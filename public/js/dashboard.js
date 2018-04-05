@@ -99,6 +99,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             type: 'link',
             icon: 'olive circle',
         });
+        
+          $scope.menu.push({
+            name: 'Upcoming',
+            url: '/upcoming',
+            type: 'link',
+            icon: 'calendar alternate outline',
+        });
     }
 ]);
 
@@ -161,6 +168,10 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/tennis", {
               templateUrl: '/admin/templates/tennis.tmpl.html',
               controller: 'tennisCGController'
+            })
+            .when("/upcoming", {
+              templateUrl: '/admin/templates/upcoming.tmpl.html',
+              controller: 'upcomingCGController'
             })
             .otherwise({redirectTo: '/general'});
     }
@@ -1102,6 +1113,190 @@ app.controller('tennisCGController', ['$scope', 'socket',
         
         $scope.resetAll = function() {
             socket.emit("tennis:reset");
+        }
+    }
+]);
+
+app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStorageService',
+    function($scope, socket, $http, localStorageService) {
+        socket.on("upcoming", function (msg) {
+            $scope.upcoming = msg;
+            if(msg.rows == null){
+                $scope.getFromStored();
+            }
+        });
+
+        $scope.$watch('upcoming', function() {
+            if ($scope.upcoming) {
+                socket.emit("bug", $scope.upcoming);
+            } else {
+                getUpcomingData();
+            }
+        }, true);
+        
+        socket.on("upcoming", function (msg) {
+            $scope.upcoming = msg;
+        });
+        
+        function getUpcomingData() {
+            socket.emit("upcoming:get");
+        }
+        
+        $scope.getFromStored = function() {
+            var stored = localStorageService.get('upcoming.rows');
+            $scope.upcoming.rows = stored;
+            if(stored == null){
+                console.log("nothing to declare");
+            } else {
+                console.log("Getting data from store");
+            }
+        }
+        
+        $scope.add = function() {
+            if(!$scope.upcoming.rows){
+                $scope.upcoming.rows = [];
+            }
+            $scope.upcoming.rows.push({left:'', right:'', change: '', color: ''});
+        };
+
+        $scope.remove = function(index){
+            $scope.upcoming.rows.splice(index, 1);
+            return localStorageService.set('upcoming.rows',$scope.upcoming.rows);  
+        };
+
+        $scope.show = function() {
+            socket.emit('grid', $scope.grid);
+            $log.info("grid.show()");
+            $log.info($scope.grid);
+        };
+
+        $scope.hide = function() {
+            socket.emit('grid', 'hide');
+            $log.info("grid.hide()");
+        };
+
+        $scope.$on("$destroy", function() {
+            localStorageService.set('grid', $scope.grid);
+        });
+        
+        $scope.locationChosen = function() {
+            console.log("Location Chosen");
+        }
+        $scope.sportChosen = function() {
+            console.log("Sport Chosen");
+        }
+        $scope.groupChosen = function() {
+            console.log("Group Chosen");
+        }
+        $scope.broadcastChosen = function() {
+            console.log("Broadcast Chosen");
+        }
+        
+        $scope.updateUpcoming = function() {
+           		
+         		var fetchData = function () {
+       				var config = {headers:  {
+					  'Accept': 'application/json',
+					  'Content-Type': 'application/json',
+					}
+    			};
+   				
+				$http.get('/data/fixtures.json', config).then(function (response) {
+						console.log('Updating Upcoming fixtures');
+						$scope.upcoming.liveupcoming = response.data;
+					    
+					    var newLiveupcoming = {"rows": []};     
+				   	    
+                        for(var i = 0; i < $scope.upcoming.numberofupcoming; i++){
+                            var buildArray = {};   
+                            buildArray["one"] = $scope.upcoming.liveupcoming[i].sport;
+                            buildArray["two"] = $scope.upcoming.liveupcoming[i].group;
+                            dateTimeString = $scope.upcoming.liveupcoming[i].date + "T" + $scope.upcoming.liveupcoming[i].time;
+                            dateTime = new Date(dateTimeString);
+                              var hours = dateTime.getHours();
+                              var minutes = dateTime.getMinutes();
+                              var ampm = hours >= 12 ? 'pm' : 'am';
+                              hours = hours % 12;
+                              hours = hours ? hours : 12; // the hour '0' should be '12'
+                              minutes = minutes < 10 ? '0'+minutes : minutes;
+                              var strTime = hours + ':' + minutes + ' ' + ampm;
+                            buildArray["three"] = strTime;
+                            buildArray["four"] = $scope.upcoming.liveupcoming[i].points;
+                            newLiveupcoming["rows"].push(buildArray);
+                        }
+                        
+                        $scope.upcoming.rows = newLiveupcoming["rows"];
+                        
+                        return localStorageService.set('upcoming.rows',newLiveupcoming["rows"]);   
+
+					 });    
+				};
+				
+				fetchData();	         		     						
+        };
+        
+        $scope.updateSelectables = function () {
+            console.log('Getting Selectable Values');
+            
+            var fetchData = function () {
+                var config = {headers:  {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+            };
+            
+            $http.get('/data/fixtures.json', config).then(function (response) {
+						$scope.upcoming.liveupcoming = response.data;   
+				   	    
+				   	    $scope.upcoming.options = ["sport","group","points","location","time","broadcast"];
+				   	    
+				   	    var sports = Array(); 
+                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                            if(sports.indexOf($scope.upcoming.liveupcoming[i].sport) == -1){
+                                sports.push($scope.upcoming.liveupcoming[i].sport);
+                            }
+                        }
+                        sports.sort();
+                        sports.unshift("All");
+                        $scope.upcoming.sports = sports;
+                        $scope.upcoming.chosenSport = "All";
+                        var groups = Array(); 
+                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                            if(groups.indexOf($scope.upcoming.liveupcoming[i].group) == -1){
+                                groups.push($scope.upcoming.liveupcoming[i].group);
+                            }
+                        }
+                        groups.sort();
+                        groups.unshift("All");
+                        $scope.upcoming.groups = groups;
+                        $scope.upcoming.chosenGroup = "All";
+                        var locations = Array(); 
+                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                            if(locations.indexOf($scope.upcoming.liveupcoming[i].location) == -1){
+                                locations.push($scope.upcoming.liveupcoming[i].location);
+                            }
+                        }
+                        locations.sort();
+                        locations.unshift("All");
+                        $scope.upcoming.locations = locations;
+                        $scope.upcoming.chosenLocation = "All";
+                        var broadcasts = Array(); 
+                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                            if(broadcasts.indexOf($scope.upcoming.liveupcoming[i].broadcast) == -1){
+                                broadcasts.push($scope.upcoming.liveupcoming[i].broadcast);
+                            }
+                        }
+                        broadcasts.sort();
+                        broadcasts.unshift("All");
+                        $scope.upcoming.broadcasts = broadcasts;
+                        $scope.upcoming.chosenBroadcast = "All";
+                        
+                        console.log('Selectable values updated');
+                        
+					 });    
+				};
+				fetchData();	      
+				            
         }
     }
 ]);

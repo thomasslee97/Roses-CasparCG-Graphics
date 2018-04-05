@@ -32,6 +32,8 @@ var tennisScore   = [{sets1: [], sets2: [],
                       pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
 var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
 
+var upcoming = {numberofupcoming: 5, header: "Upcoming matches", colone: "sport", coltwo: "group", colthree: "time", colfour: "points"};
+
 //Clock Functions
 var stopwatch = new Stopwatch();
 
@@ -289,6 +291,18 @@ io.on('connection', function(socket) {
         io.sockets.emit("tennisOptions", tennisOptions);
         io.sockets.emit("tennisScore", tennisScore[0]);
     });
+    
+     /*
+	 * 		Upcoming Fixtures
+	 */
+	socket.on("upcoming", function(msg) {
+        upcoming = msg;
+		io.sockets.emit("upcoming", msg);
+	});
+
+    socket.on("upcoming:get", function(msg) {
+		io.sockets.emit("upcoming", upcoming);
+	});
 
 });
 
