@@ -1180,10 +1180,10 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         });
         
         $scope.locationChosen = function() {
-            console.log("Location Chosen");
+            $scope.updateSelectables($scope.upcoming.chosenLocation)
         }
         $scope.sportChosen = function() {
-            console.log("Sport Chosen");
+            $scope.updateSelectables($scope.upcoming.chosenLocation,$scope.upcoming.chosenSport)
         }
         $scope.groupChosen = function() {
             console.log("Group Chosen");
@@ -1235,51 +1235,102 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 				fetchData();	         		     						
         };
         
-        $scope.updateSelectables = function () {
-            console.log('Getting Selectable Values');
-            
+        $scope.updateSelectables = function (location,sport,group,broadcast) {
+            if(!location){
+                console.log('Getting Selectable Values');
+            }
             var fetchData = function () {
                 var config = {headers:  {
                   'Accept': 'application/json',
                   'Content-Type': 'application/json',
                 }
             };
-            
             $http.get('/data/fixtures.json', config).then(function (response) {
 						$scope.upcoming.liveupcoming = response.data;   
 				   	    
 				   	    $scope.upcoming.options = ["sport","group","points","location","time","broadcast"];
 				   	    
-				   	    var sports = Array(); 
-                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                            if(sports.indexOf($scope.upcoming.liveupcoming[i].sport) == -1){
-                                sports.push($scope.upcoming.liveupcoming[i].sport);
+				   	    // Sort out locations
+				   	    if(!location || location == "All"){
+                            var locations = Array(); 
+                            for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                                if(locations.indexOf($scope.upcoming.liveupcoming[i].location) == -1){
+                                    locations.push($scope.upcoming.liveupcoming[i].location);
+                                }
                             }
+                            locations.sort();
+                            locations.unshift("All");
+                            $scope.upcoming.locations = locations;
+                            console.log("Loading Locations");
                         }
-                        sports.sort();
-                        sports.unshift("All");
-                        $scope.upcoming.sports = sports;
-                        $scope.upcoming.chosenSport = "All";
+				   	    if(!$scope.upcoming.chosenLocation){
+				   	        $scope.upcoming.chosenLocation = "All";
+				   	     }
+				   	    
+				   	    // Sort out Sports
+				   	    if(!sport || sport == "All"){
+                            var sports = Array();
+                            for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                                var oktopush = false;
+                                if(location){
+                                    if($scope.upcoming.liveupcoming[i].location == location){
+                                        var oktopush = true;
+                                    }
+                                } else { 
+                                    var oktopush = true;
+                                }
+                                if(oktopush == true){
+                                   if(sports.indexOf($scope.upcoming.liveupcoming[i].sport) == -1){
+                                        sports.push($scope.upcoming.liveupcoming[i].sport);
+                                    }
+                                }
+                            }
+                            sports.sort();
+                            sports.unshift("All");
+                            $scope.upcoming.sports = sports;
+                            console.log("Loading Sports");
+                        }
+                        if(!$scope.upcoming.chosenSport){
+                             $scope.upcoming.chosenSport = "All";
+                        }
+                        
+                        // Sort out Groups
                         var groups = Array(); 
-                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                            if(groups.indexOf($scope.upcoming.liveupcoming[i].group) == -1){
-                                groups.push($scope.upcoming.liveupcoming[i].group);
+                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){ 
+                           var oktopush = false;
+                           if(location){
+                                if($scope.upcoming.liveupcoming[i].location == location){
+                                    var oktopush = true;
+                                }
+                            } else { 
+                                var oktopush = true;
+                            }
+                            if(sport){
+                                if(!location || location == "All"){
+                                    if($scope.upcoming.liveupcoming[i].sport == sport){
+                                        var oktopush = true;
+                                    } else {
+                                        var oktopush = false;
+                                    }
+                                } else {
+                                    if(oktopush == true && $scope.upcoming.liveupcoming[i].sport == sport){
+                                        var oktopush = true;
+                                    } else {
+                                        var oktopush = false;
+                                    }
+                                }
+                            }                             
+                            if(oktopush == true){
+                                if(groups.indexOf($scope.upcoming.liveupcoming[i].group) == -1){
+                                    groups.push($scope.upcoming.liveupcoming[i].group);
+                                }
                             }
                         }
                         groups.sort();
                         groups.unshift("All");
                         $scope.upcoming.groups = groups;
                         $scope.upcoming.chosenGroup = "All";
-                        var locations = Array(); 
-                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                            if(locations.indexOf($scope.upcoming.liveupcoming[i].location) == -1){
-                                locations.push($scope.upcoming.liveupcoming[i].location);
-                            }
-                        }
-                        locations.sort();
-                        locations.unshift("All");
-                        $scope.upcoming.locations = locations;
-                        $scope.upcoming.chosenLocation = "All";
+                        console.log("Loading Groups");
                         var broadcasts = Array(); 
                         for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                             if(broadcasts.indexOf($scope.upcoming.liveupcoming[i].broadcast) == -1){
@@ -1290,8 +1341,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         broadcasts.unshift("All");
                         $scope.upcoming.broadcasts = broadcasts;
                         $scope.upcoming.chosenBroadcast = "All";
+                        console.log("Loading Broadcasts");
                         
-                        console.log('Selectable values updated');
                         
 					 });    
 				};
