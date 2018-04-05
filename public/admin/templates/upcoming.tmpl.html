@@ -1,27 +1,6 @@
 <div class="ui form segment">
   <h2>Upcoming Fixtures</h2>
   <div class="ui grid center aligned">
-    <div class="sixteen wide column">
-		 <div class="fields">
-			 <div class="four wide field">
-			 	<button class="ui green button" ng-click="updateSelectables()">Load Options</button>
-			 </div>
-            <div class="four wide field">
-			 	<button class="ui green button" ng-click="updateUpcoming()">Load Grids</button>
-			 </div>
-            <div class="four wide field">
-                <h3>{{upcoming.numberofupcoming}}</h3>
-                <div class="ui icon buttons">
-                    <button class="ui green button" ng-click="upcoming.numberofupcoming = upcoming.numberofupcoming + 1;">
-                        <i class="plus icon"></i>
-                    </button>
-                    <button class="ui red button" ng-click="upcoming.numberofupcoming = upcoming.numberofupcoming - 1;" ng-disabled="upcoming.numberofupcoming == 0">
-                        <i class="minus icon"></i>
-                    </button>
-                </div>
-            </div>
-       	 </div>
-    </div>
 	<div class="sixteen wide column">
        	 <div class="fields">
        	    <div class="four wide column" style="width: 25%;">

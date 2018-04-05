@@ -1123,6 +1123,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             $scope.upcoming = msg;
             if(msg.rows == null){
                 $scope.getFromStored();
+                $scope.updateSelectables();
             }
         });
 
@@ -1208,24 +1209,26 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 					    var newLiveupcoming = {"rows": []};     
 				   	    
 				   	    var numberofupcoming = 0;
-                        
+                        var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
                         for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                             var buildArray = {};  
                             
                             if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].sport || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].group || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].broadcast || $scope.upcoming.chosenBroadcast == "All")){
-                                buildArray["one"] = $scope.upcoming.liveupcoming[i].sport;
-                                buildArray["two"] = $scope.upcoming.liveupcoming[i].group;
                                 dateTimeString = $scope.upcoming.liveupcoming[i].date + "T" + $scope.upcoming.liveupcoming[i].time;
                                 dateTime = new Date(dateTimeString);
+                                  var day = daysOfWeek[dateTime.getDay()];
                                   var hours = dateTime.getHours();
                                   var minutes = dateTime.getMinutes();
                                   var ampm = hours >= 12 ? 'pm' : 'am';
                                   hours = hours % 12;
                                   hours = hours ? hours : 12; // the hour '0' should be '12'
                                   minutes = minutes < 10 ? '0'+minutes : minutes;
-                                  var strTime = hours + ':' + minutes + ' ' + ampm;
-                                buildArray["three"] = strTime;
-                                buildArray["four"] = $scope.upcoming.liveupcoming[i].points;
+                                  var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
+                                $scope.upcoming.liveupcoming[i].time = strTime;
+                                buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
+                                buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
+                                buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
+                                buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
                                 newLiveupcoming["rows"].push(buildArray);
                                 var numberofupcoming = numberofupcoming + 1;
                             }                            
