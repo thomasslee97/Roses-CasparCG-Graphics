@@ -248,6 +248,24 @@ app.controller('gridCtrl', ['$scope', 'socket',
     }
 ]);
 
+app.controller('upcomingCtrl', ['$scope', 'socket',
+    function($scope, socket){
+        socket.on("upcoming", function (msg) {
+            $scope.upcoming = msg;
+        });
+        
+        $scope.$watch('upcoming', function() {
+            if (!$scope.upcoming) {
+                getUpcomingData();
+            }
+        }, true);
+
+        function getUpcomingData() {
+            socket.emit("upcoming:get");
+        }     
+    }     
+]);
+
 app.controller('swimmingCtrl', ['$scope', 'socket',
     function($scope, socket){
         socket.on("swimming", function (msg) {

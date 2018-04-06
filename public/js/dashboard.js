@@ -1165,20 +1165,17 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             return localStorageService.set('upcoming.rows',$scope.upcoming.rows);  
         };
 
-        $scope.show = function() {
-            socket.emit('grid', $scope.grid);
-            $log.info("grid.show()");
-            $log.info($scope.grid);
+        $scope.showUpcoming = function() {
+            $scope.upcoming.show = true;
+            socket.emit('upcoming', $scope.upcoming);
+            console.log($scope.upcoming);
         };
 
-        $scope.hide = function() {
-            socket.emit('grid', 'hide');
-            $log.info("grid.hide()");
+        $scope.hideUpcoming = function() {
+            $scope.upcoming.show = false;
+            socket.emit('upcoming', $scope.upcoming);
+            console.log("Hide Upcoming");
         };
-
-        $scope.$on("$destroy", function() {
-            localStorageService.set('grid', $scope.grid);
-        });
         
         $scope.locationChosen = function() {
             $scope.updateSelectables($scope.upcoming.chosenLocation)

@@ -247,6 +247,23 @@
             </div>
           </div>
         </div>
+        
+        <div ng-controller="upcomingCtrl">
+          <div class="center-page scale-fade" ng-show="upcoming.show">
+            <div class="upcoming center" style="margin-top: 20px; position: absolute;" >
+              <div class="gradient-overlay">
+                <h1>{{ upcoming.header }}</h1>
+              </div>
+
+              <div class="row animate-repeat" ng-repeat="row in upcoming.rows">
+                <div class="upcoming one {{upcoming.colone}}">{{ row.one }}</div>
+                <div class="upcoming two {{upcoming.coltwo}}">{{ row.two }}</div>
+                <div class="upcoming three {{upcoming.colthree}}">{{ row.three }}</div>
+                <div class="upcoming four {{upcoming.colfour}}">{{ row.four }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div ng-controller="swimmingCtrl">
             <div class="right bottom swimmingclock scale-fade" ng-show="swimming.showclock">
