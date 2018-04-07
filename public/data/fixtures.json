@@ -1,1442 +1,2018 @@
 [
-  {
-    "date": "2018-04-28",
-    "time": "10:00:00",
-    "sport": "Rowing",
-    "group": "men's senior 4",
-    "points": 2,
-    "location": "University Boat House",
-    "warmup-time": "10:00:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "10:10:00",
-    "sport": "Rowing",
-    "group": "men's novice 8",
-    "points": 1,
-    "location": "University Boat House",
-    "warmup-time": "10:10:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "10:20:00",
-    "sport": "Rowing",
-    "group": "women's senior 4",
-    "points": 2,
-    "location": "University Boat House",
-    "warmup-time": "10:20:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "10:30:00",
-    "sport": "Rowing",
-    "group": "women's novice 8",
-    "points": 1,
-    "location": "University Boat House",
-    "warmup-time": "10:30:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "12:00:00",
-    "sport": "Rowing",
-    "group": "women's senior 8",
-    "points": 4,
-    "location": "University Boat House",
-    "warmup-time": "12:00:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "14:30:00",
-    "sport": "Rowing",
-    "group": "women's novice 4",
-    "points": 1,
-    "location": "University Boat House",
-    "warmup-time": "14:30:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "14:40:00",
-    "sport": "Rowing",
-    "group": "men's senior 8",
-    "points": 4,
-    "location": "University Boat House",
-    "warmup-time": "14:40:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "14:50:00",
-    "sport": "Rowing",
-    "group": "men's novice 4",
-    "points": 1,
-    "location": "University Boat House",
-    "warmup-time": "14:50:00",
-    "warmup-location": "University Boat House"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "15:30:00",
-    "sport": "Running",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "315 Health Club",
-    "warmup-time": "15:30:00",
-    "warmup-location": "315 Health Club"
-  },
-  {
-    "date": "2018-04-28",
-    "time": "16:00:00",
-    "sport": "Running",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "315 Health Club",
-    "warmup-time": "16:00:00",
-    "warmup-location": "315 Health Club"
-  },
-  {
-    "date": "2018-05-02",
-    "time": "09:15:00",
-    "sport": "Equestrian",
-    "group": "1st",
-    "points": 4,
-    "location": "Eccleston Equestrian Centre, Preston",
-    "warmup-time": "09:15:00",
-    "warmup-location": "Eccleston Equestrian Centre, Preston"
-  },
-  {
-    "date": "2018-05-03",
-    "time": "09:15:00",
-    "sport": "Equestrian",
-    "group": "2nd",
-    "points": 2,
-    "location": "Eccleston Equestrian Centre, Preston",
-    "warmup-time": "09:15:00",
-    "warmup-location": "Eccleston Equestrian Centre, Preston"
-  },
-  {
-    "date": "2018-05-03",
-    "time": "12:00:00",
-    "sport": "Cricket",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Lancaster Cricket Club",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Lancaster Cricket Club"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "09:00:00",
-    "sport": "Dodgeball",
-    "group": "men's 2nd",
-    "points": 0,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "09:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "09:30:00",
-    "sport": "Dodgeball",
-    "group": "women's 1st",
-    "points": 0,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "09:30:00",
-    "sport": "Table Tennis",
-    "group": "mixed 1st",
-    "points": 4,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "09:30:00",
-    "sport": "Table Tennis",
-    "group": "mixed 2nd",
-    "points": 4,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "09:45:00",
-    "sport": "Badminton",
-    "group": "mixed",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "09:45:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "10:00:00",
-    "sport": "Cricket",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Lancaster Cricket Club",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Lancaster Cricket Club"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "10:00:00",
-    "sport": "Dodgeball",
-    "group": "men's 1st",
-    "points": 0,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "11:00:00",
-    "sport": "Clay Pigeon Shooting",
-    "group": "open",
-    "points": 4,
-    "location": "Crabtree Shooting Ground",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Crabtree Shooting Ground"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "11:00:00",
-    "sport": "Netball",
-    "group": "college league a winners",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "10:45:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "12:00:00",
-    "sport": "Cricket",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Westgate Cricket Club",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Westgate Cricket Club"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "12:00:00",
-    "sport": "Football",
-    "group": "women's 2nd",
-    "points": 0,
-    "location": "Football Pitch 1",
-    "warmup-time": "11:15:00",
-    "warmup-location": "Football Pitch 1"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "12:55:00",
-    "sport": "Indoor Hockey",
-    "group": "women's 2nd",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "12:45:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "13:00:00",
-    "sport": "American Football",
-    "group": "open",
-    "points": 4,
-    "location": "Rugby Pitch 2",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "13:00:00",
-    "sport": "Netball",
-    "group": "college league b winners",
-    "points": 0,
-    "location": "Outdoor Netball Courts",
-    "warmup-time": "12:30:00",
-    "warmup-location": "Outdoor Netball Courts"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "13:50:00",
-    "sport": "Indoor Hockey",
-    "group": "men's 2nd",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "13:40:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "14:00:00",
-    "sport": "Football",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Football Pitch 1",
-    "warmup-time": "13:15:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "14:00:00",
-    "sport": "Pool",
-    "group": "open 2nds",
-    "points": 2,
-    "location": "Lonsdale College Bar",
-    "warmup-time": "14:00:00",
-    "warmup-location": "Lonsdale College Bar"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "14:45:00",
-    "sport": "Indoor Hockey",
-    "group": "women's 1st",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "14:35:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "15:40:00",
-    "sport": "Indoor Hockey",
-    "group": "men's 1st",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "15:30:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "16:00:00",
-    "sport": "Cricket",
-    "group": "men's 3rd 20/20",
-    "points": 1,
-    "location": "Lancaster Cricket Club",
-    "warmup-time": "16:00:00",
-    "warmup-location": "Lancaster Cricket Club"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "16:45:00",
-    "sport": "Badminton",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "16:30:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "16:45:00",
-    "sport": "Badminton",
-    "group": "women's 2nd",
-    "points": 2,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "16:45:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "16:45:00",
-    "sport": "Trampoline",
-    "group": "open",
-    "points": 4,
-    "location": "Sports Centre Hall 2",
-    "warmup-time": "16:30:00",
-    "warmup-location": "Sports Centre Hall 2"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "17:00:00",
-    "sport": "Pole Fitness",
-    "group": "open",
-    "points": 4,
-    "location": "Great Hall",
-    "warmup-time": "17:00:00",
-    "warmup-location": "Great Hall"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "17:30:00",
-    "sport": "Pool",
-    "group": "women",
-    "points": 4,
-    "location": "Lonsdale College Bar",
-    "warmup-time": "17:30:00",
-    "warmup-location": "Lonsdale College Bar"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "17:45:00",
-    "sport": "Football",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "16:45:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "19:55:00",
-    "sport": "Ultimate Frisbee",
-    "group": "indoor men's",
-    "points": 2,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "19:30:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "20:00:00",
-    "sport": "Basketball",
-    "group": "men's 2nd",
-    "points": 0,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "19:45:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "20:00:00",
-    "sport": "Pool",
-    "group": "men",
-    "points": 4,
-    "location": "Lonsdale College Bar",
-    "warmup-time": "20:00:00",
-    "warmup-location": "Lonsdale College Bar"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "20:00:00",
-    "sport": "Water Polo",
-    "group": "women's",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "20:00:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "20:30:00",
-    "sport": "Ultimate Frisbee",
-    "group": "indoor women's",
-    "points": 2,
-    "location": "Sports Centre Main Hall",
-    "warmup-time": "20:20:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "21:05:00",
-    "sport": "Ultimate Frisbee",
-    "group": "indoor beginner's",
-    "points": 0,
-    "location": "Sports Centre Main Hall",
-    "warmup-time": "20:55:00",
-    "warmup-location": "Sports Centre Main Hall"
-  },
-  {
-    "date": "2018-05-04",
-    "time": "21:40:00",
-    "sport": "Ultimate Frisbee",
-    "group": "indoor mixed",
-    "points": 1,
-    "location": "Sports Centre Main Hall",
-    "warmup-time": "21:30:00",
-    "warmup-location": "Sports Centre Main Hall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "09:20:00",
-    "sport": "Volleyball",
-    "group": "men's",
-    "points": 4,
-    "location": "Sports Centre Main Hall",
-    "warmup-time": "09:00:00",
-    "warmup-location": "Sports Centre Main Hall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "09:30:00",
-    "sport": "Hockey",
-    "group": "women's 3rd",
-    "points": 1,
-    "location": "Astro 1",
-    "warmup-time": "09:15:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Archery",
-    "group": "senior team open",
-    "points": 4,
-    "location": "Rugby League Pitch",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Climbing",
-    "group": "lead team men",
-    "points": 2,
-    "location": "Climbing Wall",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Climbing",
-    "group": "lead team women",
-    "points": 2,
-    "location": "Climbing Wall",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Climbing",
-    "group": "lead individual men",
-    "points": 1,
-    "location": "Climbing Wall",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Climbing",
-    "group": "lead individual women",
-    "points": 1,
-    "location": "Climbing Wall",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Esports",
-    "group": "open",
-    "points": 4,
-    "location": "Bowland SR1&SR24",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Bowland SR1&SR24"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Football",
-    "group": "college b league winners",
-    "points": 0,
-    "location": "Football Pitch 1",
-    "warmup-time": "09:15:00",
-    "warmup-location": "Football Pitch 1"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Triathlon",
-    "group": "men's",
-    "points": 0,
-    "location": "Swimming Pool (and Grounds)",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Swimming Pool (and Grounds)"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Triathlon",
-    "group": "women's",
-    "points": 0,
-    "location": "Swimming Pool (and Grounds)",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Swimming Pool (and Grounds)"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:00:00",
-    "sport": "Cycling",
-    "group": "mountain biking",
-    "points": 4,
-    "location": "Campus Downhill Slalom",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Campus Downhill Slalom"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:15:00",
-    "sport": "Fencing",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "LICA",
-    "warmup-time": "10:15:00",
-    "warmup-location": "LICA"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "10:30:00",
-    "sport": "Dance",
-    "group": "open",
-    "points": 4,
-    "location": "Great Hall",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Great Hall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Archery",
-    "group": "novice team open",
-    "points": 2,
-    "location": "Rugby League Pitch",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Football",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Stadium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Hockey",
-    "group": "men's 3rd",
-    "points": 1,
-    "location": "Astro 1",
-    "warmup-time": "10:45:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Snooker",
-    "group": "open",
-    "points": 0,
-    "location": "Squires",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Squires"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Tennis",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Tennis Courts",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Tennis Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:00:00",
-    "sport": "Negotiating",
-    "group": "open",
-    "points": 0,
-    "location": "Cavendish Colloquium",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Cavendish Colloquium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "11:05:00",
-    "sport": "Volleyball",
-    "group": "women's",
-    "points": 4,
-    "location": "Sports Centre Main Hall",
-    "warmup-time": "10:45:00",
-    "warmup-location": "Sports Centre Main Hall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Archery",
-    "group": "senior men's",
-    "points": 1,
-    "location": "Rugby League Pitch",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Chess",
-    "group": "open",
-    "points": 4,
-    "location": "Bowland North Seminar Room 7",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Bowland North Seminar Room 7"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Football",
-    "group": "college a league winners",
-    "points": 1,
-    "location": "Football Pitch 2",
-    "warmup-time": "11:45:00",
-    "warmup-location": "Football Pitch 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Squash",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Squash Courts",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Squash Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Swimming",
-    "group": "men's",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Swimming",
-    "group": "women's",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Debating",
-    "group": "mixed 1st",
-    "points": 4,
-    "location": "Furness Lecture Theatre",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Furness Lecture Theatre"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:00:00",
-    "sport": "Pokemon",
-    "group": "open",
-    "points": 0,
-    "location": "Bowland North SR05",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Bowland North SR05"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "12:30:00",
-    "sport": "Hockey",
-    "group": "women's 2nd",
-    "points": 2,
-    "location": "Astro 1",
-    "warmup-time": "12:15:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Archery",
-    "group": "senior women's",
-    "points": 1,
-    "location": "Rugby League Pitch",
-    "warmup-time": "13:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Canoe Whitewater",
-    "group": "women's",
-    "points": 4,
-    "location": "Halton Rapids",
-    "warmup-time": "13:00:00",
-    "warmup-location": "Halton Rapids"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Darts",
-    "group": "open 2nds",
-    "points": 2,
-    "location": "County Bar",
-    "warmup-time": "13:00:00",
-    "warmup-location": "County Bar"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Tennis",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Tennis Courts",
-    "warmup-time": "13:00:00",
-    "warmup-location": "Tennis Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Tennis",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Tennis Courts",
-    "warmup-time": "13:00:00",
-    "warmup-location": "Tennis Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:00:00",
-    "sport": "Rugby League",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Rugby Pitch 2",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:15:00",
-    "sport": "Basketball",
-    "group": "women's",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "13:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "13:15:00",
-    "sport": "Fencing",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "LICA",
-    "warmup-time": "13:15:00",
-    "warmup-location": "LICA"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:00:00",
-    "sport": "Archery",
-    "group": "novice men's",
-    "points": 1,
-    "location": "Rugby League Pitch",
-    "warmup-time": "14:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:00:00",
-    "sport": "Canoe Whitewater",
-    "group": "men's",
-    "points": 4,
-    "location": "Halton Rapids",
-    "warmup-time": "14:00:00",
-    "warmup-location": "Halton Rapids"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:00:00",
-    "sport": "Football",
-    "group": "college select",
-    "points": 1,
-    "location": "Football Pitch 1",
-    "warmup-time": "13:15:00",
-    "warmup-location": "Football Pitch 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:00:00",
-    "sport": "Hockey",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Astro 1",
-    "warmup-time": "13:45:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:30:00",
-    "sport": "Lacrosse",
-    "group": "men's",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "13:30:00",
-    "warmup-location": "Stadium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "14:30:00",
-    "sport": "Mooting",
-    "group": "open",
-    "points": 0,
-    "location": "Cavendish Colloquium",
-    "warmup-time": "14:30:00",
-    "warmup-location": "Cavendish Colloquium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:00:00",
-    "sport": "Archery",
-    "group": "novice women's",
-    "points": 1,
-    "location": "Rugby League Pitch",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Rugby League Pitch"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:00:00",
-    "sport": "Cycling",
-    "group": "circuit race",
-    "points": 4,
-    "location": "Salt Ayre",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Salt Ayre"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:00:00",
-    "sport": "Squash",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Squash Courts",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Squash Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:00:00",
-    "sport": "Netball",
-    "group": "medsoc",
-    "points": 0,
-    "location": "Outdoor Netball Courts",
-    "warmup-time": "14:30:00",
-    "warmup-location": "Outdoor Netball Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:15:00",
-    "sport": "Basketball",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:30:00",
-    "sport": "Hockey",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Astro 1",
-    "warmup-time": "15:15:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "15:30:00",
-    "sport": "Underwater Hockey",
-    "group": "open",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "15:30:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "16:00:00",
-    "sport": "Darts",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Great Hall",
-    "warmup-time": "16:00:00",
-    "warmup-location": "Great Hall"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "16:00:00",
-    "sport": "Football",
-    "group": "postgrad",
-    "points": 0,
-    "location": "Football Pitch 2",
-    "warmup-time": "15:15:00",
-    "warmup-location": "Football Pitch 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "16:15:00",
-    "sport": "Fencing",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "LICA",
-    "warmup-time": "16:15:00",
-    "warmup-location": "LICA"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "17:00:00",
-    "sport": "Hockey",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Astro 1",
-    "warmup-time": "16:45:00",
-    "warmup-location": "Astro 2"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "17:00:00",
-    "sport": "Lacrosse",
-    "group": "women's",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "16:00:00",
-    "warmup-location": "Stadium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "17:00:00",
-    "sport": "University Challenge",
-    "group": "open",
-    "points": 4,
-    "location": "Cavendish Colloquium",
-    "warmup-time": "17:00:00",
-    "warmup-location": "Cavendish Colloquium"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "17:30:00",
-    "sport": "Netball",
-    "group": "1st",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "17:15:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "18:00:00",
-    "sport": "Squash",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Squash Courts",
-    "warmup-time": "18:00:00",
-    "warmup-location": "Squash Courts"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "19:15:00",
-    "sport": "Badminton",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "19:15:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "19:15:00",
-    "sport": "Badminton",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "19:15:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "19:30:00",
-    "sport": "Water Polo",
-    "group": "men's",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "19:30:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-05",
-    "time": "20:00:00",
-    "sport": "Darts",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Great Hall",
-    "warmup-time": "20:00:00",
-    "warmup-location": "Great Hall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:00:00",
-    "sport": "Ballroom Dancing",
-    "group": "mixed",
-    "points": 4,
-    "location": "Great Hall",
-    "warmup-time": "09:00:00",
-    "warmup-location": "Great Hall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:00:00",
-    "sport": "Volleyball",
-    "group": "sitting",
-    "points": 0,
-    "location": "Sports Centre Hall 1",
-    "warmup-time": "08:45:00",
-    "warmup-location": "Sports Centre Hall 1"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Cheerleading",
-    "group": "open",
-    "points": 4,
-    "location": "LICA",
-    "warmup-time": "09:00:00",
-    "warmup-location": "LICA"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Climbing",
-    "group": "bouldering men's team",
-    "points": 4,
-    "location": "Climbing Wall",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Climbing",
-    "group": "bouldering women's team",
-    "points": 4,
-    "location": "Climbing Wall",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Climbing",
-    "group": "bouldering individual men",
-    "points": 1,
-    "location": "Climbing Wall",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Climbing",
-    "group": "bouldering individual women",
-    "points": 1,
-    "location": "Climbing Wall",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Climbing Wall"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:30:00",
-    "sport": "Futsal",
-    "group": "men's",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "09:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "09:45:00",
-    "sport": "Ultimate Frisbee",
-    "group": "outdoor beginner's",
-    "points": 0,
-    "location": "Football Pitch 1",
-    "warmup-time": "09:00:00",
-    "warmup-location": "Football Pitch 1"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:00:00",
-    "sport": "Vice Chancellor Bowling",
-    "group": "open",
-    "points": 0,
-    "location": "Bowling Green",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Bowling Green"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:00:00",
-    "sport": "Karate",
-    "group": "open",
-    "points": 0,
-    "location": "Studio",
-    "warmup-time": "09:45:00",
-    "warmup-location": "Studio"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:30:00",
-    "sport": "Canoe Polo",
-    "group": "open",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "10:15:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:30:00",
-    "sport": "Netball",
-    "group": "college select",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "10:15:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:30:00",
-    "sport": "Rugby Union",
-    "group": "men's 3rd",
-    "points": 1,
-    "location": "Rugby Pitch 2",
-    "warmup-time": "09:30:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:30:00",
-    "sport": "Lacrosse",
-    "group": "mixed",
-    "points": 0,
-    "location": "Lacrosse Pitch",
-    "warmup-time": "10:00:00",
-    "warmup-location": "Lacrosse Pitch"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "10:45:00",
-    "sport": "Handball",
-    "group": "mens",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "10:30:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "11:00:00",
-    "sport": "Sailing",
-    "group": "open 1st",
-    "points": 4,
-    "location": "Bolton Sailing Club",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Bolton Sailing Club"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "11:00:00",
-    "sport": "Tennis",
-    "group": "mixed",
-    "points": 1,
-    "location": "Tennis Courts",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Tennis Courts"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "11:15:00",
-    "sport": "Ultimate Frisbee",
-    "group": "outdoor men's",
-    "points": 4,
-    "location": "Football Pitch 1",
-    "warmup-time": "11:00:00",
-    "warmup-location": "Football Pitch 1"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "11:30:00",
-    "sport": "Canoe Polo",
-    "group": "women's a",
-    "points": 4,
-    "location": "Swimming Pool",
-    "warmup-time": "11:15:00",
-    "warmup-location": "Swimming Pool"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "12:15:00",
-    "sport": "Handball",
-    "group": "womens",
-    "points": 4,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "12:15:00",
-    "sport": "Netball",
-    "group": "3rd",
-    "points": 1,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "12:00:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "12:30:00",
-    "sport": "Rugby Union",
-    "group": "men's 2nd",
-    "points": 2,
-    "location": "Rugby Pitch 2",
-    "warmup-time": "11:30:00",
-    "warmup-location": "Rugby Pitch 2"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "13:00:00",
-    "sport": "Kendo",
-    "group": "1st",
-    "points": 4,
-    "location": "Studio",
-    "warmup-time": "12:45:00",
-    "warmup-location": "Studio"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "13:15:00",
-    "sport": "Ultimate Frisbee",
-    "group": "outdoor open",
-    "points": 4,
-    "location": "Football Pitch 1",
-    "warmup-time": "12:30:00",
-    "warmup-location": "Football Pitch 1"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "13:30:00",
-    "sport": "Rugby Union",
-    "group": "women's 1st",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "12:30:00",
-    "warmup-location": "Stadium"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "14:00:00",
-    "sport": "Sailing",
-    "group": "open 2nd",
-    "points": 2,
-    "location": "Bolton Sailing Club",
-    "warmup-time": "14:00:00",
-    "warmup-location": "Bolton Sailing Club"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "14:00:00",
-    "sport": "Netball",
-    "group": "2nd",
-    "points": 2,
-    "location": "Sports Hall, Lancaster",
-    "warmup-time": "13:45:00",
-    "warmup-location": "Sports Hall, Lancaster"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "14:00:00",
-    "sport": "Volleyball",
-    "group": "mixed",
-    "points": 2,
-    "location": "Sports Centre Hall 2",
-    "warmup-time": "13:45:00",
-    "warmup-location": "Sports Centre Hall 2"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "15:00:00",
-    "sport": "Snow Sports",
-    "group": "individual ski race",
-    "points": 4,
-    "location": "Rossendale",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Rossendale"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "15:00:00",
-    "sport": "Snow Sports",
-    "group": "individual snowboard race",
-    "points": 4,
-    "location": "Rossendale",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Rossendale"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "15:00:00",
-    "sport": "Snow Sports",
-    "group": "ski dual slalom",
-    "points": 2,
-    "location": "Rossendale",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Rossendale"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "15:00:00",
-    "sport": "Snow Sports",
-    "group": "snowboard dual slalom",
-    "points": 2,
-    "location": "Rossendale",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Rossendale"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "16:00:00",
-    "sport": "Rugby Union",
-    "group": "men's 1st",
-    "points": 4,
-    "location": "Stadium",
-    "warmup-time": "15:00:00",
-    "warmup-location": "Stadium"
-  },
-  {
-    "date": "2018-05-06",
-    "time": "16:30:00",
-    "sport": "Rugby Union",
-    "group": "women's 2nd",
-    "points": 0,
-    "location": "Rugby Pitch 2",
-    "warmup-time": "15:30:00",
-    "warmup-location": "Rugby Pitch 2"
-  }
+   {
+      "date":"2018-04-28",
+      "time":"10:00:00",
+      "sport":"Rowing",
+      "group":"men's senior 4",
+      "points":2,
+      "location":"University Boat House",
+      "warmup-time":"10:00:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"10",
+         "york":"4"
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"10:10:00",
+      "sport":"Rowing",
+      "group":"men's novice 8",
+      "points":1,
+      "location":"University Boat House",
+      "warmup-time":"10:10:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"1",
+         "york":"6"
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"10:20:00",
+      "sport":"Rowing",
+      "group":"women's senior 4",
+      "points":2,
+      "location":"University Boat House",
+      "warmup-time":"10:20:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"4",
+         "york":"5"
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"10:30:00",
+      "sport":"Rowing",
+      "group":"women's novice 8",
+      "points":1,
+      "location":"University Boat House",
+      "warmup-time":"10:30:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"12:00:00",
+      "sport":"Rowing",
+      "group":"women's senior 8",
+      "points":4,
+      "location":"University Boat House",
+      "warmup-time":"12:00:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"14:30:00",
+      "sport":"Rowing",
+      "group":"women's novice 4",
+      "points":1,
+      "location":"University Boat House",
+      "warmup-time":"14:30:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"14:40:00",
+      "sport":"Rowing",
+      "group":"men's senior 8",
+      "points":4,
+      "location":"University Boat House",
+      "warmup-time":"14:40:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"14:50:00",
+      "sport":"Rowing",
+      "group":"men's novice 4",
+      "points":1,
+      "location":"University Boat House",
+      "warmup-time":"14:50:00",
+      "warmup-location":"University Boat House",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"15:30:00",
+      "sport":"Running",
+      "group":"women's 1st",
+      "points":4,
+      "location":"315 Health Club",
+      "warmup-time":"15:30:00",
+      "warmup-location":"315 Health Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-04-28",
+      "time":"16:00:00",
+      "sport":"Running",
+      "group":"men's 1st",
+      "points":4,
+      "location":"315 Health Club",
+      "warmup-time":"16:00:00",
+      "warmup-location":"315 Health Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-02",
+      "time":"09:15:00",
+      "sport":"Equestrian",
+      "group":"1st",
+      "points":4,
+      "location":"Eccleston Equestrian Centre, Preston",
+      "warmup-time":"09:15:00",
+      "warmup-location":"Eccleston Equestrian Centre, Preston",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-03",
+      "time":"09:15:00",
+      "sport":"Equestrian",
+      "group":"2nd",
+      "points":2,
+      "location":"Eccleston Equestrian Centre, Preston",
+      "warmup-time":"09:15:00",
+      "warmup-location":"Eccleston Equestrian Centre, Preston",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-03",
+      "time":"12:00:00",
+      "sport":"Cricket",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Lancaster Cricket Club",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Lancaster Cricket Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"09:00:00",
+      "sport":"Dodgeball",
+      "group":"men's 2nd",
+      "points":0,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"09:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"09:30:00",
+      "sport":"Dodgeball",
+      "group":"women's 1st",
+      "points":0,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"09:30:00",
+      "sport":"Table Tennis",
+      "group":"mixed 1st",
+      "points":4,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"09:30:00",
+      "sport":"Table Tennis",
+      "group":"mixed 2nd",
+      "points":4,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"09:45:00",
+      "sport":"Badminton",
+      "group":"mixed",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"09:45:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"10:00:00",
+      "sport":"Cricket",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Lancaster Cricket Club",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Lancaster Cricket Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"10:00:00",
+      "sport":"Dodgeball",
+      "group":"men's 1st",
+      "points":0,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"11:00:00",
+      "sport":"Clay Pigeon Shooting",
+      "group":"open",
+      "points":4,
+      "location":"Crabtree Shooting Ground",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Crabtree Shooting Ground",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"11:00:00",
+      "sport":"Netball",
+      "group":"college league a winners",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"10:45:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"12:00:00",
+      "sport":"Cricket",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Westgate Cricket Club",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Westgate Cricket Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"12:00:00",
+      "sport":"Football",
+      "group":"women's 2nd",
+      "points":0,
+      "location":"Football Pitch 1",
+      "warmup-time":"11:15:00",
+      "warmup-location":"Football Pitch 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"12:55:00",
+      "sport":"Indoor Hockey",
+      "group":"women's 2nd",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"12:45:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"13:00:00",
+      "sport":"American Football",
+      "group":"open",
+      "points":4,
+      "location":"Rugby Pitch 2",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"13:00:00",
+      "sport":"Netball",
+      "group":"college league b winners",
+      "points":0,
+      "location":"Outdoor Netball Courts",
+      "warmup-time":"12:30:00",
+      "warmup-location":"Outdoor Netball Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"13:50:00",
+      "sport":"Indoor Hockey",
+      "group":"men's 2nd",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"13:40:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"14:00:00",
+      "sport":"Football",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Football Pitch 1",
+      "warmup-time":"13:15:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"14:00:00",
+      "sport":"Pool",
+      "group":"open 2nds",
+      "points":2,
+      "location":"Lonsdale College Bar",
+      "warmup-time":"14:00:00",
+      "warmup-location":"Lonsdale College Bar",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"14:45:00",
+      "sport":"Indoor Hockey",
+      "group":"women's 1st",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"14:35:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"15:40:00",
+      "sport":"Indoor Hockey",
+      "group":"men's 1st",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"15:30:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"16:00:00",
+      "sport":"Cricket",
+      "group":"men's 3rd 20/20",
+      "points":1,
+      "location":"Lancaster Cricket Club",
+      "warmup-time":"16:00:00",
+      "warmup-location":"Lancaster Cricket Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"16:45:00",
+      "sport":"Badminton",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"16:30:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"16:45:00",
+      "sport":"Badminton",
+      "group":"women's 2nd",
+      "points":2,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"16:45:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"16:45:00",
+      "sport":"Trampoline",
+      "group":"open",
+      "points":4,
+      "location":"Sports Centre Hall 2",
+      "warmup-time":"16:30:00",
+      "warmup-location":"Sports Centre Hall 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"17:00:00",
+      "sport":"Pole Fitness",
+      "group":"open",
+      "points":4,
+      "location":"Great Hall",
+      "warmup-time":"17:00:00",
+      "warmup-location":"Great Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"17:30:00",
+      "sport":"Pool",
+      "group":"women",
+      "points":4,
+      "location":"Lonsdale College Bar",
+      "warmup-time":"17:30:00",
+      "warmup-location":"Lonsdale College Bar",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"17:45:00",
+      "sport":"Football",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"16:45:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"19:55:00",
+      "sport":"Ultimate Frisbee",
+      "group":"indoor men's",
+      "points":2,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"19:30:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"20:00:00",
+      "sport":"Basketball",
+      "group":"men's 2nd",
+      "points":0,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"19:45:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"20:00:00",
+      "sport":"Pool",
+      "group":"men",
+      "points":4,
+      "location":"Lonsdale College Bar",
+      "warmup-time":"20:00:00",
+      "warmup-location":"Lonsdale College Bar",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"20:00:00",
+      "sport":"Water Polo",
+      "group":"women's",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"20:00:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"20:30:00",
+      "sport":"Ultimate Frisbee",
+      "group":"indoor women's",
+      "points":2,
+      "location":"Sports Centre Main Hall",
+      "warmup-time":"20:20:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"21:05:00",
+      "sport":"Ultimate Frisbee",
+      "group":"indoor beginner's",
+      "points":0,
+      "location":"Sports Centre Main Hall",
+      "warmup-time":"20:55:00",
+      "warmup-location":"Sports Centre Main Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-04",
+      "time":"21:40:00",
+      "sport":"Ultimate Frisbee",
+      "group":"indoor mixed",
+      "points":1,
+      "location":"Sports Centre Main Hall",
+      "warmup-time":"21:30:00",
+      "warmup-location":"Sports Centre Main Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"09:20:00",
+      "sport":"Volleyball",
+      "group":"men's",
+      "points":4,
+      "location":"Sports Centre Main Hall",
+      "warmup-time":"09:00:00",
+      "warmup-location":"Sports Centre Main Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"09:30:00",
+      "sport":"Hockey",
+      "group":"women's 3rd",
+      "points":1,
+      "location":"Astro 1",
+      "warmup-time":"09:15:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Archery",
+      "group":"senior team open",
+      "points":4,
+      "location":"Rugby League Pitch",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Climbing",
+      "group":"lead team men",
+      "points":2,
+      "location":"Climbing Wall",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Climbing",
+      "group":"lead team women",
+      "points":2,
+      "location":"Climbing Wall",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Climbing",
+      "group":"lead individual men",
+      "points":1,
+      "location":"Climbing Wall",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Climbing",
+      "group":"lead individual women",
+      "points":1,
+      "location":"Climbing Wall",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Esports",
+      "group":"open",
+      "points":4,
+      "location":"Bowland SR1&SR24",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Bowland SR1&SR24",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Football",
+      "group":"college b league winners",
+      "points":0,
+      "location":"Football Pitch 1",
+      "warmup-time":"09:15:00",
+      "warmup-location":"Football Pitch 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Triathlon",
+      "group":"men's",
+      "points":0,
+      "location":"Swimming Pool (and Grounds)",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Swimming Pool (and Grounds)",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Triathlon",
+      "group":"women's",
+      "points":0,
+      "location":"Swimming Pool (and Grounds)",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Swimming Pool (and Grounds)",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:00:00",
+      "sport":"Cycling",
+      "group":"mountain biking",
+      "points":4,
+      "location":"Campus Downhill Slalom",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Campus Downhill Slalom",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:15:00",
+      "sport":"Fencing",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"LICA",
+      "warmup-time":"10:15:00",
+      "warmup-location":"LICA",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"10:30:00",
+      "sport":"Dance",
+      "group":"open",
+      "points":4,
+      "location":"Great Hall",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Great Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Archery",
+      "group":"novice team open",
+      "points":2,
+      "location":"Rugby League Pitch",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Football",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Stadium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Hockey",
+      "group":"men's 3rd",
+      "points":1,
+      "location":"Astro 1",
+      "warmup-time":"10:45:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Snooker",
+      "group":"open",
+      "points":0,
+      "location":"Squires",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Squires",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Tennis",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Tennis Courts",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Tennis Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:00:00",
+      "sport":"Negotiating",
+      "group":"open",
+      "points":0,
+      "location":"Cavendish Colloquium",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Cavendish Colloquium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"11:05:00",
+      "sport":"Volleyball",
+      "group":"women's",
+      "points":4,
+      "location":"Sports Centre Main Hall",
+      "warmup-time":"10:45:00",
+      "warmup-location":"Sports Centre Main Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Archery",
+      "group":"senior men's",
+      "points":1,
+      "location":"Rugby League Pitch",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Chess",
+      "group":"open",
+      "points":4,
+      "location":"Bowland North Seminar Room 7",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Bowland North Seminar Room 7",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Football",
+      "group":"college a league winners",
+      "points":1,
+      "location":"Football Pitch 2",
+      "warmup-time":"11:45:00",
+      "warmup-location":"Football Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Squash",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Squash Courts",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Squash Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Swimming",
+      "group":"men's",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Swimming",
+      "group":"women's",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Debating",
+      "group":"mixed 1st",
+      "points":4,
+      "location":"Furness Lecture Theatre",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Furness Lecture Theatre",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:00:00",
+      "sport":"Pokemon",
+      "group":"open",
+      "points":0,
+      "location":"Bowland North SR05",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Bowland North SR05",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"12:30:00",
+      "sport":"Hockey",
+      "group":"women's 2nd",
+      "points":2,
+      "location":"Astro 1",
+      "warmup-time":"12:15:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Archery",
+      "group":"senior women's",
+      "points":1,
+      "location":"Rugby League Pitch",
+      "warmup-time":"13:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Canoe Whitewater",
+      "group":"women's",
+      "points":4,
+      "location":"Halton Rapids",
+      "warmup-time":"13:00:00",
+      "warmup-location":"Halton Rapids",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Darts",
+      "group":"open 2nds",
+      "points":2,
+      "location":"County Bar",
+      "warmup-time":"13:00:00",
+      "warmup-location":"County Bar",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Tennis",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Tennis Courts",
+      "warmup-time":"13:00:00",
+      "warmup-location":"Tennis Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Tennis",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Tennis Courts",
+      "warmup-time":"13:00:00",
+      "warmup-location":"Tennis Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:00:00",
+      "sport":"Rugby League",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Rugby Pitch 2",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:15:00",
+      "sport":"Basketball",
+      "group":"women's",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"13:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"13:15:00",
+      "sport":"Fencing",
+      "group":"women's 1st",
+      "points":4,
+      "location":"LICA",
+      "warmup-time":"13:15:00",
+      "warmup-location":"LICA",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:00:00",
+      "sport":"Archery",
+      "group":"novice men's",
+      "points":1,
+      "location":"Rugby League Pitch",
+      "warmup-time":"14:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:00:00",
+      "sport":"Canoe Whitewater",
+      "group":"men's",
+      "points":4,
+      "location":"Halton Rapids",
+      "warmup-time":"14:00:00",
+      "warmup-location":"Halton Rapids",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:00:00",
+      "sport":"Football",
+      "group":"college select",
+      "points":1,
+      "location":"Football Pitch 1",
+      "warmup-time":"13:15:00",
+      "warmup-location":"Football Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:00:00",
+      "sport":"Hockey",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Astro 1",
+      "warmup-time":"13:45:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:30:00",
+      "sport":"Lacrosse",
+      "group":"men's",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"13:30:00",
+      "warmup-location":"Stadium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"14:30:00",
+      "sport":"Mooting",
+      "group":"open",
+      "points":0,
+      "location":"Cavendish Colloquium",
+      "warmup-time":"14:30:00",
+      "warmup-location":"Cavendish Colloquium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:00:00",
+      "sport":"Archery",
+      "group":"novice women's",
+      "points":1,
+      "location":"Rugby League Pitch",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Rugby League Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:00:00",
+      "sport":"Cycling",
+      "group":"circuit race",
+      "points":4,
+      "location":"Salt Ayre",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Salt Ayre",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:00:00",
+      "sport":"Squash",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Squash Courts",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Squash Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:00:00",
+      "sport":"Netball",
+      "group":"medsoc",
+      "points":0,
+      "location":"Outdoor Netball Courts",
+      "warmup-time":"14:30:00",
+      "warmup-location":"Outdoor Netball Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:15:00",
+      "sport":"Basketball",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:30:00",
+      "sport":"Hockey",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Astro 1",
+      "warmup-time":"15:15:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"15:30:00",
+      "sport":"Underwater Hockey",
+      "group":"open",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"15:30:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"16:00:00",
+      "sport":"Darts",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Great Hall",
+      "warmup-time":"16:00:00",
+      "warmup-location":"Great Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"16:00:00",
+      "sport":"Football",
+      "group":"postgrad",
+      "points":0,
+      "location":"Football Pitch 2",
+      "warmup-time":"15:15:00",
+      "warmup-location":"Football Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"16:15:00",
+      "sport":"Fencing",
+      "group":"men's 1st",
+      "points":4,
+      "location":"LICA",
+      "warmup-time":"16:15:00",
+      "warmup-location":"LICA",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"17:00:00",
+      "sport":"Hockey",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Astro 1",
+      "warmup-time":"16:45:00",
+      "warmup-location":"Astro 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"17:00:00",
+      "sport":"Lacrosse",
+      "group":"women's",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"16:00:00",
+      "warmup-location":"Stadium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"17:00:00",
+      "sport":"University Challenge",
+      "group":"open",
+      "points":4,
+      "location":"Cavendish Colloquium",
+      "warmup-time":"17:00:00",
+      "warmup-location":"Cavendish Colloquium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"17:30:00",
+      "sport":"Netball",
+      "group":"1st",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"17:15:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"18:00:00",
+      "sport":"Squash",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Squash Courts",
+      "warmup-time":"18:00:00",
+      "warmup-location":"Squash Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"19:15:00",
+      "sport":"Badminton",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"19:15:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"19:15:00",
+      "sport":"Badminton",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"19:15:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"19:30:00",
+      "sport":"Water Polo",
+      "group":"men's",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"19:30:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-05",
+      "time":"20:00:00",
+      "sport":"Darts",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Great Hall",
+      "warmup-time":"20:00:00",
+      "warmup-location":"Great Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:00:00",
+      "sport":"Ballroom Dancing",
+      "group":"mixed",
+      "points":4,
+      "location":"Great Hall",
+      "warmup-time":"09:00:00",
+      "warmup-location":"Great Hall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:00:00",
+      "sport":"Volleyball",
+      "group":"sitting",
+      "points":0,
+      "location":"Sports Centre Hall 1",
+      "warmup-time":"08:45:00",
+      "warmup-location":"Sports Centre Hall 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Cheerleading",
+      "group":"open",
+      "points":4,
+      "location":"LICA",
+      "warmup-time":"09:00:00",
+      "warmup-location":"LICA",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Climbing",
+      "group":"bouldering men's team",
+      "points":4,
+      "location":"Climbing Wall",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Climbing",
+      "group":"bouldering women's team",
+      "points":4,
+      "location":"Climbing Wall",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Climbing",
+      "group":"bouldering individual men",
+      "points":1,
+      "location":"Climbing Wall",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Climbing",
+      "group":"bouldering individual women",
+      "points":1,
+      "location":"Climbing Wall",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Climbing Wall",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:30:00",
+      "sport":"Futsal",
+      "group":"men's",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"09:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"09:45:00",
+      "sport":"Ultimate Frisbee",
+      "group":"outdoor beginner's",
+      "points":0,
+      "location":"Football Pitch 1",
+      "warmup-time":"09:00:00",
+      "warmup-location":"Football Pitch 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:00:00",
+      "sport":"Vice Chancellor Bowling",
+      "group":"open",
+      "points":0,
+      "location":"Bowling Green",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Bowling Green",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:00:00",
+      "sport":"Karate",
+      "group":"open",
+      "points":0,
+      "location":"Studio",
+      "warmup-time":"09:45:00",
+      "warmup-location":"Studio",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:30:00",
+      "sport":"Canoe Polo",
+      "group":"open",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"10:15:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:30:00",
+      "sport":"Netball",
+      "group":"college select",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"10:15:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:30:00",
+      "sport":"Rugby Union",
+      "group":"men's 3rd",
+      "points":1,
+      "location":"Rugby Pitch 2",
+      "warmup-time":"09:30:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:30:00",
+      "sport":"Lacrosse",
+      "group":"mixed",
+      "points":0,
+      "location":"Lacrosse Pitch",
+      "warmup-time":"10:00:00",
+      "warmup-location":"Lacrosse Pitch",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"10:45:00",
+      "sport":"Handball",
+      "group":"mens",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"10:30:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"11:00:00",
+      "sport":"Sailing",
+      "group":"open 1st",
+      "points":4,
+      "location":"Bolton Sailing Club",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Bolton Sailing Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"11:00:00",
+      "sport":"Tennis",
+      "group":"mixed",
+      "points":1,
+      "location":"Tennis Courts",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Tennis Courts",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"11:15:00",
+      "sport":"Ultimate Frisbee",
+      "group":"outdoor men's",
+      "points":4,
+      "location":"Football Pitch 1",
+      "warmup-time":"11:00:00",
+      "warmup-location":"Football Pitch 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"11:30:00",
+      "sport":"Canoe Polo",
+      "group":"women's a",
+      "points":4,
+      "location":"Swimming Pool",
+      "warmup-time":"11:15:00",
+      "warmup-location":"Swimming Pool",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"12:15:00",
+      "sport":"Handball",
+      "group":"womens",
+      "points":4,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"12:15:00",
+      "sport":"Netball",
+      "group":"3rd",
+      "points":1,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"12:00:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"12:30:00",
+      "sport":"Rugby Union",
+      "group":"men's 2nd",
+      "points":2,
+      "location":"Rugby Pitch 2",
+      "warmup-time":"11:30:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"13:00:00",
+      "sport":"Kendo",
+      "group":"1st",
+      "points":4,
+      "location":"Studio",
+      "warmup-time":"12:45:00",
+      "warmup-location":"Studio",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"13:15:00",
+      "sport":"Ultimate Frisbee",
+      "group":"outdoor open",
+      "points":4,
+      "location":"Football Pitch 1",
+      "warmup-time":"12:30:00",
+      "warmup-location":"Football Pitch 1",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"13:30:00",
+      "sport":"Rugby Union",
+      "group":"women's 1st",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"12:30:00",
+      "warmup-location":"Stadium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"14:00:00",
+      "sport":"Sailing",
+      "group":"open 2nd",
+      "points":2,
+      "location":"Bolton Sailing Club",
+      "warmup-time":"14:00:00",
+      "warmup-location":"Bolton Sailing Club",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"14:00:00",
+      "sport":"Netball",
+      "group":"2nd",
+      "points":2,
+      "location":"Sports Hall, Lancaster",
+      "warmup-time":"13:45:00",
+      "warmup-location":"Sports Hall, Lancaster",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"14:00:00",
+      "sport":"Volleyball",
+      "group":"mixed",
+      "points":2,
+      "location":"Sports Centre Hall 2",
+      "warmup-time":"13:45:00",
+      "warmup-location":"Sports Centre Hall 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"15:00:00",
+      "sport":"Snow Sports",
+      "group":"individual ski race",
+      "points":4,
+      "location":"Rossendale",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Rossendale",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"15:00:00",
+      "sport":"Snow Sports",
+      "group":"individual snowboard race",
+      "points":4,
+      "location":"Rossendale",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Rossendale",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"15:00:00",
+      "sport":"Snow Sports",
+      "group":"ski dual slalom",
+      "points":2,
+      "location":"Rossendale",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Rossendale",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"15:00:00",
+      "sport":"Snow Sports",
+      "group":"snowboard dual slalom",
+      "points":2,
+      "location":"Rossendale",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Rossendale",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"16:00:00",
+      "sport":"Rugby Union",
+      "group":"men's 1st",
+      "points":4,
+      "location":"Stadium",
+      "warmup-time":"15:00:00",
+      "warmup-location":"Stadium",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   },
+   {
+      "date":"2018-05-06",
+      "time":"16:30:00",
+      "sport":"Rugby Union",
+      "group":"women's 2nd",
+      "points":0,
+      "location":"Rugby Pitch 2",
+      "warmup-time":"15:30:00",
+      "warmup-location":"Rugby Pitch 2",
+      "score":{
+         "lancs":"",
+         "york":""
+      }
+   }
 ]

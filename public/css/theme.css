@@ -785,7 +785,7 @@ h1, h2, h3, h4 {
 
 .upcoming {
     color: white;
-    width: 650px;
+    max-width: 800px;
     background-clip: padding-box;
 }
 
@@ -804,8 +804,12 @@ h1, h2, h3, h4 {
     background-color: #1f1a34;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
     font-size: 16px;
-    width: 25%;
     float: left;
+    padding: 2px;
+    width: 25%;
+}
+.upcoming .one:empty, .upcoming .two:empty, .upcoming .three:empty, .upcoming .four:empty{
+    display:none;
 }
 
 .upcoming .one {
@@ -817,9 +821,11 @@ h1, h2, h3, h4 {
 }
 
 .upcoming .three {
+    float: left;
 }
 
 .upcoming .four {
+    float: left;
 }
 
 .upcoming .sport {
@@ -844,6 +850,7 @@ h1, h2, h3, h4 {
 }
 
 .upcoming .broadcast{
+
 }
 
 /**************************************************/

@@ -1192,25 +1192,50 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         
         $scope.updateUpcoming = function() {
            		
-         		var fetchData = function () {
-       				var config = {headers:  {
-					  'Accept': 'application/json',
-					  'Content-Type': 'application/json',
-					}
-    			};
-   				
-				$http.get('/data/fixtures.json', config).then(function (response) {
-						console.log('Updating Upcoming fixtures');
-						$scope.upcoming.liveupcoming = response.data;
-					    
-					    var newLiveupcoming = {"rows": []};     
-				   	    
-				   	    var numberofupcoming = 0;
-                        var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
-                        for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                            var buildArray = {};  
+            var fetchData = function () {
+                var config = {headers:  {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                }
+            };
+            
+            $http.get('/data/fixtures.json', config).then(function (response) {
+                    console.log('Updating Upcoming fixtures');
+                    $scope.upcoming.liveupcoming = response.data;
+                    
+                    var newLiveupcoming = {"rows": []};     
+                    
+                        $scope.upcoming.hiddencols = 0;
+                    if($scope.upcoming.colone == "none"){
+                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
+                    }
+                    if($scope.upcoming.coltwo == "none"){
+                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
+                    }
+                    if($scope.upcoming.colthree == "none"){
+                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
+                    }
+                    if($scope.upcoming.colfour == "none"){
+                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
+                    }
+                    
+                    console.log((4 - $scope.upcoming.hiddencols) + " cols being displayed");
+                    
+                    var numberofupcoming = 0;
+                    var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
+                    for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
+                        var buildArray = {};  
+                        
+                        if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].sport || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].group || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].broadcast || $scope.upcoming.chosenBroadcast == "All")){
                             
-                            if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].sport || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].group || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].broadcast || $scope.upcoming.chosenBroadcast == "All")){
+                            if($scope.upcoming.liveupcoming[i].score.lancs !== ""){
+                                var lancScore = $scope.upcoming.liveupcoming[i].score.lancs;
+                                var yorkScore = $scope.upcoming.liveupcoming[i].score.york;
+                                
+                                // Home team shows first. To be changed in future years!
+                                var strScore = lancScore + ' - ' + yorkScore;
+                                $scope.upcoming.liveupcoming[i].time = strScore;
+                            } else {
                                 dateTimeString = $scope.upcoming.liveupcoming[i].date + "T" + $scope.upcoming.liveupcoming[i].time;
                                 dateTime = new Date(dateTimeString);
                                   var day = daysOfWeek[dateTime.getDay()];
@@ -1222,26 +1247,28 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                                   minutes = minutes < 10 ? '0'+minutes : minutes;
                                   var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
                                 $scope.upcoming.liveupcoming[i].time = strTime;
-                                buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
-                                buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
-                                buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
-                                buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
-                                newLiveupcoming["rows"].push(buildArray);
-                                var numberofupcoming = numberofupcoming + 1;
-                            }                            
-                            if ($scope.upcoming.numberofupcoming == numberofupcoming){
-                                break;
                             }
+                            
+                            buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
+                            buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
+                            buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
+                            buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
+                            newLiveupcoming["rows"].push(buildArray);
+                            var numberofupcoming = numberofupcoming + 1;
+                        }                            
+                        if ($scope.upcoming.numberofupcoming == numberofupcoming){
+                            break;
                         }
-                        
-                        $scope.upcoming.rows = newLiveupcoming["rows"];
-                        
-                        return localStorageService.set('upcoming.rows',newLiveupcoming["rows"]);   
+                    }
+                    
+                    $scope.upcoming.rows = newLiveupcoming["rows"];
+                    
+                    return localStorageService.set('upcoming.rows',newLiveupcoming["rows"]);   
 
-					 });    
-				};
-				
-				fetchData();	         		     						
+                 });    
+            };
+            
+            fetchData();	         		     						
         };
         
         $scope.updateSelectables = function (location,sport,group,broadcast) {
@@ -1257,7 +1284,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             $http.get('/data/fixtures.json', config).then(function (response) {
 						$scope.upcoming.liveupcoming = response.data;   
 				   	    
-				   	    $scope.upcoming.options = ["sport","group","points","location","time","broadcast"];
+				   	    $scope.upcoming.options = ["sport","group","points","location","time","broadcast","none"];
 				   	    
 				   	    // Sort out locations
 				   	    if(!location || location == "All"){
