@@ -256,10 +256,10 @@
               </div>
 
               <div class="row animate-repeat" ng-repeat="row in upcoming.rows">
-                <div class="upcoming one {{upcoming.colone}}">{{ row.one }}</div>
-                <div class="upcoming two {{upcoming.coltwo}}">{{ row.two }}</div>
-                <div class="upcoming three {{upcoming.colthree}}">{{ row.three }}</div>
-                <div class="upcoming four {{upcoming.colfour}}">{{ row.four }}</div>
+                <div style="width: {{upcoming.colonewidth}}%" class="upcoming one {{upcoming.colone}}">{{ row.one }}</div>
+                <div style="width: {{upcoming.coltwowidth}}%" class="upcoming two {{upcoming.coltwo}}">{{ row.two }}</div>
+                <div style="width: {{upcoming.colthreewidth}}%" class="upcoming three {{upcoming.colthree}}">{{ row.three }}</div>
+                <div style="width: {{upcoming.colfourwidth}}%" class="upcoming four {{upcoming.colfour}}">{{ row.four }}</div>
               </div>
             </div>
           </div>

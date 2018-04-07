@@ -787,6 +787,7 @@ h1, h2, h3, h4 {
     color: white;
     max-width: 800px;
     background-clip: padding-box;
+    background-color: #1f1a34;
 }
 
 .upcoming h1 {
@@ -801,20 +802,16 @@ h1, h2, h3, h4 {
 
 .upcoming .one, .upcoming .two, .upcoming .three, .upcoming .four {
     line-height: 24px;
-    background-color: #1f1a34;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.12) 51%, rgba(0, 0, 0, 0.04));
     font-size: 16px;
     float: left;
-    padding: 2px;
-    width: 25%;
+    padding: 5px;
 }
+
 .upcoming .one:empty, .upcoming .two:empty, .upcoming .three:empty, .upcoming .four:empty{
     display:none;
 }
 
 .upcoming .one {
-    text-align: left;
-    padding-left: 5px;
 }
 
 .upcoming .two {
@@ -839,14 +836,12 @@ h1, h2, h3, h4 {
     text-align: center;
 }
 
-.upcoming .points::after {
-    content:"pts";
-}
 
 .upcoming .location{
 }
 
 .upcoming .time{
+    text-align: center;
 }
 
 .upcoming .broadcast{

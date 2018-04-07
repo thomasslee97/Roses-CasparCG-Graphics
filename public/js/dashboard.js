@@ -1129,7 +1129,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 
         $scope.$watch('upcoming', function() {
             if ($scope.upcoming) {
-                socket.emit("bug", $scope.upcoming);
+                // This will make the thing update live, which we don't want
+                // socket.emit("upcoming", $scope.upcoming);
             } else {
                 getUpcomingData();
             }
@@ -1204,23 +1205,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                     $scope.upcoming.liveupcoming = response.data;
                     
                     var newLiveupcoming = {"rows": []};     
-                    
-                        $scope.upcoming.hiddencols = 0;
-                    if($scope.upcoming.colone == "none"){
-                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
-                    }
-                    if($scope.upcoming.coltwo == "none"){
-                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
-                    }
-                    if($scope.upcoming.colthree == "none"){
-                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
-                    }
-                    if($scope.upcoming.colfour == "none"){
-                        $scope.upcoming.hiddencols = $scope.upcoming.hiddencols + 1;
-                    }
-                    
-                    console.log((4 - $scope.upcoming.hiddencols) + " cols being displayed");
-                    
+                                       
                     var numberofupcoming = 0;
                     var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
                     for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
@@ -1248,6 +1233,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                                   var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
                                 $scope.upcoming.liveupcoming[i].time = strTime;
                             }
+                            
+                            $scope.upcoming.liveupcoming[i].points = $scope.upcoming.liveupcoming[i].points + 'pts';
                             
                             buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
                             buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  

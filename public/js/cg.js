@@ -252,6 +252,44 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
     function($scope, socket){
         socket.on("upcoming", function (msg) {
             $scope.upcoming = msg;
+            
+            var totalWidth = 0;
+            var maxOne = 0;
+            var maxTwo = 0;
+            var maxThree = 0;
+            var maxFour = 0;
+            
+            for(i = 0; i<$scope.upcoming.rows.length; i++){   
+                if(maxOne < $scope.upcoming.rows[i].one.length) {
+                    maxOne = $scope.upcoming.rows[i].one.length;
+                }
+                if(maxTwo < $scope.upcoming.rows[i].two.length) {
+                    maxTwo = $scope.upcoming.rows[i].two.length;
+                }
+                if(maxThree < $scope.upcoming.rows[i].three.length) {
+                    maxThree = $scope.upcoming.rows[i].three.length;
+                }
+                if(maxFour < $scope.upcoming.rows[i].four.length) {
+                    maxFour = $scope.upcoming.rows[i].four.length;
+                }
+                
+            }
+
+            var colWidths = {
+                colone : maxOne,
+                coltwo : maxTwo,
+                colthree : maxThree,
+                colfour : maxFour,
+                total : maxOne + maxTwo + maxThree + maxFour
+            }
+        
+            $scope.upcoming.colonewidth = ((colWidths.colone / colWidths.total) * 100).toFixed(1);
+            $scope.upcoming.coltwowidth = ((colWidths.coltwo / colWidths.total) * 100).toFixed(1);
+            $scope.upcoming.colthreewidth = ((colWidths.colthree / colWidths.total) * 100).toFixed(1);
+            $scope.upcoming.colfourwidth = ((colWidths.colfour / colWidths.total) * 100).toFixed(1);
+               
+        
+            console.log($scope.upcoming);
         });
         
         $scope.$watch('upcoming', function() {
