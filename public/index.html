@@ -249,20 +249,20 @@
         </div>
         
         <div ng-controller="upcomingCtrl">
-          <div class="center-page scale-fade" ng-show="upcoming.show">
-            <div class="upcoming center" style="margin-top: 20px; position: absolute;" >
-              <div class="gradient-overlay">
-                <h1>{{ upcoming.header }}</h1>
-              </div>
-
-              <div class="row animate-repeat" ng-repeat="row in upcoming.rows">
-                <div style="width: {{upcoming.colonewidth}}%" class="upcoming one {{upcoming.colone}}">{{ row.one }}</div>
-                <div style="width: {{upcoming.coltwowidth}}%" class="upcoming two {{upcoming.coltwo}}">{{ row.two }}</div>
-                <div style="width: {{upcoming.colthreewidth}}%" class="upcoming three {{upcoming.colthree}}">{{ row.three }}</div>
-                <div style="width: {{upcoming.colfourwidth}}%" class="upcoming four {{upcoming.colfour}}">{{ row.four }}</div>
-              </div>
+            <div class="scale-fade upcoming upcomingGrid {{upcoming.template}}" ng-show="upcoming.show">
+                <div class="upcomingHeaderTop" style="display: none;">
+                    <h1>{{ upcoming.header }}</h1>
+                </div>
+                <div class="row animate-repeat" ng-repeat="row in upcoming.rows">
+                    <div style="width: {{upcoming.colonewidth}}%" class="upcoming one {{upcoming.colone}}">{{ row.one }}</div>
+                    <div style="width: {{upcoming.coltwowidth}}%" class="upcoming two {{upcoming.coltwo}}">{{ row.two }}</div>
+                    <div style="width: {{upcoming.colthreewidth}}%" class="upcoming three {{upcoming.colthree}}">{{ row.three }}</div>
+                    <div style="width: {{upcoming.colfourwidth}}%" class="upcoming four {{upcoming.colfour}}">{{ row.four }}</div>
+                </div>
+                <div class="upcomingHeaderBottom">
+                    <h1>{{ upcoming.header }}</h1>
+                </div>
             </div>
-          </div>
         </div>
 
         <div ng-controller="swimmingCtrl">

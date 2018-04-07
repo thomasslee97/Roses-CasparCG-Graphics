@@ -43,8 +43,13 @@
             </div>
             <div class="three wide field">
                 <div class="ui center form">
-                    <h3>Sort By...</h3>
-                    <select class="ui fluid dropdown" ng-model='upcoming.sortby'  ng-options='option for option in upcoming.options'></select>
+                    <h3>Template</h3>
+                     <dropdown title="Pick template"  ng-model="upcoming.template">
+                        <dropdown-group>bottom-left</dropdown-group>
+                        <dropdown-group>bottom-right</dropdown-group>
+                        <dropdown-group>bottom-center</dropdown-group>
+                        <dropdown-group>top-center</dropdown-group>
+                      </dropdown>
                 </div>
             </div>
             <div class="three wide field">
@@ -84,20 +89,7 @@
     </div>    
     <div class="sixteen wide field">
         <div class="ui error form segment">
-            <div class="fields slide-left">
-                <div class="four wide field">
-                    <h3 style="text-transform: capitalize">{{upcoming.colone}}</h3>
-                </div>
-                <div class="four wide field">
-                    <h3 style="text-transform: capitalize">{{upcoming.coltwo}}</h3>
-                </div>
-                <div class="three wide field">
-                    <h3 style="text-transform: capitalize">{{upcoming.colthree}}</h3>
-                </div>
-                <div class="two wide field">
-                    <h3 style="text-transform: capitalize">{{upcoming.colfour}}</h3>
-                </div>
-            </div>
+
             <div class="fields slide-left" ng-repeat="row in upcoming.rows track by $index">
                 <div class="four wide field">
                 <input type="text" ng-model="row.one" placeholder="">
@@ -105,10 +97,10 @@
                 <div class="four wide field">
                 <input type="text" ng-model="row.two" placeholder="Hidden">
                 </div>
-                <div class="three wide field">
+                <div class="four wide field">
                 <input type="text" ng-model="row.three" placeholder="Hidden">
                 </div>
-                <div class="two wide field">
+                <div class="four wide field">
                 <input type="text" ng-model="row.four" placeholder="Hidden">
                 </div>
                 <div class="two wide field">
