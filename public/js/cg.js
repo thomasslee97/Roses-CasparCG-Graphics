@@ -356,11 +356,9 @@ app.controller('twitterCtrl', ['$scope', 'socket', '$sce',
             if (!showTweet) {
                 $scope.showTweet = false;
             } else {
-            
                 tweetUrl = msg.tweet;
-            
                 if(tweetUrl !== ""){
-                    fetchTweetHTML(msg.tweet);
+                    fetchTweetID(msg.tweet);
                 }
             }
         });
@@ -369,9 +367,8 @@ app.controller('twitterCtrl', ['$scope', 'socket', '$sce',
             console.log('Selected: ', tweetId);
             $scope.selectedTweet = tweetId;
         };
-
-        
-        var fetchTweetHTML = function(tweetURL){
+       
+        var fetchTweetID = function(tweetURL){
             var tweetSplit = tweetURL.split('/');
             var tweetID = tweetSplit[tweetSplit.length-1];
             $scope.selectTweet(tweetID);

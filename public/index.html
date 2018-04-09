@@ -372,8 +372,9 @@
         </div>
         
         <div ng-controller="twitterCtrl">
-			<div class="{{twitter.pos}} social-media">
-			    <twitter-widget twitter-widget-id="selectedTweet" twitter-widget-options="{}">
+			<div class="{{twitter.pos}}">
+			Selected Tweet: {{selectedTweet}}
+			    <twitter-widget twitter-widget-id="{{selectedTweet}}" twitter-widget-options="{}">
 			</div>
         </div>
 
