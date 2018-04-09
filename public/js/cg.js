@@ -283,10 +283,10 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
                 total : maxOne + maxTwo + maxThree + maxFour
             }
         
-            $scope.upcoming.colonewidth = ((colWidths.colone / colWidths.total) * 100).toFixed(1);
-            $scope.upcoming.coltwowidth = ((colWidths.coltwo / colWidths.total) * 100).toFixed(1);
-            $scope.upcoming.colthreewidth = ((colWidths.colthree / colWidths.total) * 100).toFixed(1);
-            $scope.upcoming.colfourwidth = ((colWidths.colfour / colWidths.total) * 100).toFixed(1);
+            $scope.upcoming.colonewidth = Math.floor((colWidths.colone / colWidths.total) * 10000)/100;
+            $scope.upcoming.coltwowidth = Math.floor((colWidths.coltwo / colWidths.total) * 10000)/100;
+            $scope.upcoming.colthreewidth = Math.floor((colWidths.colthree / colWidths.total) * 10000)/100;
+            $scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
                
         
             console.log($scope.upcoming);

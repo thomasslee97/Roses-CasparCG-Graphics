@@ -117,6 +117,50 @@
             </div>
         </div>
     </div>
-    <div class="sixteen wide column"></div>
+    <div class="sixteen wide column">
+         <div class="ui divider"></div>
+        <div class="fields">
+            <div class="four wide field">
+                <div class="ui center form">
+                    <h3>Next on header</h3>
+                    <input name="heading" placeholder="Heading" type="text" ng-model="upcoming.nextonHeader" />             
+                </div>
+            </div>
+            <div class="three wide field">
+                <h3>Time</h3>
+                <h2>{{upcoming.nextonTime}}</h2>
+            </div>
+            <div class="three wide field">
+                <div class="ui center form">
+                    <h3>Grab Latest</h3>
+                    <button class="ui green button" ng-click="updateLatest()">Get 'em</button>
+                </div>
+            </div>
+            <div class="three wide field">
+                <div class="ui center form">
+                    <h3>Show Next On</h3>
+                    <button class="ui green button" ng-click="showNexton()">Show</button>
+                    <div class="ui red button" ng-click="hideNexton()">Hide</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sixteen wide field">
+        <div class="fields slide-left">
+            <div class="four wide field">
+            <input type="text" ng-model="row.nextonSport" placeholder="Sport">
+            </div>
+            <div class="four wide field">
+            <input type="text" ng-model="row.nextonGroup" placeholder="Group">
+            </div>
+            <div class="four wide field">
+            <input type="text" ng-model="row.nextonPoints" placeholder="Points">
+            </div>
+            <div class="four wide field">
+            <input type="text" ng-model="row.nextonBroadcast" placeholder="Broadcast">
+            </div>
+        </div>
+    </div>
+    <div class="sixteen wide field"><br /></div>
   </div><!-- ui grid center aligned -->
 </div><!-- ui form segment -->
