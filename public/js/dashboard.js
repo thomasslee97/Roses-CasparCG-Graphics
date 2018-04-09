@@ -1144,11 +1144,25 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             socket.emit("upcoming:get");
         }
         
+        function countDownUpcoming() {
+       	    console.log("countDownUpcoming");
+
+       	    setInterval(function(){
+				var end = $scope.upcoming.nextonTime;
+				var now = new Date();
+				var timeBetween = end - now;
+				var hours = timeBetween.getHours();
+				var minutes = timeBetween.getMinutes();
+				var seconds = timeBetween.getSeconds();
+				$scope.upcoming.nextonCountdown = hours + ":" + minutes + " : " + seconds;
+			}, 1000);
+        }
+        
         $scope.getFromStored = function() {
             var stored = localStorageService.get('upcoming.rows');
             $scope.upcoming.rows = stored;
             if(stored == null){
-                console.log("nothing to declare");
+                console.log("Nothing to get from local storage.");
             } else {
                 console.log("Getting data from store");
             }
@@ -1191,8 +1205,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             console.log("Broadcast Chosen");
         }
         
-        $scope.updateUpcoming = function() {
-           		
+        $scope.updateUpcoming = function(whichGraphic) {
+          	
             var fetchData = function () {
                 var config = {headers:  {
                   'Accept': 'application/json',
@@ -1201,10 +1215,10 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             };
             
             $http.get('/data/fixtures.json', config).then(function (response) {
-                    console.log('Updating Upcoming fixtures');
+                    console.log('Updating Upcoming fixtures for '+whichGraphic);
                     $scope.upcoming.liveupcoming = response.data;
                     
-                    var newLiveupcoming = {"rows": []};     
+                    var newLiveupcoming = {"rows": [], "nextup": []};     
                                        
                     var numberofupcoming = 0;
                     var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
@@ -1213,7 +1227,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         
                         if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].sport || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].group || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].broadcast || $scope.upcoming.chosenBroadcast == "All")){
                             
-                            if($scope.upcoming.liveupcoming[i].score.lancs !== ""){
+                            if($scope.upcoming.liveupcoming[i].score.lancs !== "" && whichGraphic !== "nextup"){
                                 var lancScore = $scope.upcoming.liveupcoming[i].score.lancs;
                                 var yorkScore = $scope.upcoming.liveupcoming[i].score.york;
                                 
@@ -1231,27 +1245,51 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                                   hours = hours ? hours : 12; // the hour '0' should be '12'
                                   minutes = minutes < 10 ? '0'+minutes : minutes;
                                   var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
-                                $scope.upcoming.liveupcoming[i].time = strTime;
+                                if(whichGraphic == "nextup"){
+                                	$scope.upcoming.liveupcoming[i].time = dateTime;
+                                } else {
+                                	$scope.upcoming.liveupcoming[i].time = strTime;
+                                }
                             }
                             
                             $scope.upcoming.liveupcoming[i].points = $scope.upcoming.liveupcoming[i].points + 'pts';
                             
-                            buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
-                            buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
-                            buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
-                            buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
-                            newLiveupcoming["rows"].push(buildArray);
-                            var numberofupcoming = numberofupcoming + 1;
+                           
+                            if(whichGraphic == "nextup"){                          	
+								buildArray["sport"] = $scope.upcoming.liveupcoming[i].sport;
+								buildArray["group"] = $scope.upcoming.liveupcoming[i].group;  
+								buildArray["points"] = $scope.upcoming.liveupcoming[i].points;
+								buildArray["broadcast"] = $scope.upcoming.liveupcoming[i].broadcast;
+								buildArray["time"] = $scope.upcoming.liveupcoming[i].time;
+								newLiveupcoming["nextup"].push(buildArray);
+								$scope.upcoming.nextup = newLiveupcoming["nextup"];
+								break;
+                            } else {
+                            	buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
+								buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
+								buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
+								buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
+								newLiveupcoming["rows"].push(buildArray);
+								var numberofupcoming = numberofupcoming + 1;
+							}
                         }                            
                         if ($scope.upcoming.numberofupcoming == numberofupcoming){
                             break;
                         }
                     }
-                    
-                    $scope.upcoming.rows = newLiveupcoming["rows"];
-                    
-                    return localStorageService.set('upcoming.rows',newLiveupcoming["rows"]);   
-
+                    if(whichGraphic == "nextup"){
+                    	console.log(newLiveupcoming);
+                    	$scope.upcoming.nextonSport = newLiveupcoming["nextup"][0]["sport"];
+                    	$scope.upcoming.nextonGroup = newLiveupcoming["nextup"][0]["group"];
+                    	$scope.upcoming.nextonPoints = newLiveupcoming["nextup"][0]["points"];
+                    	$scope.upcoming.nextonBroadcast = newLiveupcoming["nextup"][0]["broadcast"];
+                    	$scope.upcoming.nextonTime = newLiveupcoming["nextup"][0]["time"]
+                    	countDownUpcoming();
+                    	return localStorageService.set('upcoming.nextup',newLiveupcoming["nextup"]);	
+                    } else {
+						$scope.upcoming.rows = newLiveupcoming["rows"];				
+						return localStorageService.set('upcoming.rows',newLiveupcoming["rows"]);   
+					}
                  });    
             };
             
