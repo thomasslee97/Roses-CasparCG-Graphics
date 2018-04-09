@@ -1,4 +1,4 @@
-var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
+var app = angular.module('cgApp', ['ngAnimate', 'socket-io', 'ngtweet']);
 
 app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     function($scope, socket){
@@ -343,6 +343,42 @@ app.controller('tennisCtrl', ['$scope', 'socket',
 
         function getTennisData() {
             socket.emit("tennis:get");
+        }
+    }
+]);
+
+app.controller('twitterCtrl', ['$scope', 'socket', '$sce',
+    function($scope, socket, $sce){
+        socket.on("twitter", function (msg) {
+            $scope.twitter = msg;
+            showTweet = msg.show;
+            
+            if (!showTweet) {
+                $scope.showTweet = false;
+            } else {
+            
+                tweetUrl = msg.tweet;
+            
+                if(tweetUrl !== ""){
+                    fetchTweetHTML(msg.tweet);
+                }
+            }
+        });
+              
+        $scope.selectTweet = function(tweetId) {
+            console.log('Selected: ', tweetId);
+            $scope.selectedTweet = tweetId;
+        };
+
+        
+        var fetchTweetHTML = function(tweetURL){
+            var tweetSplit = tweetURL.split('/');
+            var tweetID = tweetSplit[tweetSplit.length-1];
+            $scope.selectTweet(tweetID);
+           
+            if (showTweet) {
+                $scope.showTweet = showTweet;
+            }
         }
     }
 ]);
