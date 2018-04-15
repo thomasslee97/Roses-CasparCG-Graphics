@@ -1385,8 +1385,8 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
     }
 ]);
 
-app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket',
-  function($scope, localStorageService, socket){
+app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket', '$rootScope', '$document',
+  function($scope, localStorageService, socket, $rootScope, $document){
     var storedLancs = localStorageService.get('lancs_waterpolo');
     var storedYork = localStorageService.get('york_waterpolo');
     var clockIcon = 'pause icon'
@@ -1509,5 +1509,18 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
       socket.emit("clock:get");
       socket.emit("shotclock:get");
     }
+
+    $document.bind('keypress', function (e) {
+        $rootScope.$emit('keypress', e, String.fromCharCode(e.which));
+    });
+
+    $rootScope.$on('keypress', function (event, object, key) {
+      console.log(object.which)
+      console.log($scope.waterpolo.enableKeyboard)
+      if(object.which === 32 && $scope.waterpolo.enableKeyboard) {
+        $scope.waterpoloShotClock()
+        console.log("SUCCESS")
+      }
+    })
   }
 ]);
