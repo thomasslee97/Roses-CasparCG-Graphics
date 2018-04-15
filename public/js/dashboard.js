@@ -1413,7 +1413,12 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     }
 
     $scope.pauseClock = function() {
-        socket.emit("clock:pause");
+      if($scope.clockState) {
+        $scope.clockState = false
+      } else {
+        $scope.clockState = true
+      }
+      socket.emit("clock:pause");
     };
 
     $scope.resetClock = function() {
@@ -1438,6 +1443,11 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     }
 
     $scope.pauseShotClock = function() {
+      if($scope.shotClockState) {
+        $scope.shotClockState = false
+      } else {
+        $scope.shotClockState = true
+      }
         socket.emit("shotclock:pause");
     };
 

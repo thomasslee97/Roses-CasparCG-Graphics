@@ -4,7 +4,7 @@
     <div class="ui grid center aligned">
         <div class="ten wide column">
             <div class="inline field">
-                <checkbox ng-model="waterpolo.show" size="large" type="toggle">Show Score Bar</checkbox>
+              <checkbox ng-model="waterpolo.show" size="large" type="toggle">Show Score Bar</checkbox>
            		<checkbox ng-model="waterpolo.showquarter" size="large" type="toggle">Show Quarter</checkbox>
               <checkbox ng-model="waterpolo.showshotcountdown" size="large" type="toggle">Show Shot Countdown</checkbox>
             </div>
@@ -33,10 +33,18 @@
 
         <div class="five wide column">
           <div class="ui">
-            <div class="ui icon blue button" ng-click="waterpoloClock()">
-              <i class="pause icon"></i>
+            <div class="content" ng-if="clockState">
+              <div class="ui icon blue button" ng-click="waterpoloClock()">
+                <i class="pause icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetClock()">Reset</div>
             </div>
-            <div class="ui button" ng-click="resetClock()">Reset</div>
+            <div class="content" ng-if="!clockState">
+              <div class="ui icon green button" ng-click="waterpoloClock()">
+                <i class="play icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetClock()">Reset</div>
+            </div>
           </div>
         </div>
     </div>
@@ -57,10 +65,19 @@
 
         <div class="five wide column">
           <div class="ui">
-            <div class="ui icon blue button" ng-click="waterpoloShotClock()">
-              <i class="pause icon"></i>
+            <div class="content" ng-if="shotClockState">
+              <div class="ui icon blue button" ng-click="waterpoloShotClock()">
+                <i class="pause icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetShotClock()">Reset</div>
+              <checkbox ng-model="waterpolo.enableKeyboard" size="large" type="toggle">Enable Keyboard Controls</checkbox>
             </div>
-            <div class="ui button" ng-click="resetShotClock()">Reset Shot</div>
+            <div class="content" ng-if="!shotClockState">
+              <div class="ui icon green button" ng-click="waterpoloShotClock()">
+                <i class="play icon"></i>
+              </div>
+              <div class="ui button" ng-click="resetShotClock()">Reset</div>
+            </div>
           </div>
         </div>
     </div>
