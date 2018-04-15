@@ -36,7 +36,7 @@ var tennisScore   = [{sets1: [0], sets2: [0],
                       pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
 var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
 var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var waterpolo = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var waterpolo = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0, showquarter: true, showshotcountdown: true};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
