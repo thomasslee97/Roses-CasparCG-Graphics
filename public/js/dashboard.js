@@ -232,9 +232,12 @@ app.controller('archeryCGController', ['$scope', 'socket',
       };
 
       $scope.archeryHit1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
         if($scope.archery.shots1.length < 6) {
           $scope.archery.shots1 += "H";
-          var tmp = Number($scope.archery.score1);
+          var tmp = Number($scope.archery.score1) || 0;
           var newScore = (tmp + 1);
           $scope.archery.score1 = newScore;
           debugger
@@ -242,21 +245,30 @@ app.controller('archeryCGController', ['$scope', 'socket',
       }
 
       $scope.archeryHit2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
         if($scope.archery.shots2.length < 6) {
           $scope.archery.shots2 += "H";
-          var tmp = Number($scope.archery.score2);
+          var tmp = Number($scope.archery.score2) || 0;
           var newScore = (tmp + 1);
           $scope.archery.score2 = newScore;
         }
       }
 
       $scope.archeryMiss1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
         if($scope.archery.shots1.length < 6) {
           $scope.archery.shots1 += "M";
         }
       }
 
       $scope.archeryMiss2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
         if($scope.archery.shots2.length < 6) {
           $scope.archery.shots2 += "M";
         }
@@ -264,14 +276,16 @@ app.controller('archeryCGController', ['$scope', 'socket',
 
       $scope.archeryReset2 = function() {
           $scope.archery.score2 = 0;
+          $scope.archery.shots1 = [];
+          $scope.archery.shots2 = [];
       };
 
       $scope.archeryHitsReset1 = function() {
-          $scope.archery.shots1 = [];
+          $scope.archery.shots1 = "";
       };
 
       $scope.archeryHitsReset2 = function() {
-          $scope.archery.shots2 = [];
+          $scope.archery.shots2 = "";
       };
   }
 ]);
@@ -337,10 +351,12 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
         }
 
         $scope.add = function(item) {
-            $scope.queuedThirds.push(item);
+            if (item.heading) {
+                $scope.queuedThirds.push(item);
 
-            $scope.lowerThirdsForm.$setPristine();
-            $scope.lowerThird = {};
+                $scope.lowerThirdsForm.$setPristine();
+                $scope.lowerThird = {};
+            }
         };
 
         $scope.remove = function(index){
@@ -351,6 +367,14 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
             socket.emit("lowerthird:" + side, item);
             showLiveLowerThird($scope)
         };
+
+        $scope.edit = function(index) {
+            if (!$scope.queuedThirds[index].edit) {
+                $scope.queuedThirds[index].edit = true;
+            } else if ($scope.queuedThirds[index].heading) {
+                $scope.queuedThirds[index].edit = !$scope.queuedThirds[index].edit
+            }
+        }
 
         $scope.hideall = function() {
             socket.emit("lowerthird:hideall");
