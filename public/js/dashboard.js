@@ -1521,6 +1521,7 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     $rootScope.$on('keypress', function (event, object, key) {
       if(object.which === 32 && $scope.waterpolo.enableKeyboard) {
         $scope.waterpoloShotClock()
+        $scope.waterpoloClock()
       }
       if(object.which === 13 && $scope.waterpolo.enableKeyboard) {
         $scope.setShotClock("00:30")
