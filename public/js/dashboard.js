@@ -491,11 +491,11 @@ app.controller('boxingCGController', ['$scope', 'socket',
         };
 
         $scope.updateScore = function() {
-            console.log("Score");
+            // console.log("Score");
         };
 
         $scope.roundChanged = function() {
-            console.log("Round");
+            // console.log("Round");
         };
 
         socket.on("boxing", function (msg) {
@@ -607,7 +607,7 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
         };
 
         $scope.delete = function(team, index) {
-            console.log('delete');
+            // console.log('delete');
             if(team === 'york') {
                 $scope.yorksPlayers.splice(index, 1);
             } else if (team === 'lancs') {
@@ -928,7 +928,7 @@ app.controller('basketballCGController', ['$scope', 'localStorageService', 'sock
         };
 
         $scope.delete = function(team, index) {
-            console.log('delete');
+            // console.log('delete');
             if(team === 'york') {
                 $scope.yorksPlayers.splice(index, 1);
             } else if (team === 'lancs') {
@@ -1367,7 +1367,7 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
         };
 
         $scope.delete = function(team, index) {
-            console.log('delete');
+            // console.log('delete');
             if(team === 'york') {
                 $scope.yorksPlayers.splice(index, 1);
             } else if (team === 'lancs') {
@@ -1385,7 +1385,7 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
         });
 
         $scope.quarterChanged = function() {
-            console.log("Quarter");
+            // console.log("Quarter");
         };
 
         $scope.$watch('netball', function() {
@@ -1462,7 +1462,7 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
     };
 
     $scope.delete = function(team, index) {
-        console.log('delete');
+        // console.log('delete');
         if(team === 'york') {
             $scope.yorksPlayers.splice(index, 1);
         } else if (team === 'lancs') {
@@ -1527,7 +1527,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         }
         
         function countDownUpcoming() {
-       	    console.log("countDownUpcoming");
+       	    // console.log("countDownUpcoming");
 
        	    setInterval(function(){
 				var end = $scope.upcoming.nextonTime;
@@ -1544,9 +1544,9 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             var stored = localStorageService.get('upcoming.rows');
             $scope.upcoming.rows = stored;
             if(stored == null){
-                console.log("Nothing to get from local storage.");
+                //console.log("Nothing to get from local storage.");
             } else {
-                console.log("Getting data from store");
+                //console.log("Getting data from store");
             }
         }
         
@@ -1565,13 +1565,13 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         $scope.showUpcoming = function() {
             $scope.upcoming.show = true;
             socket.emit('upcoming', $scope.upcoming);
-            console.log($scope.upcoming);
+            //console.log($scope.upcoming);
         };
 
         $scope.hideUpcoming = function() {
             $scope.upcoming.show = false;
             socket.emit('upcoming', $scope.upcoming);
-            console.log("Hide Upcoming");
+            //console.log("Hide Upcoming");
         };
         
         $scope.locationChosen = function() {
@@ -1581,10 +1581,10 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             $scope.updateSelectables($scope.upcoming.chosenLocation,$scope.upcoming.chosenSport)
         }
         $scope.groupChosen = function() {
-            console.log("Group Chosen");
+            // console.log("Group Chosen");
         }
         $scope.broadcastChosen = function() {
-            console.log("Broadcast Chosen");
+            // console.log("Broadcast Chosen");
         }
         
         $scope.updateUpcoming = function(whichGraphic) {
@@ -1597,9 +1597,9 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
             };
             
             $http.get('/data/timetable_entries_example.json', config).then(function (response) {
-                    console.log('Updating Upcoming fixtures for '+whichGraphic);
+                    // console.log('Updating Upcoming fixtures for '+whichGraphic);
                     $scope.upcoming.liveupcoming = response.data;
-                    console.log( $scope.upcoming.liveupcoming);
+                    // console.log( $scope.upcoming.liveupcoming);
                     var newLiveupcoming = {"rows": [], "nextup": []};     
                                        
                     var numberofupcoming = 0;
@@ -1658,7 +1658,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         }
                     }
                     if(whichGraphic == "nextup"){
-                    	console.log(newLiveupcoming);
+                    	// console.log(newLiveupcoming);
                     	$scope.upcoming.nextonSport = newLiveupcoming["nextup"][0]["sport"];
                     	$scope.upcoming.nextonGroup = newLiveupcoming["nextup"][0]["group"];
                     	$scope.upcoming.nextonPoints = newLiveupcoming["nextup"][0]["points"];
@@ -1678,7 +1678,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         
         $scope.updateSelectables = function (location,sport,group,broadcast) {
             if(!location){
-                console.log('Getting Selectable Values');
+                // console.log('Getting Selectable Values');
             }
             var fetchData = function () {
                 var config = {headers:  {
@@ -1702,7 +1702,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                             locations.sort();
                             locations.unshift("All");
                             $scope.upcoming.locations = locations;
-                            console.log("Loading Locations");
+                            // console.log("Loading Locations");
                         }
 				   	    if(!$scope.upcoming.chosenLocation){
 				   	        $scope.upcoming.chosenLocation = "All";
@@ -1729,7 +1729,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                             sports.sort();
                             sports.unshift("All");
                             $scope.upcoming.sports = sports;
-                            console.log("Loading Sports");
+                            // console.log("Loading Sports");
                         }
                         if(!$scope.upcoming.chosenSport){
                              $scope.upcoming.chosenSport = "All";
@@ -1771,7 +1771,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         groups.unshift("All");
                         $scope.upcoming.groups = groups;
                         $scope.upcoming.chosenGroup = "All";
-                        console.log("Loading Groups");
+                        // console.log("Loading Groups");
                         var broadcasts = Array(); 
                         for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                             if(broadcasts.indexOf($scope.upcoming.liveupcoming[i].la1tv_coverage_level) == -1){
@@ -1782,7 +1782,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         broadcasts.unshift("All");
                         $scope.upcoming.broadcasts = broadcasts;
                         $scope.upcoming.chosenBroadcast = "All";
-                        console.log("Loading Broadcasts");
+                        // console.log("Loading Broadcasts");
                         
                         
 					 });    

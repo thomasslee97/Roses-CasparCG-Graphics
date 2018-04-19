@@ -296,7 +296,7 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
             $scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
                
         
-            console.log($scope.upcoming);
+            // console.log($scope.upcoming);
         });
         
         $scope.$watch('upcoming', function() {
