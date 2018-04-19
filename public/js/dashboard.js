@@ -205,6 +205,7 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
             .when("/waterpolo", {
               templateUrl: '/admin/templates/waterpolo.tmpl.html',
               controller: 'waterpoloCGController'
+            })
             .when("/upcoming", {
               templateUrl: '/admin/templates/upcoming.tmpl.html',
               controller: 'upcomingCGController'
@@ -1595,10 +1596,10 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                 }
             };
             
-            $http.get('/data/fixtures.json', config).then(function (response) {
+            $http.get('/data/timetable_entries_example.json', config).then(function (response) {
                     console.log('Updating Upcoming fixtures for '+whichGraphic);
                     $scope.upcoming.liveupcoming = response.data;
-                    
+                    console.log( $scope.upcoming.liveupcoming);
                     var newLiveupcoming = {"rows": [], "nextup": []};     
                                        
                     var numberofupcoming = 0;
@@ -1606,50 +1607,48 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                     for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                         var buildArray = {};  
                         
-                        if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].sport || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].group || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].broadcast || $scope.upcoming.chosenBroadcast == "All")){
+                        if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location.name || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].team.sport.title || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].team.title || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].la1tv_coverage_level || $scope.upcoming.chosenBroadcast == "All")){
                             
-                            if($scope.upcoming.liveupcoming[i].score.lancs !== "" && whichGraphic !== "nextup"){
-                                var lancScore = $scope.upcoming.liveupcoming[i].score.lancs;
-                                var yorkScore = $scope.upcoming.liveupcoming[i].score.york;
-                                
-                                // Home team shows first. To be changed in future years!
-                                var strScore = lancScore + ' - ' + yorkScore;
-                                $scope.upcoming.liveupcoming[i].time = strScore;
+                            dateTimeString = $scope.upcoming.liveupcoming[i].updated_at;
+                            dateTime = new Date(dateTimeString);
+                              var day = daysOfWeek[dateTime.getDay()];
+                              var hours = dateTime.getHours();
+                              var minutes = dateTime.getMinutes();
+                              var ampm = hours >= 12 ? 'pm' : 'am';
+                              hours = hours % 12;
+                              hours = hours ? hours : 12; // the hour '0' should be '12'
+                              minutes = minutes < 10 ? '0'+minutes : minutes;
+                              var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
+                            if(whichGraphic == "nextup"){
+                                $scope.upcoming.liveupcoming[i].time = dateTime;
                             } else {
-                                dateTimeString = $scope.upcoming.liveupcoming[i].date + "T" + $scope.upcoming.liveupcoming[i].time;
-                                dateTime = new Date(dateTimeString);
-                                  var day = daysOfWeek[dateTime.getDay()];
-                                  var hours = dateTime.getHours();
-                                  var minutes = dateTime.getMinutes();
-                                  var ampm = hours >= 12 ? 'pm' : 'am';
-                                  hours = hours % 12;
-                                  hours = hours ? hours : 12; // the hour '0' should be '12'
-                                  minutes = minutes < 10 ? '0'+minutes : minutes;
-                                  var strTime = day + ' ' + hours + ':' + minutes + ' ' + ampm;
-                                if(whichGraphic == "nextup"){
-                                	$scope.upcoming.liveupcoming[i].time = dateTime;
-                                } else {
-                                	$scope.upcoming.liveupcoming[i].time = strTime;
-                                }
+                                $scope.upcoming.liveupcoming[i].time = strTime;
                             }
                             
-                            $scope.upcoming.liveupcoming[i].points = $scope.upcoming.liveupcoming[i].points + 'pts';
+                            $scope.upcoming.liveupcoming[i].points = $scope.upcoming.liveupcoming[i].point.amount + 'pts';
                             
-                           
+                            var sport = $scope.upcoming.liveupcoming[i].team.sport.title;
+                            var group = $scope.upcoming.liveupcoming[i].team.title;
+                            var points = $scope.upcoming.liveupcoming[i].points;
+                            var location = $scope.upcoming.liveupcoming[i].location.name;
+                            var time = $scope.upcoming.liveupcoming[i].time;
+                            var broadcast = $scope.upcoming.liveupcoming[i].la1tv_coverage_level;
+                            var arrayOfData = {"sport" : sport, "group": group, "location" : location, "points" : points, "time" : time, "broadcast" : broadcast};
+                            
                             if(whichGraphic == "nextup"){                          	
-								buildArray["sport"] = $scope.upcoming.liveupcoming[i].sport;
-								buildArray["group"] = $scope.upcoming.liveupcoming[i].group;  
-								buildArray["points"] = $scope.upcoming.liveupcoming[i].points;
-								buildArray["broadcast"] = $scope.upcoming.liveupcoming[i].broadcast;
-								buildArray["time"] = $scope.upcoming.liveupcoming[i].time;
+								buildArray["sport"] = sport;
+								buildArray["group"] = group;
+								buildArray["points"] = points;
+								buildArray["broadcast"] = broadcast;
+								buildArray["time"] = time;
 								newLiveupcoming["nextup"].push(buildArray);
 								$scope.upcoming.nextup = newLiveupcoming["nextup"];
 								break;
                             } else {
-                            	buildArray["one"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colone];
-								buildArray["two"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.coltwo];  
-								buildArray["three"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colthree];
-								buildArray["four"] = $scope.upcoming.liveupcoming[i][$scope.upcoming.colfour];
+                            	buildArray["one"] = arrayOfData[$scope.upcoming.colone];
+								buildArray["two"] = arrayOfData[$scope.upcoming.coltwo];  
+								buildArray["three"] = arrayOfData[$scope.upcoming.colthree];
+								buildArray["four"] = arrayOfData[$scope.upcoming.colfour];
 								newLiveupcoming["rows"].push(buildArray);
 								var numberofupcoming = numberofupcoming + 1;
 							}
@@ -1687,7 +1686,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                   'Content-Type': 'application/json',
                 }
             };
-            $http.get('/data/fixtures.json', config).then(function (response) {
+            $http.get('/data/timetable_entries_example.json', config).then(function (response) {
 						$scope.upcoming.liveupcoming = response.data;   
 				   	    
 				   	    $scope.upcoming.options = ["sport","group","points","location","time","broadcast","none"];
@@ -1696,8 +1695,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 				   	    if(!location || location == "All"){
                             var locations = Array(); 
                             for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                                if(locations.indexOf($scope.upcoming.liveupcoming[i].location) == -1){
-                                    locations.push($scope.upcoming.liveupcoming[i].location);
+                                if(locations.indexOf($scope.upcoming.liveupcoming[i].location.name) == -1){
+                                    locations.push($scope.upcoming.liveupcoming[i].location.name);
                                 }
                             }
                             locations.sort();
@@ -1715,15 +1714,15 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                             for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                                 var oktopush = false;
                                 if(location){
-                                    if($scope.upcoming.liveupcoming[i].location == location){
+                                    if($scope.upcoming.liveupcoming[i].location.name == location){
                                         var oktopush = true;
                                     }
                                 } else { 
                                     var oktopush = true;
                                 }
                                 if(oktopush == true){
-                                   if(sports.indexOf($scope.upcoming.liveupcoming[i].sport) == -1){
-                                        sports.push($scope.upcoming.liveupcoming[i].sport);
+                                   if(sports.indexOf($scope.upcoming.liveupcoming[i].team.sport.title) == -1){
+                                        sports.push($scope.upcoming.liveupcoming[i].team.sport.title);
                                     }
                                 }
                             }
@@ -1741,7 +1740,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){ 
                            var oktopush = false;
                            if(location){
-                                if($scope.upcoming.liveupcoming[i].location == location){
+                                if($scope.upcoming.liveupcoming[i].location.name == location){
                                     var oktopush = true;
                                 }
                             } else { 
@@ -1749,13 +1748,13 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                             }
                             if(sport){
                                 if(!location || location == "All"){
-                                    if($scope.upcoming.liveupcoming[i].sport == sport){
+                                    if($scope.upcoming.liveupcoming[i].team.sport.title == sport){
                                         var oktopush = true;
                                     } else {
                                         var oktopush = false;
                                     }
                                 } else {
-                                    if(oktopush == true && $scope.upcoming.liveupcoming[i].sport == sport){
+                                    if(oktopush == true && $scope.upcoming.liveupcoming[i].team.sport.title == sport){
                                         var oktopush = true;
                                     } else {
                                         var oktopush = false;
@@ -1763,8 +1762,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                                 }
                             }                             
                             if(oktopush == true){
-                                if(groups.indexOf($scope.upcoming.liveupcoming[i].group) == -1){
-                                    groups.push($scope.upcoming.liveupcoming[i].group);
+                                if(groups.indexOf($scope.upcoming.liveupcoming[i].team.title) == -1){
+                                    groups.push($scope.upcoming.liveupcoming[i].team.title);
                                 }
                             }
                         }
@@ -1775,8 +1774,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         console.log("Loading Groups");
                         var broadcasts = Array(); 
                         for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
-                            if(broadcasts.indexOf($scope.upcoming.liveupcoming[i].broadcast) == -1){
-                                broadcasts.push($scope.upcoming.liveupcoming[i].broadcast);
+                            if(broadcasts.indexOf($scope.upcoming.liveupcoming[i].la1tv_coverage_level) == -1){
+                                broadcasts.push($scope.upcoming.liveupcoming[i].la1tv_coverage_level);
                             }
                         }
                         broadcasts.sort();
