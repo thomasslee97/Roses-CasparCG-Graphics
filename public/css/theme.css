@@ -918,6 +918,30 @@ h1, h2, h3, h4 {
     margin-bottom: 5px;
   }
 
+  .onebargridright {
+    display: none;
+  }
+
+  .grid .row {
+    display: flex;
+    color: #fff;
+    border-top: 3px solid #fff;
+    position: relative;
+    transform: translateY(0);
+    opacity: 1;
+    transition: transform 0.8s, opacity 0.8s;
+  }
+
+  .grid.ng-hide-remove .row {
+    transform: translateY(-5.5vw);
+    opacity: 0;
+    transition-duration: 0;
+  }
+
+  .grid .row:last-child {
+    margin-bottom: 5px;
+  }
+
 .grid h1 {
     color:  #ffffff;
     font-size: 40px;
