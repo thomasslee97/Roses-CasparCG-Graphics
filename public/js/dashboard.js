@@ -1532,7 +1532,15 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
        	    	var end = $scope.upcoming.nextonTime;
 				var now = new Date();		
 				var timeDiff = Math.abs(end.getTime() - now.getTime());
-				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+				if(diffDays > 1){
+					diffDays = diffDays + " Days ";
+				} else if (diffDays == 1){
+					diffDays = diffDays + " Day ";		
+				} else {
+					diffDays = "";
+				}
+				 
 				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
 				var diffHours = diffHours % 24;				
 				if(diffHours < 10){
@@ -1548,7 +1556,9 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 				if(diffSeconds < 10){
 					diffSeconds = "0" + diffSeconds;
 				}
-				$scope.upcoming.nextonCountdown = diffDays + ":" + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				
+				
+				$scope.upcoming.nextonCountdown = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
 				console.log($scope.upcoming.nextonCountdown);
 				$scope.upcoming.ticking = true;
        	    }

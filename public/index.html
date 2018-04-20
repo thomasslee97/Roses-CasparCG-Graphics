@@ -274,12 +274,12 @@
             <!-- Next Up -->
             <div class="scale-fade upcoming nextupGrid bottom-left" ng-show="upcoming.showNextup">
                 <div class="row" >
-                    <div class="upcoming nextUp one sport">{{ upcoming.nextonSport }}</div>
-                    <div class="upcoming nextUp two group">{{ upcoming.nextonGroup }}</div>
-                    <div class="upcoming nextUp three points">({{ upcoming.nextonPoints }})</div>
+                    <div class="upcoming nextUp one sport" style="width: 40%;">{{ upcoming.nextonSport }}</div>
+                    <div class="upcoming nextUp two group" style="width: 40%;">{{ upcoming.nextonGroup }}</div>
+                    <div class="upcoming nextUp three points" style="width: 20%;">({{ upcoming.nextonPoints }})</div>
                 </div>
                 <div class="upcomingHeaderBottom">
-                    <h1>{{ upcoming.nextonHeader }} {{upcoming.nextonCountdown}}</h1>
+                    <h1>{{ upcoming.nextonHeader }} <span style="float: right;"> {{upcoming.nextonCountdown}}</span></h1>
                 </div>
             </div>
         </div>
