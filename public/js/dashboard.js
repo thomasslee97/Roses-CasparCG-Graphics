@@ -1544,13 +1544,13 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
 				var diffHours = diffHours % 24;				
 				if(diffHours < 10){
-					diffHours = "0" + diffHours + ":";
+					diffHours = "0" + diffHours;
 				}
-				if(diffHours == 0){
-					diffHours = "";
+				if(diffHours == 0 || diffHours == "00"){
+					diffHoursDisplay = "00";
 				} else {
-					diffHours + ":";
-				}			
+					diffHoursDisplay = diffHours + ":";
+				}	
 				
 				var diffMinutes = Math.ceil(timeDiff / (1000 * 60));
 				var diffMinutes = diffMinutes % 60;
@@ -1564,10 +1564,11 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 					diffSeconds = "0" + diffSeconds;
 				}
 
-				$scope.upcoming.nextonCountdownDisplay = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				$scope.upcoming.nextonCountdownDisplay = diffDays + diffHoursDisplay + diffMinutes + ":" + diffSeconds;
 				// console.log($scope.upcoming.nextonCountdown);
+				
        	    }
-       	    
+
        	    $interval($scope.startCountdown,1000);  
 			
         }

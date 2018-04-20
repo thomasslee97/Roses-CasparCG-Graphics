@@ -265,7 +265,7 @@ app.controller('upcomingCtrl', ['$scope', 'socket', '$interval',
             var maxTwo = 0;
             var maxThree = 0;
             var maxFour = 0;
-            
+            $scope.upcoming.nextonCountdown = "";
             // Work out how wide our columns should be!
             if($scope.upcoming.rows !== undefined){
 				for(i = 0; i<$scope.upcoming.rows.length; i++){   
@@ -296,7 +296,9 @@ app.controller('upcomingCtrl', ['$scope', 'socket', '$interval',
 				$scope.upcoming.colthreewidth = Math.floor((colWidths.colthree / colWidths.total) * 10000)/100;
 				$scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
             }
-            
+            if($scope.upcoming.clockTicking == true){
+            	$interval.cancel(interval);
+            }
 			$scope.start = function() {
 				// console.log($scope.upcoming.nextonTime);
        	    	var end = new Date($scope.upcoming.nextonTime);
@@ -314,12 +316,13 @@ app.controller('upcomingCtrl', ['$scope', 'socket', '$interval',
 				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
 				var diffHours = diffHours % 24;				
 				if(diffHours < 10){
-					diffHours = "0" + diffHours + ":";
+					diffHours = "0" + diffHours;
 				}
+				
 				if(diffHours == 0 || diffHours == "00"){
-					diffHours = "";
+					diffHoursDisplay = "";
 				} else {
-					diffHours + ":";
+					diffHoursDisplay = diffHours + ":";
 				}			
 				
 				var diffMinutes = Math.ceil(timeDiff / (1000 * 60));
@@ -334,11 +337,12 @@ app.controller('upcomingCtrl', ['$scope', 'socket', '$interval',
 					diffSeconds = "0" + diffSeconds;
 				}
 
-				$scope.upcoming.nextonCountdown = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				$scope.upcoming.nextonCountdown = diffDays + diffHoursDisplay + diffMinutes + ":" + diffSeconds;
 				// console.log($scope.upcoming.nextonCountdown);
+				$scope.upcoming.clockTicking = true;
        	    }
        	   
-       	     $interval($scope.start,1000);  
+       	     var interval = $interval($scope.start,1000);  
         
         	// console.log($scope.upcoming);
         });
