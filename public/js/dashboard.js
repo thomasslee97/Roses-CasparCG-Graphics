@@ -1527,17 +1527,38 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         }
         
         function countDownUpcoming() {
-       	    // console.log("countDownUpcoming");
-
-       	    setInterval(function(){
-				var end = $scope.upcoming.nextonTime;
-				var now = new Date();
-				var timeBetween = end - now;
-				var hours = timeBetween.getHours();
-				var minutes = timeBetween.getMinutes();
-				var seconds = timeBetween.getSeconds();
-				$scope.upcoming.nextonCountdown = hours + ":" + minutes + " : " + seconds;
-			}, 1000);
+       	    
+       	    function start() {
+       	    	var end = $scope.upcoming.nextonTime;
+				var now = new Date();		
+				var timeDiff = Math.abs(end.getTime() - now.getTime());
+				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
+				var diffHours = diffHours % 24;				
+				if(diffHours < 10){
+					diffHours = "0" + diffHours;
+				}
+				var diffMinutes = Math.ceil(timeDiff / (1000 * 60));
+				var diffMinutes = diffMinutes % 60;
+				if(diffMinutes < 10){
+					diffMinutes = "0" + diffMinutes;
+				}
+				var diffSeconds = Math.ceil(timeDiff / (1000));
+				var diffSeconds = diffSeconds % 60;
+				if(diffSeconds < 10){
+					diffSeconds = "0" + diffSeconds;
+				}
+				$scope.upcoming.nextonCountdown = diffDays + ":" + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				console.log($scope.upcoming.nextonCountdown);
+				$scope.upcoming.ticking = true;
+       	    }
+       	    
+       	    if($scope.upcoming.ticking == true){
+       	    	start();
+       	    } else {
+				setInterval(start(), 1000);
+       	    }
+			
         }
         
         $scope.getFromStored = function() {
@@ -1565,11 +1586,22 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         $scope.showUpcoming = function() {
             $scope.upcoming.show = true;
             socket.emit('upcoming', $scope.upcoming);
-            //console.log($scope.upcoming);
         };
 
         $scope.hideUpcoming = function() {
             $scope.upcoming.show = false;
+            socket.emit('upcoming', $scope.upcoming);
+            //console.log("Hide Upcoming");
+        };
+        
+        $scope.showNextup = function() {
+        	console.log($scope.upcoming);
+            $scope.upcoming.showNextup = true;
+            socket.emit('upcoming', $scope.upcoming);
+        };
+
+        $scope.hideNextup = function() {
+            $scope.upcoming.showNextup = false;
             socket.emit('upcoming', $scope.upcoming);
             //console.log("Hide Upcoming");
         };
@@ -1609,7 +1641,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                         
                         if(($scope.upcoming.chosenLocation == $scope.upcoming.liveupcoming[i].location.name || $scope.upcoming.chosenLocation == "All") && ($scope.upcoming.chosenSport == $scope.upcoming.liveupcoming[i].team.sport.title || $scope.upcoming.chosenSport == "All") && ($scope.upcoming.chosenGroup == $scope.upcoming.liveupcoming[i].team.title || $scope.upcoming.chosenGroup == "All") && ($scope.upcoming.chosenBroadcast == $scope.upcoming.liveupcoming[i].la1tv_coverage_level || $scope.upcoming.chosenBroadcast == "All")){
                             
-                            dateTimeString = $scope.upcoming.liveupcoming[i].updated_at;
+                            dateTimeString = $scope.upcoming.liveupcoming[i].start;
                             dateTime = new Date(dateTimeString);
                               var day = daysOfWeek[dateTime.getDay()];
                               var hours = dateTime.getHours();
@@ -1663,7 +1695,8 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                     	$scope.upcoming.nextonGroup = newLiveupcoming["nextup"][0]["group"];
                     	$scope.upcoming.nextonPoints = newLiveupcoming["nextup"][0]["points"];
                     	$scope.upcoming.nextonBroadcast = newLiveupcoming["nextup"][0]["broadcast"];
-                    	$scope.upcoming.nextonTime = newLiveupcoming["nextup"][0]["time"]
+                    	$scope.upcoming.nextonTime = newLiveupcoming["nextup"][0]["time"];
+                    	// console.log($scope.upcoming.nextonTime);
                     	countDownUpcoming();
                     	return localStorageService.set('upcoming.nextup',newLiveupcoming["nextup"]);	
                     } else {

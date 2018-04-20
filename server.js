@@ -47,8 +47,6 @@ stopwatch.on('tick:stopwatch', function(time) {
 	io.sockets.emit("clock:tick", time);
 });
 
-
-
 io.on('connection', function(socket) {
 	console.log("Client Socket Connected");
 
@@ -230,7 +228,7 @@ io.on('connection', function(socket) {
  		io.sockets.emit("basketball", msg);
  	});
 
-  socket.on("basketball:get", function(msg) {
+  	socket.on("basketball:get", function(msg) {
  		io.sockets.emit("basketball", basketball);
  	});
 
@@ -239,17 +237,17 @@ io.on('connection', function(socket) {
 		io.sockets.emit("archery", msg);
 	});
 
-		socket.on("archery:get", function(msg) {
-				io.sockets.emit("archery", archery);
-		});
+	socket.on("archery:get", function(msg) {
+			io.sockets.emit("archery", archery);
+	});
 
-		/*
-		* Badminton
-		*/
-		socket.on("badminton", function(msg) {
-	        badminton = msg;
-			io.sockets.emit("badminton", msg);
-		});
+	/*
+	* Badminton
+	*/
+	socket.on("badminton", function(msg) {
+		badminton = msg;
+		io.sockets.emit("badminton", msg);
+	});
 
     socket.on("badminton:get", function(msg) {
         io.sockets.emit("badminton", badminton);
@@ -331,16 +329,16 @@ io.on('connection', function(socket) {
 	});
 
 	/*
- * 		Waterpolo
- */
-socket.on("waterpolo", function(msg) {
-			waterpolo = msg;
-	io.sockets.emit("waterpolo", msg);
-});
+	 * 		Waterpolo
+	 */
+	socket.on("waterpolo", function(msg) {
+				waterpolo = msg;
+		io.sockets.emit("waterpolo", msg);
+	});
 
-	socket.on("waterpolo:get", function(msg) {
-	io.sockets.emit("waterpolo", waterpolo);
-});
+		socket.on("waterpolo:get", function(msg) {
+		io.sockets.emit("waterpolo", waterpolo);
+	});
 
 });
 

@@ -265,36 +265,35 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
             var maxTwo = 0;
             var maxThree = 0;
             var maxFour = 0;
-            
-            for(i = 0; i<$scope.upcoming.rows.length; i++){   
-                if(maxOne < $scope.upcoming.rows[i].one.length) {
-                    maxOne = $scope.upcoming.rows[i].one.length;
-                }
-                if(maxTwo < $scope.upcoming.rows[i].two.length) {
-                    maxTwo = $scope.upcoming.rows[i].two.length;
-                }
-                if(maxThree < $scope.upcoming.rows[i].three.length) {
-                    maxThree = $scope.upcoming.rows[i].three.length;
-                }
-                if(maxFour < $scope.upcoming.rows[i].four.length) {
-                    maxFour = $scope.upcoming.rows[i].four.length;
-                }
-                
-            }
-
-            var colWidths = {
-                colone : maxOne,
-                coltwo : maxTwo,
-                colthree : maxThree,
-                colfour : maxFour,
-                total : maxOne + maxTwo + maxThree + maxFour
-            }
-        
-            $scope.upcoming.colonewidth = Math.floor((colWidths.colone / colWidths.total) * 10000)/100;
-            $scope.upcoming.coltwowidth = Math.floor((colWidths.coltwo / colWidths.total) * 10000)/100;
-            $scope.upcoming.colthreewidth = Math.floor((colWidths.colthree / colWidths.total) * 10000)/100;
-            $scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
-               
+            if($scope.upcoming.rows !== undefined){
+				for(i = 0; i<$scope.upcoming.rows.length; i++){   
+					if(maxOne < $scope.upcoming.rows[i].one.length) {
+						maxOne = $scope.upcoming.rows[i].one.length;
+					}
+					if(maxTwo < $scope.upcoming.rows[i].two.length) {
+						maxTwo = $scope.upcoming.rows[i].two.length;
+					}
+					if(maxThree < $scope.upcoming.rows[i].three.length) {
+						maxThree = $scope.upcoming.rows[i].three.length;
+					}
+					if(maxFour < $scope.upcoming.rows[i].four.length) {
+						maxFour = $scope.upcoming.rows[i].four.length;
+					}
+				}
+			
+				var colWidths = {
+					colone : maxOne,
+					coltwo : maxTwo,
+					colthree : maxThree,
+					colfour : maxFour,
+					total : maxOne + maxTwo + maxThree + maxFour
+				}
+		
+				$scope.upcoming.colonewidth = Math.floor((colWidths.colone / colWidths.total) * 10000)/100;
+				$scope.upcoming.coltwowidth = Math.floor((colWidths.coltwo / colWidths.total) * 10000)/100;
+				$scope.upcoming.colthreewidth = Math.floor((colWidths.colthree / colWidths.total) * 10000)/100;
+				$scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
+            }  
         
             // console.log($scope.upcoming);
         });

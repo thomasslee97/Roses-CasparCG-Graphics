@@ -997,6 +997,12 @@ h1, h2, h3, h4 {
     position: absolute;
 }
 
+.nextupGrid {
+	width: 400px;
+    border-top: solid 3px #1f1a34;
+    position: absolute;	
+}
+
 .upcoming h1 {
     color:  #ffffff;
     line-height: 22px;
@@ -1051,21 +1057,6 @@ h1, h2, h3, h4 {
 
 .upcoming .one:empty, .upcoming .two:empty, .upcoming .three:empty, .upcoming .four:empty{
     display:none;
-}
-
-.upcoming .one {
-}
-
-.upcoming .two {
-}
-
-.upcoming .three {
-}
-
-.upcoming .four {
-}
-
-.upcoming .sport {
 }
 
 .upcoming .group{
