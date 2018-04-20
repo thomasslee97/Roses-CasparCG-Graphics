@@ -1499,8 +1499,8 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socke
   }
 ]);
 
-app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStorageService',
-    function($scope, socket, $http, localStorageService) {
+app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStorageService', '$interval',
+    function($scope, socket, $http, localStorageService, $interval) {
         socket.on("upcoming", function (msg) {
             $scope.upcoming = msg;
             if(msg.rows == null){
@@ -1528,7 +1528,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
         
         function countDownUpcoming() {
        	    
-       	    function start() {
+       	    $scope.startCountdown = function() {
        	    	var end = $scope.upcoming.nextonTime;
 				var now = new Date();		
 				var timeDiff = Math.abs(end.getTime() - now.getTime());
@@ -1544,30 +1544,31 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
 				var diffHours = diffHours % 24;				
 				if(diffHours < 10){
-					diffHours = "0" + diffHours;
+					diffHours = "0" + diffHours + ":";
 				}
+				if(diffHours == 0){
+					diffHours = "";
+				} else {
+					diffHours + ":";
+				}			
+				
 				var diffMinutes = Math.ceil(timeDiff / (1000 * 60));
 				var diffMinutes = diffMinutes % 60;
 				if(diffMinutes < 10){
 					diffMinutes = "0" + diffMinutes;
 				}
+				
 				var diffSeconds = Math.ceil(timeDiff / (1000));
 				var diffSeconds = diffSeconds % 60;
 				if(diffSeconds < 10){
 					diffSeconds = "0" + diffSeconds;
 				}
-				
-				
-				$scope.upcoming.nextonCountdown = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
-				console.log($scope.upcoming.nextonCountdown);
-				$scope.upcoming.ticking = true;
+
+				$scope.upcoming.nextonCountdownDisplay = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				// console.log($scope.upcoming.nextonCountdown);
        	    }
        	    
-       	    if($scope.upcoming.ticking == true){
-       	    	start();
-       	    } else {
-				setInterval(start(), 1000);
-       	    }
+       	    $interval($scope.startCountdown,1000);  
 			
         }
         

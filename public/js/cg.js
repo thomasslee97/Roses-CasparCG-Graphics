@@ -255,8 +255,8 @@ app.controller('gridCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('upcomingCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('upcomingCtrl', ['$scope', 'socket', '$interval',
+    function($scope, socket, $interval){
         socket.on("upcoming", function (msg) {
             $scope.upcoming = msg;
             
@@ -265,6 +265,8 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
             var maxTwo = 0;
             var maxThree = 0;
             var maxFour = 0;
+            
+            // Work out how wide our columns should be!
             if($scope.upcoming.rows !== undefined){
 				for(i = 0; i<$scope.upcoming.rows.length; i++){   
 					if(maxOne < $scope.upcoming.rows[i].one.length) {
@@ -293,9 +295,52 @@ app.controller('upcomingCtrl', ['$scope', 'socket',
 				$scope.upcoming.coltwowidth = Math.floor((colWidths.coltwo / colWidths.total) * 10000)/100;
 				$scope.upcoming.colthreewidth = Math.floor((colWidths.colthree / colWidths.total) * 10000)/100;
 				$scope.upcoming.colfourwidth = Math.floor((colWidths.colfour / colWidths.total) * 10000)/100;
-            }  
+            }
+            
+			$scope.start = function() {
+				// console.log($scope.upcoming.nextonTime);
+       	    	var end = new Date($scope.upcoming.nextonTime);
+				var now = new Date();		
+				var timeDiff = Math.abs(end.getTime() - now.getTime());
+				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+				if(diffDays > 1){
+					diffDays = diffDays + " Days ";
+				} else if (diffDays == 1){
+					diffDays = diffDays + " Day ";		
+				} else {
+					diffDays = "";
+				}
+				 
+				var diffHours = Math.ceil(timeDiff / (1000 * 3600));
+				var diffHours = diffHours % 24;				
+				if(diffHours < 10){
+					diffHours = "0" + diffHours + ":";
+				}
+				if(diffHours == 0 || diffHours == "00"){
+					diffHours = "";
+				} else {
+					diffHours + ":";
+				}			
+				
+				var diffMinutes = Math.ceil(timeDiff / (1000 * 60));
+				var diffMinutes = diffMinutes % 60;
+				if(diffMinutes < 10){
+					diffMinutes = "0" + diffMinutes;
+				}
+				
+				var diffSeconds = Math.ceil(timeDiff / (1000));
+				var diffSeconds = diffSeconds % 60;
+				if(diffSeconds < 10){
+					diffSeconds = "0" + diffSeconds;
+				}
+
+				$scope.upcoming.nextonCountdown = diffDays + diffHours + ":" + diffMinutes + ":" + diffSeconds;
+				// console.log($scope.upcoming.nextonCountdown);
+       	    }
+       	   
+       	     $interval($scope.start,1000);  
         
-            // console.log($scope.upcoming);
+        	// console.log($scope.upcoming);
         });
         
         $scope.$watch('upcoming', function() {
