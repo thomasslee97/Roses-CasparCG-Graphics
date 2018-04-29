@@ -1648,6 +1648,7 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
                                        
                     var numberofupcoming = 0;
                     var daysOfWeek = ['Sun','Mon','Tue','Wed','Thur','Fri','Sat'];
+                    var nowDate = new Date();
                     for(var i = 0; i < $scope.upcoming.liveupcoming.length; i++){
                         var buildArray = {};  
                         
@@ -1693,8 +1694,10 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 								buildArray["two"] = arrayOfData[$scope.upcoming.coltwo];  
 								buildArray["three"] = arrayOfData[$scope.upcoming.colthree];
 								buildArray["four"] = arrayOfData[$scope.upcoming.colfour];
-								newLiveupcoming["rows"].push(buildArray);
-								var numberofupcoming = numberofupcoming + 1;
+                                if(dateTime > nowDate){
+                                    newLiveupcoming["rows"].push(buildArray);
+                                    var numberofupcoming = numberofupcoming + 1;
+                                }
 							}
                         }                            
                         if ($scope.upcoming.numberofupcoming == numberofupcoming){
