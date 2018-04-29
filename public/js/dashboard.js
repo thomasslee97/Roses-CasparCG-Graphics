@@ -1685,10 +1685,12 @@ app.controller('upcomingCGController', ['$scope', 'socket', '$http', 'localStora
 								buildArray["group"] = group;
 								buildArray["points"] = points;
 								buildArray["broadcast"] = broadcast;
-								buildArray["time"] = time;
-								newLiveupcoming["nextup"].push(buildArray);
-								$scope.upcoming.nextup = newLiveupcoming["nextup"];
-								break;
+                                buildArray["time"] = time;
+                                if(dateTime > nowDate){
+								    newLiveupcoming["nextup"].push(buildArray);
+								    $scope.upcoming.nextup = newLiveupcoming["nextup"];
+                                    break;
+                                }
                             } else {
                             	buildArray["one"] = arrayOfData[$scope.upcoming.colone];
 								buildArray["two"] = arrayOfData[$scope.upcoming.coltwo];  
