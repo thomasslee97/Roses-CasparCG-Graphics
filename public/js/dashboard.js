@@ -710,7 +710,7 @@ app.controller('rugbyCGController', ['$scope', 'localStorageService', 'socket',
         socket.on("rugby", function (msg) {
             $scope.rugby = msg;
             $scope.menu.forEach(item => {
-                if (item.name === 'Rugby') {
+                if (item.name === 'rugby') {
                     item.live = $scope.rugby.show
                 }
             })
@@ -725,12 +725,12 @@ app.controller('rugbyCGController', ['$scope', 'localStorageService', 'socket',
         }, true);
 
         $scope.$on("$destroy", function() {
-            localStorageService.set('york_Rugby', $scope.yorksPlayers);
-            localStorageService.set('lancs_Rugby', $scope.lancsPlayers);
+            localStorageService.set('york_rugby', $scope.yorksPlayers);
+            localStorageService.set('lancs_rugby', $scope.lancsPlayers);
         });
 
         function getRugbyData() {
-            socket.emit("Rugby:get");
+            socket.emit("rugby:get");
             socket.emit("clock:get");
         }
     }
@@ -939,7 +939,7 @@ app.controller('basketballCGController', ['$scope', 'localStorageService', 'sock
         socket.on("basketball", function (msg) {
             $scope.basketball = msg;
             $scope.menu.forEach(item => {
-                if (item.name === 'Basketball') {
+                if (item.name === 'basketball') {
                     item.live = $scope.basketball.show
                 }
             })
@@ -959,7 +959,7 @@ app.controller('basketballCGController', ['$scope', 'localStorageService', 'sock
         });
 
         function getBasketballData() {
-            socket.emit("football:get");
+            socket.emit("basketball:get");
             socket.emit("clock:get");
         }
     }
