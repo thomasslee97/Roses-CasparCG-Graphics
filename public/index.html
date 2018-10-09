@@ -442,6 +442,33 @@
             </div>
         </div>
 
+        <div ng-controller="volleyballCtrl">
+            <div ng-show="volleyball.showScore" class="volleyball-score right bottom scale-fade">
+
+                <div class="bar" ng-show="volleyball.showTime">
+                    <div class="gradient-overlay"><span class="timer">{{clock}}</span></div>
+                    <div class="moving"></div>
+                </div>
+
+                <div class="score-inner">
+
+                    <div class="float-left" style="padding-bottom: 12px;">
+                        <h4>{{volleyball.name1}}</h4>
+                        <h1>{{volleyball.lancScore}}</h1>
+                        <h2>LAN</h2>
+                    </div>
+
+                    <div class="float-right">
+                        <h4>{{volleyball.name2}}</h4>
+                        <h1>{{volleyball.yorkScore}}</h1>
+                        <h2>YORK</h2>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
         <script type="text/javascript" src="/js/socket.io.js"></script>
         <script type="text/javascript" src="/js/libs/angular.min.js"></script>
         <script type="text/javascript" src="/js/libs/angular-animate.min.js"></script>
