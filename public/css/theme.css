@@ -201,17 +201,17 @@ h1, h2, h3, h4 {
     display:inline;
     white-space: nowrap;
     clear:none;
-    background-color: #1f1a34;
+    background-color: #333333;
 }
 
 .bug h1 {
-    color: #fff;
-    font-size: 18px;
-    line-height: 20px;
+    color: #F2F2F2;
+    font-size: 36px;
+    line-height: 40px;
     float: left;
     padding: 3px 10px;
     margin-right: 0px;
-    background-color: #BC204B;
+    background-color: #FCAF17;
 }
 
 .bug h1:empty {
@@ -219,26 +219,26 @@ h1, h2, h3, h4 {
 }
 
 .black {
-    background-color: #1f1a34 !important;
+    background-color: #333333 !important;
 }
 
 .white {	
 	background-color: #f2f2f2 !important;
-	color: #1f1a34 !important;
+	color: #333333 !important;
 }
 /**************************************************/
 /*              [Logo]                            */
 /**************************************************/
 
 .logo {
-    opacity: 0.5;
+    opacity: 1.0;
     top: 40px;
 }
 
 .logo.toggle.ng-leave,
 .logo.toggle.ng-hide-add,
 .logo.toggle.ng-hide-remove.ng-hide-remove-active {
-    opacity: 0.5;
+    opacity: 1.0;
 }
 
 
