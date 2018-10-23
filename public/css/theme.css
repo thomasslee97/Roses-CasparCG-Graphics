@@ -614,34 +614,34 @@ h1, h2, h3, h4 {
 
 .badminton .matches {
   width: 21%;
-  color: #1f1a34;
+  color: #333333;
 }
 
 .badminton .games {
   width: 22%;
-  color: #1f1a34;
+  color: #333333;
 }
 
 .badminton .header .name {
-  color: #fff;
-  background-color: #1f1a34;
+  color: #F2F2F2;
+  background-color: #333333;
   width: 57%;
 }
 
 .badminton .header .match {
-  color: #fff;
-  background-color: #1f1a34;
+  color: #F2F2F2;
+  background-color: #333333;
   width: 21%;
 }
 .badminton .header .game {
-  color: #fff;
-  background-color: #1f1a34;
+  color: #F2F2F2;
+  background-color: #333333;
   width: 22%;
 }
 
 .badminton .footer {
-  background-color: #1f1a34;
-  color: #fff;
+  background-color: #333333;
+  color: #F2F2F2;
   text-align: left;
   text-transform: uppercase;
   width: 100%;
