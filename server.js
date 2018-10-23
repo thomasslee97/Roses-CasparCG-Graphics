@@ -3,6 +3,7 @@ var express 	= require('express'),
 	http 		= require('http'),
 	less		= require('gulp-less'),
 	path 		= require('path'),
+	watch		= require('gulp-watch'),
 	Stopwatch 	= require('./models/stopwatch');
 
 gulp.task('less', function(){
@@ -13,7 +14,13 @@ gulp.task('less', function(){
 		.pipe(gulp.dest('./public/css'));
 });
 
-gulp.task('default', ['less']);
+gulp.task('watchFiles', function(){
+	return watch('./public/less/**/*.less', function(){
+		gulp.start('less');
+	});
+});
+
+gulp.task('default', ['less', 'watchFiles']);
 
 gulp.start('default');
 
