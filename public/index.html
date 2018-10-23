@@ -77,31 +77,31 @@
         </div>
 
         <div ng-controller="scoringCtrl">
-        		<img ng-src="images/LancasterSport250.png" ng-show="showScore" class="bottom leftLogo scale-fade"/>
-				    <img ng-src="images/YorkSport250.png" ng-show="showScore" class="bottom rightLogo scale-fade"/>
-            	<div ng-show="showScore" class="center bottom total-score scale-fade">
-                    <h1>Roses 2018</h1>
-                    <div class="float-left lanc">
-                        <p>{{lancScore}}</p>
-                    </div>
-                    <div class="float-right york">
-                        <p>{{yorkScore}}</p>
-                    </div>
-                <div class="clearfix"></div>
-            	</div>
+            <img ng-src="images/LancasterSport250.png" ng-show="showScore" class="bottom leftLogo scale-fade"/>
+                <img ng-src="images/YorkSport250.png" ng-show="showScore" class="bottom rightLogo scale-fade"/>
+            <div ng-show="showScore" class="center bottom total-score scale-fade">
+                <h1>Roses 2018</h1>
+                <div class="float-left lanc">
+                    <p>{{lancScore}}</p>
+                </div>
+                <div class="float-right york">
+                    <p>{{yorkScore}}</p>
+                </div>
+            <div class="clearfix"></div>
+            </div>
         </div>
 
         <div ng-controller="scoringCtrl">
-            	<div ng-show="showProgress" class="bottom progress-bar slide-top" >
-            		<p class="toWin">{{pointsToWin}}</p>
-					<div class="york-progress" style="height:{{yorkProgress}}%">
-						<p ng-if="yorkScore > 0" class="scoreText">{{yorkScore}}</p>
-					</div>
-					<div class="lanc-progress" style="height:{{lancProgress}}%">
-						<p ng-if="lancScore > 0" class="scoreText">{{lancScore}}</p>
-					</div>
-                	<div class="clearfix"></div>
-            	</div>
+            <div ng-show="showProgress" class="bottom progress-bar slide-top" >
+                <p class="toWin">{{pointsToWin}}</p>
+                <div class="york-progress" style="height:{{yorkProgress}}%">
+                    <p ng-if="yorkScore > 0" class="scoreText">{{yorkScore}}</p>
+                </div>
+                <div class="lanc-progress" style="height:{{lancProgress}}%">
+                    <p ng-if="lancScore > 0" class="scoreText">{{lancScore}}</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>
 
         <div ng-controller="footballCtrl" class="football left top scale-fade" ng-show="football.show">
@@ -115,46 +115,46 @@
         </div>
 
         <div ng-controller="footballCtrl" ng-show="football.showpost">
-        		<img ng-src="images/LancasterSport250.png" ng-show="football.showpost" class="bottom leftLogo scale-fade"/>
-				<img ng-src="images/YorkSport250.png" ng-show="football.showpost" class="bottom rightLogo scale-fade"/>
-            	<div ng-show="football.showpost" class="center bottom football-score scale-fade" >
-            		<div class="footballtop">
-            			<h1 ng-show="football.showtop">{{football.matchname}}</h1>
-					</div>
-					<div class="float-left lanc">
-						<p>{{football.lancScore}}</p>
-					</div>
+            <img ng-src="images/LancasterSport250.png" ng-show="football.showpost" class="bottom leftLogo scale-fade"/>
+            <img ng-src="images/YorkSport250.png" ng-show="football.showpost" class="bottom rightLogo scale-fade"/>
+            <div ng-show="football.showpost" class="center bottom football-score scale-fade" >
+                <div class="footballtop">
+                    <h1 ng-show="football.showtop">{{football.matchname}}</h1>
+                </div>
+                <div class="float-left lanc">
+                    <p>{{football.lancScore}}</p>
+                </div>
 
-					<div class="float-right york">
-						<p>{{football.yorkScore}}</p>
-					</div>
-	              	<div class="clearfix"></div>
-	              	<div class="footballbottom">
-	              		<h1 ng-show="football.showbottom">{{football.starttime}}</h1>
-	              	</div>
-            	</div>
+                <div class="float-right york">
+                    <p>{{football.yorkScore}}</p>
+                </div>
+                <div class="clearfix"></div>
+                <div class="footballbottom">
+                    <h1 ng-show="football.showbottom">{{football.starttime}}</h1>
+                </div>
+            </div>
         </div>
 
         <div ng-controller="footballCtrl" ng-show="football.showpre">
-        		<img ng-src="images/LancasterSport250.png" ng-show="football.showpre" class="bottom leftLogo scale-fade"/>
-				<img ng-src="images/YorkSport250.png" ng-show="football.showpre" class="bottom rightLogo scale-fade"/>
-            	<div ng-show="football.showpre" class="center bottom football-score scale-fade" >
-            		<div class="footballtop">
-            			<h1 class="upper" ng-show="football.showtop">{{football.matchname}}</h1>
-            		</div>
-					<div class="float-left lanc">
-					LANCS
-					</div>
+            <img ng-src="images/LancasterSport250.png" ng-show="football.showpre" class="bottom leftLogo scale-fade"/>
+            <img ng-src="images/YorkSport250.png" ng-show="football.showpre" class="bottom rightLogo scale-fade"/>
+            <div ng-show="football.showpre" class="center bottom football-score scale-fade" >
+                <div class="footballtop">
+                    <h1 class="upper" ng-show="football.showtop">{{football.matchname}}</h1>
+                </div>
+                <div class="float-left lanc">
+                LANCS
+                </div>
 
-					<div class="float-right york">
-					YORK
-					</div>
-					<div class="clearfix"></div>
-					<div class="footballbottom">
-						<h1 ng-show="football.showbottom">{{football.starttime}}</h1>
-					</div>
-                	<div class="clearfix"></div>
-            	</div>
+                <div class="float-right york">
+                YORK
+                </div>
+                <div class="clearfix"></div>
+                <div class="footballbottom">
+                    <h1 ng-show="football.showbottom">{{football.starttime}}</h1>
+                </div>
+                <div class="clearfix"></div>
+            </div>
         </div>             
         
         <div ng-controller="rugbyCtrl" class="football left top scale-fade" ng-show="rugby.show">
@@ -164,7 +164,7 @@
                 <div ng-if="rugby.lancScore > -1 || rugby.yorkScore > -1" class="score scoreNumber">{{rugby.lancScore}} - {{rugby.yorkScore}}</div>
                 <div class="score york">YRK</div>
             </div>
-            	<div ng-show="rugby.showextratime" class="extratime scale-fade">ET</div>
+            <div ng-show="rugby.showextratime" class="extratime scale-fade">ET</div>
         </div>
 
         
