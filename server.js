@@ -1,6 +1,21 @@
 var express 	= require('express'),
+	gulp		= require('gulp'),
 	http 		= require('http'),
+	less		= require('gulp-less'),
+	path 		= require('path'),
 	Stopwatch 	= require('./models/stopwatch');
+
+gulp.task('less', function(){
+	return gulp.src('./public/less/**/*.less')
+		.pipe(less({
+			paths: [path.join(__dirname, 'less', 'includes')]
+		}))
+		.pipe(gulp.dest('./public/css'));
+});
+
+gulp.task('default', ['less']);
+
+gulp.start('default');
 
 var app = express();
 var server = http.createServer(app);
