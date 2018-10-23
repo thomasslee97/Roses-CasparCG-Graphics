@@ -341,7 +341,7 @@
                 </div>
                 <div class="row">
                     <div class="name lanc">{{tennisOptions.player1}}</div>
-                    <div style="position: absolute; right: 0px;">
+                    <div class="scoreTable">
                         <div class="sets">{{tennisScore.sets1[0]}}</div>
                         <div class="sets">{{tennisScore.sets1[1]}}</div>
                         <div class="sets">{{tennisScore.sets1[2]}}</div>
@@ -352,7 +352,7 @@
 
                 <div class="row">
                     <div class="name york">{{tennisOptions.player2}}</div>
-                    <div style="position: absolute; right: 0px;">
+                    <div class="scoreTable">
                         <div class="sets">{{tennisScore.sets2[0]}}</div>
                         <div class="sets">{{tennisScore.sets2[1]}}</div>
                         <div class="sets">{{tennisScore.sets2[2]}}</div>
@@ -370,7 +370,7 @@
 			   	    <div class="header">
 					    <h1>Match Statistics</h1>
 				    </div>
-					<div class="info" style="width: 100%">{{tennisOptions.matchName}} - After {{tennisScore.sets1.length}} of {{tennisOptions.maxSets}} sets</div>
+					<div class="info">{{tennisOptions.matchName}} - After {{tennisScore.sets1.length}} of {{tennisOptions.maxSets}} sets</div>
 
 					<div class="row">
 						<div class="stats names">
