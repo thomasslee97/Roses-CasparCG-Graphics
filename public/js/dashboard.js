@@ -33,13 +33,13 @@ app.controller('AppCtrl', ['$scope', '$location',
             live: false,
         });
 
-        $scope.menu.push({
+        /*$scope.menu.push({
             name: 'Roses',
             url: '/roses',
             type: 'link',
             icon: 'yellow trophy',
             live: false,
-        });
+        });*/
 
         $scope.menu.push({
             name: 'Boxing',
