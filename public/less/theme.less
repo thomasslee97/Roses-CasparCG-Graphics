@@ -203,14 +203,6 @@ h1, h2, h3, h4 {
     text-shadow:1px -1px 0px @brand-text-colour-h1-alt;
 }
 
-.lancLight {
-    background-color: #f4a6a4;
-}
-
-.yorkLight {
-    background-color: #f7dfa1;
-}
-
 /**************************************************/
 /*              [Live Bug]                        */
 /**************************************************/
@@ -278,7 +270,7 @@ h1, h2, h3, h4 {
     background-color: @brand-background-colour-tertiary !important;
 }
 
-.total-score .lanc, .football-score .lanc {
+.total-score .lanc {
     display: block;
     width: 50%;
     font-size: 20px;
@@ -289,7 +281,7 @@ h1, h2, h3, h4 {
     background-color: @team-1-colour;
 }
 
-.total-score .york, .football-score .york {
+.total-score .york {
     display: block;
     width: 50%;
     font-size: 20px;
@@ -360,6 +352,7 @@ h1, h2, h3, h4 {
     left: 65px;
     font-size: 18px;
 }
+
 /**************************************************/
 /*              [Football Score]                  */
 /**************************************************/
@@ -400,7 +393,7 @@ h1, h2, h3, h4 {
 }
 
 
-.football .clock, .football .score.lanc, .football .score.york, .football .scoreNumber {
+.football .clock, .football .score.home, .football .score.away, .football .scoreNumber {
     padding: 3px;
     float: left;
 }
@@ -425,17 +418,120 @@ h1, h2, h3, h4 {
     margin-left: 23px;
 }
 
-.football .score.lanc {
+.football .score.home {
     width: 22%;
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.football .score.lanc p {
+.football .score.home p {
     float: right;
 }
 
-.football .score.york {
+.football .score.away {
+    width: 22%;
+    color: @brand-text-colour-h2-alt;
+    background-color: @team-2-colour;
+}
+
+.football-score .home {
+    display: block;
+    width: 50%;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 50px;
+    color: @brand-text-colour-h1;
+    padding: 6px;
+    background-color: @team-1-colour;
+}
+
+.football-score .away {
+    display: block;
+    width: 50%;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 50px;
+    color: @brand-text-colour-h1-alt;
+    padding: 6px;
+    background-color: @team-2-colour !important;
+}
+
+/**************************************************/
+/*              [Football Score]                  */
+/**************************************************/
+
+.rugby {
+    width: 25%;
+    background-clip: padding-box;
+    font-size: 20px;
+    text-align: center;
+    line-height: 24px;
+}
+
+.rugby-score h1 {
+    padding: 6px;
+    padding-left: 58px !important;
+    padding-right: 44px !important;
+    text-transform: uppercase;
+}
+
+.rugbytop h1 {
+    color: @brand-text-colour-h1-alt;
+    background-color: @brand-background-colour-tertiary !important;
+    line-height: 24px;
+}
+
+.rugbytop h1:empty {
+    display: none;
+}
+
+.rugbybottom h1 {
+    color: @brand-text-colour-h1;
+    background-color: @brand-text-colour-h2-alt !important;
+    line-height: 24px;
+}
+
+.rugbybottom h1:empty {
+    display: none;
+}
+
+
+.rugby .clock, .rugby .score.home, .rugby .score.away, .rugby .scoreNumber {
+    padding: 3px;
+    float: left;
+}
+
+.rugby .scoreNumber {
+    color: @brand-text-colour-h1;
+    background-color: @brand-background-colour-secondary;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.rugby .clock {
+    background-color: @brand-background-colour-tertiary;
+    width: 24%;
+}
+
+.rugby .extratime {
+    background-color: @brand-background-colour-primary;
+    color: @brand-text-colour-h1;;
+    width: 12%;
+    padding: 3px;
+    margin-left: 23px;
+}
+
+.rugby .score.home {
+    width: 22%;
+    color: @brand-text-colour-h1;
+    background-color: @team-1-colour;
+}
+
+.rugby .score.home p {
+    float: right;
+}
+
+.rugby .score.away {
     width: 22%;
     color: @brand-text-colour-h2-alt;
     background-color: @team-2-colour;
@@ -468,14 +564,22 @@ h1, h2, h3, h4 {
     padding-right: 5px;
 }
 
-.darts .name.lanc {
+.darts .name.home {
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.darts .name.york {
+.darts .name.away {
     color: @brand-text-colour-h1;
     background-color: @team-2-colour;
+}
+
+.darts .homeLight {
+    background-color: lighten(@team-1-colour, 40%);
+}
+
+.darts .awayLight {
+    background-color: lighten(@team-2-colour, 40%);
 }
 
 .darts .legs {
@@ -578,12 +682,12 @@ h1, h2, h3, h4 {
     width: 40%;
 }
 
-.archery .name.lanc {
+.archery .name.home {
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.archery .name.york {
+.archery .name.away {
     color: @brand-text-colour-h1;
     background-color: @team-2-colour;
 }
@@ -676,14 +780,22 @@ h1, h2, h3, h4 {
     width: 57%;
 }
 
-.badminton .name.lanc {
+.badminton .name.home {
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.badminton .name.york {
+.badminton .name.away {
     color: @brand-text-colour-h1;
     background-color: @team-2-colour;
+}
+
+.badminton .homeLight {
+    background-color: lighten(@team-1-colour, 40%);
+}
+
+.badminton .awayLight {
+    background-color: lighten(@team-2-colour, 40%);
 }
 
 .badminton .matches {
@@ -770,11 +882,11 @@ width: 65%;
     width: 100%;
 }
 
-.tennis .lanc {
+.tennis .home {
     background-color: @team-1-colour;
 }
 
-.tennis .york {
+.tennis .away {
     background-color: @team-2-colour;
 }
 
@@ -1075,16 +1187,6 @@ width: 65%;
     background-color: rgba(0, 0, 0, 0.5)
 }
 
-.swimmingsplits .row.lanc {
-    color: @brand-text-colour-h1;
-    background-color: @team-1-colour;
-}
-
-.swimmingsplits .row.york {
-    color: @brand-text-colour-h1;
-    background-color: @team-2-colour;
-}
-
 .swimmingsplits .row .lane {
     float: left;
     margin-right: 5px;
@@ -1134,16 +1236,6 @@ width: 65%;
     overflow: hidden;
 }
 
-.swimminglist .row.lanc {
-    color: @brand-text-colour-h1;
-    background-color: @team-1-colour;
-}
-
-.swimminglist .row.york {
-    color: @brand-text-colour-h1;
-    background-color: @team-2-colour;
-}
-
 .swimminglist .row .lane {
     float: left;
     margin-right: 15px;
@@ -1154,6 +1246,29 @@ width: 65%;
     text-align: center;
     color: @brand-text-colour-h1;
     background-color: @brand-background-colour-primary;
+}
+
+/**
+ * ng-class
+ */
+.swimmingsplits-row-home {
+    color: @brand-text-colour-h1;
+    background-color: @team-1-colour;
+}
+
+.swimmingsplits-row-away {
+    color: @brand-text-colour-h1;
+    background-color: @team-2-colour;
+}
+
+.swimminglist-row-home {
+    color: @brand-text-colour-h1;
+    background-color: @team-1-colour;
+}
+
+.swimminglist-row-away {
+    color: @brand-text-colour-h1;
+    background-color: @team-2-colour;
 }
 
 /**************************************************/
@@ -1169,7 +1284,7 @@ width: 65%;
     line-height: 24px;
 }
 
-.basketball .clock, .basketball .score.lanc, .basketball .score.york {
+.basketball .clock, .basketball .score.home, .basketball .score.away {
     padding: 3px;
     float: left;
 }
@@ -1179,17 +1294,17 @@ width: 65%;
     width: 24%;
 }
 
-.basketball .score.lanc {
+.basketball .score.home {
     width: 38%;
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.basketball .score.lanc p {
+.basketball .score.home p {
     float: right;
 }
 
-.basketball .score.york {
+.basketball .score.away {
     width: 38%;
     color: @brand-text-colour-h1-alt;
     background-color: @team-2-colour;
@@ -1228,7 +1343,7 @@ width: 65%;
     display: none;
 }
 
-.netball .clock, .netball .score.lanc, .netball .score.york {
+.netball .clock, .netball .score.home, .netball .score.away {
     padding: 3px;
     float: left;
 }
@@ -1239,7 +1354,7 @@ width: 65%;
     text-align: center;
 }
 
-.netball .score.lanc {
+.netball .score.home {
     width: 32%;
     text-align: right;
     padding-right:20px;
@@ -1247,12 +1362,12 @@ width: 65%;
     background-color: @team-1-colour;
 }
 
-.netball .score.lanc p {
+.netball .score.home p {
     float: right;
     text-align: center;
 }
 
-.netball .score.york {
+.netball .score.away {
     width: 32%;
     text-align: left;
     padding-left: 30px;
@@ -1296,7 +1411,7 @@ width: 65%;
     display: none;
 }
 
-.waterpolo .clock, .waterpolo .score.lanc, .waterpolo .score.york {
+.waterpolo .clock, .waterpolo .score.home, .waterpolo .score.away {
     padding: 3px;
     float: left;
 }
@@ -1307,7 +1422,7 @@ width: 65%;
     text-align: center;
 }
 
-.waterpolo .score.lanc {
+.waterpolo .score.home {
     width: 32%;
     text-align: right;
     padding-right:20px;
@@ -1315,12 +1430,12 @@ width: 65%;
     background-color: @team-1-colour;
 }
 
-.waterpolo .score.lanc p {
+.waterpolo .score.home p {
     float: right;
     text-align: center;
 }
 
-.waterpolo .score.york {
+.waterpolo .score.away {
     width: 32%;
     text-align: left;
     padding-left: 30px;

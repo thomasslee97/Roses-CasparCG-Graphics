@@ -28,17 +28,26 @@ var app = express();
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 
-var bug = {livetext: "Live", locationtext: '', showLive: false, showLocation: false};
-var boxing = {lancScore: 0, yorkScore: 0, currRound: ''};
+var eventLogo = "/images/roses2018logo.png";
+
+var homeTeamName = "France";
+var awayTeamName = "England";
+var homeTeamShortName = "FRA";
+var awayTeamShortName = "ENG";
+var homeTeamImage = "images/LancasterSport250.png";
+var awayTeamImage = "images/YorkSport250.png"
+
+var bug = {livetext: "Live", locationtext: '', showLive: false, showLocation: false, logo: eventLogo};
+var boxing = {homeTeam: homeTeamShortName, awayTeam: awayTeamShortName, homeScore: 0, awayScore: 0, currRound: ''};
 var score = {totalPoints: 354};
-var football = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var rugby = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var basketball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var dart = {match: "Darts", player1: "Lancaster", player2: "York", set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
+var football = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0, homeTeamImage: homeTeamImage, awayTeamImage, awayTeamImage};
+var rugby = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
+var basketball = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
+var darts = {match: "Darts", homeTeam: homeTeamName, awayTeam: awayTeamName, player1: homeTeamName, player2: awayTeamName, set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
 var swimming = {order: ''};
 var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
 var archery = {};
-var tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+var tennisOptions = {homeTeam: homeTeamName, awayTeam: awayTeamName, matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
 var tennisScore   = [{sets1: [0], sets2: [0],
                       set1: 0, set2: 0,
                       game1: 0, game2: 0,
@@ -56,9 +65,9 @@ var tennisScore   = [{sets1: [0], sets2: [0],
 					  serviceGame1: 0, serviceGame2: 0,
 					  servicesWon1: 0, servicesWon2: 0,
                       pointsPlayed: 0, server: 1, tiebreak: false, gamePoint: "", firstFault: false}];
-var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", player1: "Lancaster", player2: "York", game1: 0, game2:0, point1: 0, point2: 0 };
-var netball = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
-var waterpolo = {homeTeam: "Lancaster", awayTeam: "York", lancScore: 0, yorkScore: 0};
+var badminton = {match: "Badminton", subtitle: "Best of 3 Games Wins Match", homeTeam: homeTeamName, awayTeam: awayTeamName, game1: 0, game2:0, point1: 0, point2: 0 };
+var netball = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeScore: 0, awayScore: 0};
+var waterpolo = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeScore: 0, awayScore: 0};
 
 //Clock Functions
 var stopwatch = new Stopwatch();
@@ -207,13 +216,13 @@ io.on('connection', function(socket) {
 	/*
 	 * 		Darts
 	 */
-	socket.on("dart", function(msg) {
-        dart = msg;
-		io.sockets.emit("dart", msg);
+	socket.on("darts", function(msg) {
+        darts = msg;
+		io.sockets.emit("darts", msg);
 	});
 
-    socket.on("dart:get", function(msg) {
-        io.sockets.emit("dart", dart);
+    socket.on("darts:get", function(msg) {
+        io.sockets.emit("darts", darts);
     });
 
     /*
@@ -303,7 +312,7 @@ io.on('connection', function(socket) {
     });
 
     socket.on("tennis:reset", function(msg) {
-        tennisOptions = {player1: "Lancaster", player2: "York", matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
+        tennisOptions = {homeTeam: homeTeamName, awayTeam: awayTeamName, matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
         tennisScore   = [{sets1: [0], sets2: [0],
                           set1: 0, set2: 0,
                           game1: 0, game2: 0,
