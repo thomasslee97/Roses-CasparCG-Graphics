@@ -81,6 +81,22 @@ stopwatch.on('tick:stopwatch', function(time) {
 io.on('connection', function(socket) {
 	console.log("Client Socket Connected");
 
+	socket.on("teamName:home", function(){
+		io.sockets.emit("teamName:home", homeTeamName);
+	});
+
+	socket.on("teamName:home:short", function(){
+		io.sockets.emit("teamName:home:short", homeTeamShortName);
+	});
+
+	socket.on("teamName:away", function(){
+		io.sockets.emit("teamName:away", awayTeamName);
+	});
+
+	socket.on("teamName:away:short", function(){
+		io.sockets.emit("teamName:away:short", awayTeamShortName);
+	});
+
 	/*
 	 * 		Clock functions
 	 */

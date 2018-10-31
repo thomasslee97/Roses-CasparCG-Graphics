@@ -1021,15 +1021,25 @@ app.controller('tennisCGController', ['$scope', 'socket',
         $scope.$watch('tennisOptions', function() {
             if ($scope.tennisOptions) {
 				if (($scope.tennisOptions.matchName).includes("Mixed")) {
-					$scope.tennisOptions.player1 = $scope.homeTeamName;
-					$scope.tennisOptions.player2 = $scope.awayTeamName;
-				}
-
-                socket.emit("tennisOptions", $scope.tennisOptions);
+					$scope.tennisOptions.player1 = socket.emit("teamName:home");
+					$scope.tennisOptions.player2 = socket.emit("teamName:away");
+				}else{
+                    socket.emit("tennisOptions", $scope.tennisOptions);
+                }
             } else {
                 getTennisData();
             }
         }, true);
+
+        socket.on("teamName:home", function(msg){
+            $scope.tennisOptions.homeTeam = msg;
+            socket.emit("tennisOptions", $scope.tennisOptions);
+        });
+
+        socket.on("teamName:away", function(msg){
+            $scope.tennisOptions.awayTeam = msg;
+            socket.emit("tennisOptions", $scope.tennisOptions);
+        });
 
         $scope.$watch('tennisScore', function() {
             if ($scope.tennisScore) {
