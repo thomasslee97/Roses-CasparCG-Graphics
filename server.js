@@ -30,10 +30,10 @@ var io = require('socket.io').listen(server);
 
 var eventLogo = "/images/roses2018logo.png";
 
-var homeTeamName = "France";
-var awayTeamName = "England";
-var homeTeamShortName = "FRA";
-var awayTeamShortName = "ENG";
+var homeTeamName = "Lancaster";
+var awayTeamName = "York";
+var homeTeamShortName = "LAN";
+var awayTeamShortName = "YOR";
 var homeTeamImage = "images/LancasterSport250.png";
 var awayTeamImage = "images/YorkSport250.png"
 
