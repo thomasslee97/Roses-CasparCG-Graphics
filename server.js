@@ -105,6 +105,10 @@ io.on('connection', function(socket) {
 		io.sockets.emit("teamName:away:short", awayTeamShortName);
 	});
 
+	socket.on("config:logo:get", function(){
+		io.sockets.emit("config:logo", eventLogo);
+	});
+
 	/*
 	 * 		Clock functions
 	 */

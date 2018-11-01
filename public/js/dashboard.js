@@ -1,7 +1,7 @@
 var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic', 'socket-io']);
 
-app.controller('AppCtrl', ['$scope', '$location',
-    function($scope, $location){
+app.controller('AppCtrl', ['$scope', '$location', 'socket',
+    function($scope, $location, socket){
 
         $scope.menu = [];
 
@@ -128,6 +128,17 @@ app.controller('AppCtrl', ['$scope', '$location',
             live: false,
             play: true
         });
+
+        socket.on("config:logo", function(msg){
+            $scope.logoUrl = msg;
+            console.log($scope.logoUrl);
+        });
+
+        getBrandingData();
+
+        function getBrandingData() {
+            socket.emit("config:logo:get");
+        }
     }
 ]);
 
