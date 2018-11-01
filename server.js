@@ -7,7 +7,7 @@ var express 	= require('express'),
 	Stopwatch 	= require('./models/stopwatch');
 
 gulp.task('less', function(){
-	return gulp.src('./public/less/**/*.less')
+	return gulp.src('./public/less/theme.less')
 		.pipe(less({
 			paths: [path.join(__dirname, 'less', 'includes')]
 		}))
