@@ -814,40 +814,43 @@ app.controller('swimmingCGController', ['$scope', 'socket',
             socket.emit("clock:up");
         };
 
-        $scope.resetOrder = function(val) {
-                var splits = $scope.swimming.showsplits;
-                $scope.swimming.showsplits = false;
-                setTimeout(function() {
-                    $scope.swimming.order = '';
-                    $scope.swimming.showsplits = splits;
-                    socket.emit("swimming", $scope.swimming);
-                }, 600);
+        $scope.resetLanes = function() {
+            for (var i = 0; i < 8; i++){
+                $scope.swimming.lanes[i] = {
+                    id: i,
+                    name: "",
+                    team: ""
+                };
+            }
         };
 
-        $scope.resetLanes = function() {
-            $scope.swimming.order = '';
-
-            for(i = 1; i <= 8; i++){
-                $scope.swimming['lane' + i + 'name'] = '';
-                $scope.swimming['lane' + i + 'team'] = '';
-            }
+        $scope.resetOrder = function() {
+            $scope.swimming.laneOrder = [];
+            $scope.swimming.order = "";
+            $scope.swimming.prevOrderLength = 0;
         };
 
         socket.on("swimming", function (msg) {
             $scope.swimming = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Swimming') {
-                    if ($scope.swimming.showlist === true || $scope.swimming.showclock === true) {
-                        item.live = true
-                    } else {
-                        item.live = false
-                    }
-                }
-            })
         });
 
         $scope.$watch('swimming', function() {
             if ($scope.swimming) {
+                if($scope.swimming.prevOrderLength < $scope.swimming.order.length){                    
+                    for (var i = $scope.swimming.prevOrderLength; i < Math.min($scope.swimming.order.length, 8); i++){
+                        $scope.swimming.laneOrder[i] = {
+                            lane: $scope.swimming.lanes[$scope.swimming.order[i] - 1],
+                            time: $scope.clock
+                        };
+                    }
+
+                    $scope.swimming.prevOrderLength = $scope.swimming.order.length;
+                }
+
+                if($scope.swimming.order.length > 0){
+
+                }
+
                 socket.emit("swimming", $scope.swimming);
             } else {
                 getSwimmingData();
@@ -858,10 +861,6 @@ app.controller('swimmingCGController', ['$scope', 'socket',
             socket.emit("swimming:get");
             socket.emit("clock:get");
         }
-
-        $(function () {
-          $('.ui.dropdown').dropdown();
-        });
     }
 ]);
 
