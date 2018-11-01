@@ -48,42 +48,42 @@
 
   <div class="ui grid center aligned">
     <div class="eight wide column">
-      <h3>Lancaster</h3>
+      <h3>{{volleyball.homeTeam}}</h3>
       <input type="text" ng-model="volleyball.name1" >
-      <h1>{{volleyball.lancScore}}</h1>
+      <h1>{{volleyball.homeScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="volleyball.lancScore = volleyball.lancScore + 1; updateScore();">
+        <button class="ui green button" ng-click="volleyball.homeScore = volleyball.homeScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="volleyball.lancScore = volleyball.lancScore - 1; updateScore();" ng-disabled="volleyball.lancScore == 0">
+        <button class="ui red button" ng-click="volleyball.homeScore = volleyball.homeScore - 1; updateScore();" ng-disabled="volleyball.homeScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="volleyball.lancScore = 0">
+	 	<button class="ui red button" ng-click="volleyball.homeScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
 	 </div>   
     </div>
 
     <div class="eight wide column">
-      <h3>York</h3>
+      <h3>{{volleyball.awayTeam}}</h3>
       <input type="text" ng-model="volleyball.name2" >
-      <h1>{{volleyball.yorkScore}}</h1>
+      <h1>{{volleyball.awayScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="volleyball.yorkScore = volleyball.yorkScore + 1; updateScore();">
+        <button class="ui green button" ng-click="volleyball.awayScore = volleyball.awayScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="volleyball.yorkScore = volleyball.yorkScore - 1; updateScore();" ng-disabled="volleyball.yorkScore == 0">
+        <button class="ui red button" ng-click="volleyball.awayScore = volleyball.awayScore - 1; updateScore();" ng-disabled="volleyball.awayScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="volleyball.yorkScore = 0">
+	 	<button class="ui red button" ng-click="volleyball.awayScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
 	 </div>
