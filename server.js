@@ -1,8 +1,11 @@
 var express 	= require('express'),
+	fileinclude = require('gulp-file-include'),
 	gulp		= require('gulp'),
 	http 		= require('http'),
 	less		= require('gulp-less'),
 	path 		= require('path'),
+	rename 		= require('gulp-rename'),
+	runSequence = require('run-sequence'),
 	watch		= require('gulp-watch'),
 	Stopwatch 	= require('./models/stopwatch');
 
@@ -20,7 +23,20 @@ gulp.task('watchFiles', function(){
 	});
 });
 
-gulp.task('default', ['less', 'watchFiles']);
+gulp.task('fileinclude', function() {
+	gulp.src(['./public/templates/index.tmpl.html'])
+		.pipe(fileinclude({
+			prefix: '@@',
+			basepath: '@file'
+		}))
+		.pipe(rename('index.html'))
+		.pipe(gulp.dest('./public'));
+	
+});
+
+gulp.task('default', function(){
+	runSequence(['less', 'fileinclude'], 'watchFiles');
+});
 
 gulp.start('default');
 
@@ -380,5 +396,5 @@ socket.on("waterpolo", function(msg) {
 app.use(express.static(__dirname + "/public"));
 
 server.listen(3000);
-console.log("Now listening on port 3000. Go to http://127.0.0.1:3000/admin to control")
-console.log("run 'play 1-1 [html] http://127.0.0.1:3000' in CasparCG to start the graphics")
+console.log("Now listening on port 3000. Go to http://127.0.0.1:3000/admin to control");
+console.log("run 'play 1-1 [html] http://127.0.0.1:3000' in CasparCG to start the graphics");
