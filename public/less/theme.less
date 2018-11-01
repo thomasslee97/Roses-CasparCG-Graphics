@@ -1204,6 +1204,7 @@ width: 65%;
     padding: 0px 10px;
     color: @brand-text-colour-h1-alt;
     background-color: @brand-background-colour-tertiary;
+    width: 20%;
 }
 
 .swimminglist {
@@ -1234,41 +1235,47 @@ width: 65%;
     line-height: 50px;
     line-height: 3.8vw;
     overflow: hidden;
+    border-bottom: 3px solid @brand-background-colour-tertiary;
 }
 
 .swimminglist .row .lane {
     float: left;
-    margin-right: 15px;
     border-right: 3px solid @brand-text-colour-h1;
-    padding: 15px;
-    width: 50px;
-    width: 3.8vw;
+    width: 10%;
     text-align: center;
     color: @brand-text-colour-h1;
     background-color: @brand-background-colour-primary;
+    padding: 10px;
 }
 
-/**
- * ng-class
- */
-.swimmingsplits-row-home {
+.swimmingsplits .row.home {
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
 }
 
-.swimmingsplits-row-away {
+.swimmingsplits .row.away {
     color: @brand-text-colour-h1;
     background-color: @team-2-colour;
 }
 
-.swimminglist-row-home {
+.swimminglist .row .home {
     color: @brand-text-colour-h1;
     background-color: @team-1-colour;
+    padding: 10px;
 }
 
-.swimminglist-row-away {
+.swimminglist .row .home p {
+    padding-left: 10%;
+}
+
+.swimminglist .row .away {
     color: @brand-text-colour-h1;
     background-color: @team-2-colour;
+    padding: 10px;
+}
+
+.swimminglist .row .away p {
+    padding-left: 10%;
 }
 
 /**************************************************/

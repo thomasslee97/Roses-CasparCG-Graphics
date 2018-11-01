@@ -44,7 +44,15 @@ var football = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: h
 var rugby = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
 var basketball = {homeTeam: homeTeamName, awayTeam: awayTeamName, homeTeamShort: homeTeamShortName, awayTeamShort: awayTeamShortName, homeScore: 0, awayScore: 0};
 var darts = {match: "Darts", homeTeam: homeTeamName, awayTeam: awayTeamName, player1: homeTeamName, player2: awayTeamName, set1: 0, set2:0, leg1: 0, leg2: 0, score1:501, score2:501 };
-var swimming = {order: ''};
+var swimming = {order: '', lanes: [], homeTeam: homeTeamName, awayTeam: awayTeamName, laneOrder: [], prevOrderLength: 0};
+for (var i = 0; i < 8; i++){
+	swimming.lanes[i] = {
+		id: i,
+		name: "",
+		team: ""
+	};
+}
+
 var grid = {headingcolor:"#BC204B", leftcolor: "#1f1a34", rightcolor:"#1f1a34"};
 var archery = {};
 var tennisOptions = {homeTeam: homeTeamName, awayTeam: awayTeamName, matchName: "", maxSets: 3, disableInput: false, showScore: false, showSets: false, showStats: false}
@@ -246,19 +254,6 @@ io.on('connection', function(socket) {
 	 */
 	socket.on("swimming", function(msg) {
         swimming = msg;
-
-        swimming.order = (swimming.order).replace(/[^1-8]+/, '');
-        swimming.order = (swimming.order).replace(/(.).*\1/, function (x) {return x.substring(0, x.length - 1)})
-
-        if(!('pos1name' in swimming) && swimming.order != '') {
-            swimming.splittime = stopwatch.getTime().replace(/^0/, '');
-        }
-
-        for(i = 1; i <= 8; i++){
-            swimming['pos' + i + 'name'] = eval('swimming.lane' + (swimming.order).charAt(i-1) + 'name');
-            swimming['pos' + i + 'team'] = eval('swimming.lane' + (swimming.order).charAt(i-1) + 'team');
-            swimming['pos' + i + 'lane'] = (swimming.order).charAt(i-1);
-        }
 
 		io.sockets.emit("swimming", msg);
 	});
