@@ -80,26 +80,19 @@ app.controller('boxingCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
-    function($scope, $timeout, socket){
+app.controller('bugCtrl', ['$scope', '$timeout', 'socket', '$http', 
+    function($scope, $timeout, socket, $http){
         $scope.tickInterval = 1000; //ms
 
-        socket.on("bug", function (state) {
-            $scope.state = state;
-        });
-
-        $scope.$watch('bug', function() {
-            if (!$scope.bug) {
-                getBugData();
-            }
-        }, true);
-
-		socket.on("bug", function (msg) {
-            $scope.bug = msg;
-        });
-
         function getBugData() {
-            socket.emit("bug:get");
+            $http.get("http://127.0.0.1:3000/bug")
+            .then(function(response){
+                if (response.status == 200) {
+                    if ($scope.bug != response.data) {
+                        $scope.bug = response.data
+                    }
+                }
+            })
         };
 
         var tick = function () {
@@ -109,6 +102,7 @@ app.controller('bugCtrl', ['$scope', '$timeout', 'socket',
 
         // Start the timer
         $timeout(tick, $scope.tickInterval);
+        setInterval(getBugData, 100);
     }
 ]);
 

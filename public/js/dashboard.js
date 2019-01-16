@@ -1,7 +1,7 @@
 var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic', 'socket-io']);
 
-app.controller('AppCtrl', ['$scope', '$location', 'socket',
-    function($scope, $location, socket){
+app.controller('AppCtrl', ['$scope', '$location', 'socket', '$http',
+    function($scope, $location, socket, $http){
 
         $scope.menu = [];
 
@@ -129,15 +129,15 @@ app.controller('AppCtrl', ['$scope', '$location', 'socket',
             play: true
         });
 
-        socket.on("config:logo", function(msg){
-            $scope.logoUrl = msg;
-            console.log($scope.logoUrl);
-        });
-
         getBrandingData();
 
         function getBrandingData() {
-            socket.emit("config:logo:get");
+            $http.get('http://127.0.0.1:3000/images/logo')
+            .then(function(response){
+                if (response.status == 200) {
+                    $scope.logoUrl = response.data
+                }
+            });
         }
     }
 ]);
@@ -301,36 +301,50 @@ app.controller('archeryCGController', ['$scope', 'socket',
   }
 ]);
 
-app.controller('generalCGController', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("bug", function (msg) {
-            $scope.general = msg;
-        });
-
-        $scope.$watch('general', function() {
-            if ($scope.general) {
-                socket.emit("bug", $scope.general);
+app.controller('generalCGController', ['$scope', '$http', 
+    function($scope, $http){
+        $scope.general = {}
+        $scope.lock = false;
+        $scope.$watch('bug', function() {
+            if ($scope.bug && !$scope.lock) {
+                $scope.lock = true;
+                $http.post('http://127.0.0.1:3000/bug', $scope.bug).then($scope.lock = false);
+                getBugData();
             } else {
                 getBugData();
             }
         }, true);
 
-        socket.on("bug", function (msg) {
-            $scope.bug = msg;
+        function getBugData() {
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/bug')
+                .then(function(response){
+                    if (response.status == 200 && response.data) {
+                        if (!$scope.lock && $scope.bug != response.data) {
+                            $scope.bug = response.data;
+                        
+                            bugUpdated();
+                        }
+                    }
+                });
+            }
+        }
+
+        function bugUpdated() {
             $scope.menu.forEach(item => {
                 if (item.name === 'General') {
-                    if ($scope.bug.showLive === true || $scope.bug.showLocation === true || $scope.general.showClock === true || $scope.general.showLogo === true) {
+                    if ($scope.bug.showLogo === true || 
+                        ($scope.bug.showGeneral === true && ($scope.bug.showLocation === true || $scope.bug.showClock === true || $scope.bug.showLive === true))) 
+                    {
                         item.live = true
                     } else {
                         item.live = false
                     }
                 }
             })
-        });
-
-        function getBugData() {
-            socket.emit("bug:get");
         }
+
+        setInterval(getBugData, 1000);
     }
 ]);
 

@@ -7,6 +7,7 @@
     "start": "nodemon server.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "^4.15.2",
     "gulp": "^3.9.1",
     "gulp-file-include": "^2.0.1",
