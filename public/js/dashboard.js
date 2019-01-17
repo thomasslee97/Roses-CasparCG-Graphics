@@ -303,6 +303,9 @@ app.controller('archeryCGController', ['$scope', 'socket',
   }
 ]);
 
+/**
+ * General/ Bug.
+ */
 app.controller('generalCGController', ['$scope', '$http', 
     function($scope, $http){
 
@@ -374,33 +377,24 @@ app.controller('generalCGController', ['$scope', '$http',
     }
 ]);
 
-app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-
+/**
+ * Lower Thirds.
+ */
+app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
+        $scope.queuedThirds = [];
+        
+        // Load lower thirds from local storage.
         var stored = localStorageService.get('lower_thirds');
 
-        const showLiveLowerThird = $scope => {
-            $scope.menu.forEach(item => {
-                if (item.name === 'Lower Thirds') {
-                    item.live = true
-                }
-            })
-        }
-
-        const hideLiveLowerThird = $scope => {
-            $scope.menu.forEach(item => {
-                if (item.name === 'Lower Thirds') {
-                    item.live = false
-                }
-            })
-        }
-
-        if(stored === null) {
-            $scope.queuedThirds = [];
-        } else {
+        // If any lower thirds have been stored, set the queue.
+        if(stored !== null) {
             $scope.queuedThirds = stored;
         }
 
+        /**
+         * Adds a lower third to the queue.
+         */
         $scope.add = function(item) {
             if (item.heading) {
                 $scope.queuedThirds.push(item);
@@ -409,16 +403,17 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
                 $scope.lowerThird = {};
             }
         };
-
+        
+        /**
+         * Removes a lower third from the queue.
+         */
         $scope.remove = function(index){
             $scope.queuedThirds.splice(index, 1);
         };
-
-        $scope.show = function(side, item) {
-            socket.emit("lowerthird:" + side, item);
-            showLiveLowerThird($scope)
-        };
-
+        
+        /**
+         * Edits a lower third.
+         */
         $scope.edit = function(index) {
             if (!$scope.queuedThirds[index].edit) {
                 $scope.queuedThirds[index].edit = true;
@@ -427,26 +422,70 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', 'soc
             }
         }
 
+        /**
+         * Shows a lower third.
+         */
+        $scope.show = function(side, item) {
+            $http.post('http://127.0.0.1:3000/lower-third/show/' + side, item);
+        };
+
+        /**
+         * Hides all lower thirds.
+         */
         $scope.hideall = function() {
-            socket.emit("lowerthird:hideall");
-            hideLiveLowerThird($scope)
+            $http.post('http://127.0.0.1:3000/lower-third/hide/all')
         };
 
+        /**
+         * Hides the full lower third.
+         */
         $scope.hidefull = function() {
-            socket.emit("lowerthird:hidefull");
+            $http.post('http://127.0.0.1:3000/lower-third/hide/full')
         };
 
+        /**
+         * Hides the left lower third.
+         */
 		$scope.hideleft = function() {
-            socket.emit("lowerthird:hideleft");
+            $http.post('http://127.0.0.1:3000/lower-third/hide/left')
         };
 
+        /**
+         * Hide the right lower third.
+         */
 		$scope.hideright = function() {
-            socket.emit("lowerthird:hideright");
+            $http.post('http://127.0.0.1:3000/lower-third/hide/right')
         };
 
-        $scope.$on("$destroy", function() {
-            localStorageService.set('lower_thirds', $scope.queuedThirds);
-        });
+        /**
+         * Gets all lower thirds from the API.
+         */
+        function getLowerThirds() {
+            $http.get('http://127.0.0.1:3000/lower-third')
+            .then(function(response) {
+                if (response.status == 200 && response.data) {
+                    $scope.lowerThirds = response.data;
+
+                    lowerThirdUpdated();
+                }
+            })
+        }
+
+        /**
+         * Called after the lower thirds have been updated by getLowerThirds.
+         */
+        function lowerThirdUpdated() {
+            var shown = $scope.lowerThirds.left.show || $scope.lowerThirds.right.show || $scope.lowerThirds.full.show
+
+            $scope.menu.forEach(item => {
+                if (item.name === 'Lower Thirds') {
+                    item.live = shown
+                }
+            })
+        }
+
+        // Calls getLowerThirds once every data_timeout.
+        setInterval(getLowerThirds, data_timeout)
     }
 ]);
 

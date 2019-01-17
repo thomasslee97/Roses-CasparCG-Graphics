@@ -18,9 +18,9 @@ module.exports = function(app) {
 
     app.route('/bug').get(controller.get_bug).post(controller.set_bug);
 
-    app.route('/lower-third/show/:location');
-    app.route('/lower-third/hide/:location');
-    app.route('/lower-third/hide/all');
+    app.route('/lower-third').get(controller.get_lowerThird);
+    app.route('/lower-third/show/:location').post(controller.show_lowerThird);
+    app.route('/lower-third/hide/:location').post(controller.hide_lowerThird);
 
     app.route('/roses/total');
     app.route('/roses/lanc');

@@ -29,6 +29,23 @@ var state = {
         leftcolor: "#1f1a34", 
         rightcolor:"#1f1a34"
     },
+    lowerThirds: {
+        left: {
+            heading: "",
+            subHeading: "",
+            show: false
+        },
+        right: {
+            heading: "",
+            subHeading: "",
+            show: false
+        },
+        full: {
+            heading: "",
+            subHeading: "",
+            show: false
+        }
+    },
     boxing: {
         homeTeam: homeTeamShortName,
         awayTeam: awayTeamShortName,
@@ -149,28 +166,77 @@ for (var i = 0; i < 8; i++){
 	};
 }
 
-// Gets the event logo.
+/**
+ * Gets the event logo.
+ */
 exports.get_logo = function(req, res) {
-    res.json(eventLogo)
+    res.json(eventLogo);
 }
 
-// Gets the state of the bug.
+/**
+ * Gets the state of the bug.
+ */
 exports.get_bug = function(req, res) {
-    res.json(state.bug)
+    res.json(state.bug);
 }
 
-// Sets the state of the bug.
+/**
+ * Sets the state of the bug.
+ */
 exports.set_bug = function(req, res) {
-    state.bug = req.body
+    state.bug = req.body;
+
     res.status(200).send("Updated");
 }
 
-// Gets the current state.
+/**
+ * Gets the state of the lower thirds.
+ */
+exports.get_lowerThird = function(req, res) {
+    res.json(state.lowerThirds);
+}
+
+/**
+ * Shows a lower third.
+ * The lower third to show is determined by req.params.location.
+ *      req.params.location: left/right/full.
+ * The request body should contain the lower third heading and subHeading (even if blank).
+ */
+exports.show_lowerThird = function(req, res) {
+    state.lowerThirds[req.params.location].heading = req.body.heading;
+    state.lowerThirds[req.params.location].subHeading = req.body.subHeading;
+    state.lowerThirds[req.params.location].show = true;
+
+    res.status(200).send("Updated");
+}
+
+/**
+ * Hides a lower third.
+ * The lower third to hide is determined by req.params.location.
+ *      req.params.location: left/right/full/all.
+ */
+exports.hide_lowerThird = function(req, res) {
+    if (req.params.location === 'all') {
+        state.lowerThirds.left.show = false
+        state.lowerThirds.right.show = false
+        state.lowerThirds.full.show = false
+    } else {
+        state.lowerThirds[req.params.location].show = false;
+    }
+
+    res.status(200).send("Updated");
+}
+
+/**
+ * Gets the current state.
+ */
 exports.get_state = function(req, res) {
     res.json(state);
 }
 
-// Get the state for a particular sport.
+/**
+ * Get the state for a particular sport.
+ */
 exports.get_sport = function(req, res) {
     var sport = req.params.sport.toUpperCase();
 

@@ -1,51 +1,19 @@
 var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
 var data_timeout = 100;
 
-app.controller('lowerThirdsCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        $scope.showLeft = false;
+app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
+    function($scope, socket, $http){
+        function getLowerThirds() {
+            $http.get('http://127.0.0.1:3000/lower-third')
+            .then(function(response){
+                if (response.status == 200 && response.data) {
+                    console.log(response.data)
+                    $scope.lowerThirds = response.data;
+                }
+            })
+        }
 
-        socket.on("lowerthird:hideall", function (msg) {
-            $scope.showLeft = false;
-            $scope.showRight = false;
-            $scope.showFull = false;
-        });
-
-        socket.on("lowerthird:hidefull", function (msg) {
-            $scope.showFull = false;
-        });
-
-        socket.on("lowerthird:hideleft", function (msg) {
-            $scope.showLeft = false;
-        });
-
-        socket.on("lowerthird:hideright", function (msg) {
-            $scope.showRight = false;
-        });
-
-        socket.on("lowerthird:left", function (msg) {
-            if($scope.showLeft) {
-                $scope.showLeft = false;
-            }
-            $scope.left = msg;
-            $scope.showLeft = true;
-        });
-
-        socket.on("lowerthird:right", function (msg) {
-            if($scope.showRight) {
-                $scope.showRight = false;
-            }
-            $scope.right = msg;
-            $scope.showRight = true;
-        });
-
-        socket.on("lowerthird:full", function (msg) {
-            if($scope.showFull) {
-                $scope.showFull = false;
-            }
-            $scope.full = msg;
-            $scope.showFull = true;
-        });
+        setInterval(getLowerThirds, data_timeout);
     }
 ]);
 
