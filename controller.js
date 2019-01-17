@@ -27,7 +27,12 @@ var state = {
     grid: {
         headingcolor:"#BC204B",
         leftcolor: "#1f1a34", 
-        rightcolor:"#1f1a34"
+        rightcolor:"#1f1a34",
+        header: "",
+        rows: [], // { left: "", right: "" }
+        position: null,
+        split: null, // halves, sporttimes, onebar
+        show: false
     },
     lowerThirds: {
         left: {
@@ -225,6 +230,45 @@ exports.hide_lowerThird = function(req, res) {
     }
 
     res.status(200).send("Updated");
+}
+
+/**
+ * Gets the grid state.
+ */
+exports.get_grid = function(req, res) {
+    res.json(state.grid);
+}
+
+/**
+ * Sets the grid state.
+ */
+exports.set_grid = function(req, res) {
+    if (req.body.headingcolor) {
+        state.grid.headingcolor = req.body.headingcolor;
+    }
+
+    if (req.body.leftcolor) {
+        state.grid.leftcolor = req.body.leftcolor;
+    }
+
+    if (req.body.rightcolor) {
+        state.grid.rightcolor = req.body.rightcolor;
+    }
+
+    state.grid.header = req.body.header;
+    state.grid.rows = req.body.rows;
+
+    if (req.body.position) {
+        state.grid.position = req.body.position;
+    }
+
+    if (req.body.split) {
+        state.grid.split = req.body.split;
+    }
+
+    state.grid.show = req.body.show;
+
+    res.status(200).send("Updated")
 }
 
 /**

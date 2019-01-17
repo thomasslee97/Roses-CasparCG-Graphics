@@ -7,7 +7,6 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
             $http.get('http://127.0.0.1:3000/lower-third')
             .then(function(response){
                 if (response.status == 200 && response.data) {
-                    console.log(response.data)
                     $scope.lowerThirds = response.data;
                 }
             })
@@ -217,16 +216,96 @@ app.controller('dartsCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('gridCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("grid", function (payload) {
-            if (payload === "hide") {
-                $scope.show = false;
-            } else {
-                $scope.show = true;
-                $scope.grid = payload;
+/**
+ * Grid
+ */
+app.controller('gridCtrl', ['$scope', 'socket', '$http', 
+    function($scope, socket, $http){
+        $scope.grid = {}
+
+        // Lock changes to the scope so that the grid is not update multiple times, causing ng-repeat issues.
+        $scope.lock = false;
+
+        /**
+         * Gets the state of the grid.
+         */
+        function getGrid() {
+            if (!$scope.lock) {
+                // Lock changes.
+                $scope.lock = true;
+
+                $http.get('http://127.0.0.1:3000/grid')
+                .then(function(response) {
+                    // Check for a valid response.
+                    if (response.status == 200 && response.data) {
+
+                        // Set 'easy' properties.
+                        $scope.grid.headingcolor = response.data.headingcolor;
+                        $scope.grid.leftcolor = response.data.leftcolor;
+                        $scope.grid.rightcolor = response.data.rightcolor;
+                        $scope.grid.header = response.data.header;
+                        $scope.grid.position = response.data.position;
+                        $scope.grid.split = response.data.split;
+                        $scope.grid.show = response.data.show;
+                        
+                        // If the rows have not changed, no changes are needed.
+                        if (!rowsEquivalent(response.data.rows)) {
+                            // If the grid is currently shown, we need to hide it to update it.
+                            if ($scope.grid.show === true) {
+                                $scope.grid.show = false;
+                                $scope.grid.rows = [];
+                                
+                                // Wait until the grid is hidden. ng-repeat causes issues if we update while the grid is shown.
+                                setTimeout(function() {
+                                    $scope.grid.rows = response.data.rows;
+                                    $scope.grid.show = true;
+
+                                    $scope.lock = false;
+                                }, 2000)
+                            } else {
+                                // If the grid is currently hidden, we can just update it.
+                                $scope.grid.rows = response.data.rows;
+
+                                $scope.lock = false;
+                            }
+                        } else {
+                            $scope.lock = false;
+                        }
+                    } else {
+                        $scope.lock = false;
+                    }
+                })
             }
-        });
+        }
+
+        /**
+         * Returns true if the rows are equivalent to the currently displayed rows.
+         * @param {} rows 
+         */
+        function rowsEquivalent(rows) {
+            if (!$scope.grid.rows) {
+                return false
+            }
+
+            if (rows.length != $scope.grid.rows.length) {
+                return false
+            }
+
+            for (var i = 0; i < $scope.grid.rows.length; i++) {
+                if (rows[i].right != $scope.grid.rows[i].right) {
+                    return false;
+                }
+
+                if (rows[i].left != $scope.grid.rows[i].left) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // Call getGrid once every data timeout period.
+        setInterval(getGrid, data_timeout);
     }
 ]);
 

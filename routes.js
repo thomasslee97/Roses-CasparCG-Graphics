@@ -14,7 +14,7 @@ module.exports = function(app) {
     app.route('/images/logo').get(controller.get_logo);
     app.route('/images/:team');
 
-    app.route('/grid');
+    app.route('/grid').get(controller.get_grid).post(controller.set_grid);
 
     app.route('/bug').get(controller.get_bug).post(controller.set_bug);
 

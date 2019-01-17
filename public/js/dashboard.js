@@ -489,55 +489,70 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$ht
     }
 ]);
 
-app.controller('gridCGController', ['$scope', '$log', 'localStorageService', 'socket',
-    function($scope, $log, localStorageService, socket){
+/**
+ * Grid.
+ */
+app.controller('gridCGController', ['$scope', 'localStorageService', 'socket', '$http',
+    function($scope, localStorageService, socket, $http){
+        // Initialise grid.
+        $scope.grid = {};
+        $scope.grid.rows = [];
 
+        // Get stored grid.
         var stored = localStorageService.get('grid');
-
-        if(stored === null) {
-            $scope.grid = {};
-            $scope.grid.rows = [];
-        } else {
+        if(stored !== null) {
             $scope.grid = stored;
         }
 
+        /**
+         * Adds a row to the grid.
+         */
         $scope.add = function() {
             $scope.grid.rows.push({left:'', right:''});
         };
 
+        /**
+         * Removes a row from the grid.
+         */
         $scope.remove = function(index){
             $scope.grid.rows.splice(index, 1);
         };
 
+        /**
+         * Shows the grid.
+         */
         $scope.show = function() {
-            socket.emit('grid', $scope.grid);
-            $log.info("grid.show()");
-            $log.info($scope.grid);
-            $scope.menu.forEach(item => {
-                if (item.name === 'Grid') {
-                    item.live = true
-                }
-            })
+            $scope.grid.show = true;
+
+            $http.post('http://127.0.0.1:3000/grid', $scope.grid);
         };
 
+        /**
+         * Hides the grid.
+         */
         $scope.hide = function() {
-            socket.emit('grid', 'hide');
-            $log.info("grid.hide()");
-            $scope.menu.forEach(item => {
-                if (item.name === 'Grid') {
-                    item.live = false
-                }
-            })
+            $scope.grid.show = false;
+            
+            $http.post('http://127.0.0.1:3000/grid', $scope.grid);
         };
 
+        /**
+         * Store the grid when destroyed.
+         */
         $scope.$on("$destroy", function() {
             localStorageService.set('grid', $scope.grid);
         });
 
+        /**
+         * Shows the color options.
+         */
         $scope.showColorOptions = function() {
           $scope.grid.colorShow = true
         }
 
+        /**
+         * Hides the color options.
+         */
         $scope.hideColorOptions = function() {
           $scope.grid.colorShow = false
         }
