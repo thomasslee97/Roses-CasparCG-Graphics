@@ -1,4 +1,5 @@
 var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
+var data_timeout = 100;
 
 app.controller('lowerThirdsCtrl', ['$scope', 'socket',
     function($scope, socket){
@@ -80,29 +81,41 @@ app.controller('boxingCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('bugCtrl', ['$scope', '$timeout', 'socket', '$http', 
-    function($scope, $timeout, socket, $http){
+/**
+ * Bug controller.
+ */
+app.controller('bugCtrl', ['$scope', '$timeout', '$http', 
+    function($scope, $timeout, $http){
         $scope.tickInterval = 1000; //ms
-
+        
+        /**
+         * Gets the state of the bug from the API.
+         */
         function getBugData() {
             $http.get("http://127.0.0.1:3000/bug")
             .then(function(response){
                 if (response.status == 200) {
+                    // Only update if the new data is different.
                     if ($scope.bug != response.data) {
                         $scope.bug = response.data
                     }
                 }
             })
         };
-
+        
+        /**
+         * Updates the clock.
+         */
         var tick = function () {
-            $scope.clock = Date.now(); // get the current time
-            $timeout(tick, $scope.tickInterval); // reset the timer
+            $scope.clock = Date.now(); // Get the current time.
+            $timeout(tick, $scope.tickInterval); // Reset the timer.
         };
 
-        // Start the timer
+        // Start the timer.
         $timeout(tick, $scope.tickInterval);
-        setInterval(getBugData, 100);
+
+        // Get bug data once every timeout period.
+        setInterval(getBugData, data_timeout);
     }
 ]);
 

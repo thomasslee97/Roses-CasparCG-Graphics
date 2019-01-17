@@ -1,3 +1,4 @@
+// Team names and logos.
 const homeTeamName = "Lancaster";
 const awayTeamName = "York";
 const homeTeamShortName = "LAN";
@@ -5,8 +6,10 @@ const awayTeamShortName = "YOR";
 const homeTeamImage = "images/LancasterSport250.png";
 const awayTeamImage = "images/YorkSport250.png";
 
+// The logo for the event.
 const eventLogo = "/images/roses2018logo.png";
 
+// The current state.
 var state = {
     bug: {
         livetext: "Live",
@@ -18,15 +21,20 @@ var state = {
         showGeneral: false,
         showClock: false
     },
+    score: {
+        totalPoints: 354
+    },
+    grid: {
+        headingcolor:"#BC204B",
+        leftcolor: "#1f1a34", 
+        rightcolor:"#1f1a34"
+    },
     boxing: {
         homeTeam: homeTeamShortName,
         awayTeam: awayTeamShortName,
         homeScore: 0,
         awayScore: 0,
         currRound: ""
-    },
-    score: {
-        totalPoints: 354
     },
     football: {
         homeTeam: homeTeamName,
@@ -74,11 +82,6 @@ var state = {
         awayTeam: awayTeamName,
         laneOrder: [],
         prevOrderLength: 0
-    },
-    grid: {
-        headingcolor:"#BC204B",
-        leftcolor: "#1f1a34", 
-        rightcolor:"#1f1a34"
     },
     archery: {
 
@@ -146,23 +149,28 @@ for (var i = 0; i < 8; i++){
 	};
 }
 
+// Gets the event logo.
 exports.get_logo = function(req, res) {
     res.json(eventLogo)
 }
 
+// Gets the state of the bug.
 exports.get_bug = function(req, res) {
     res.json(state.bug)
 }
 
+// Sets the state of the bug.
 exports.set_bug = function(req, res) {
     state.bug = req.body
     res.status(200).send("Updated");
 }
 
+// Gets the current state.
 exports.get_state = function(req, res) {
     res.json(state);
 }
 
+// Get the state for a particular sport.
 exports.get_sport = function(req, res) {
     var sport = req.params.sport.toUpperCase();
 

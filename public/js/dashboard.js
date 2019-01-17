@@ -1,5 +1,7 @@
 var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic', 'socket-io']);
 
+var data_timeout = 1000;
+
 app.controller('AppCtrl', ['$scope', '$location', 'socket', '$http',
     function($scope, $location, socket, $http){
 
@@ -303,26 +305,44 @@ app.controller('archeryCGController', ['$scope', 'socket',
 
 app.controller('generalCGController', ['$scope', '$http', 
     function($scope, $http){
-        $scope.general = {}
+
+        // Lock changes to the scope.
         $scope.lock = false;
+
+        /**
+         * Updates the API when $scope.bug changes.
+         */
         $scope.$watch('bug', function() {
+            // If the bug exists and changes are allowed.
             if ($scope.bug && !$scope.lock) {
+                // Lock changed.
                 $scope.lock = true;
+                
+                // Send changes and unlock changes.
                 $http.post('http://127.0.0.1:3000/bug', $scope.bug).then($scope.lock = false);
+
+                // Request changes from API to confirm changes.
                 getBugData();
             } else {
+                // Get data from API.
                 getBugData();
             }
         }, true);
 
+        /**
+         * Gets data from API for $scope.bug.
+         */
         function getBugData() {
+            // Only get data if changes are not locked.
             if (!$scope.lock){
                 $http.get('http://127.0.0.1:3000/bug')
                 .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
                         if (!$scope.lock && $scope.bug != response.data) {
                             $scope.bug = response.data;
-                        
+                            
                             bugUpdated();
                         }
                     }
@@ -330,9 +350,14 @@ app.controller('generalCGController', ['$scope', '$http',
             }
         }
 
+        /**
+         * Should be called whenever $scope.bug is modified by the controller.
+         */
         function bugUpdated() {
+            // Find the item in the menu.
             $scope.menu.forEach(item => {
                 if (item.name === 'General') {
+                    // Set item live status according to current settings.
                     if ($scope.bug.showLogo === true || 
                         ($scope.bug.showGeneral === true && ($scope.bug.showLocation === true || $scope.bug.showClock === true || $scope.bug.showLive === true))) 
                     {
@@ -343,8 +368,9 @@ app.controller('generalCGController', ['$scope', '$http',
                 }
             })
         }
-
-        setInterval(getBugData, 1000);
+        
+        // Update data after every data timeout period.
+        setInterval(getBugData, data_timeout);
     }
 ]);
 
