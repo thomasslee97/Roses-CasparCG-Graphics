@@ -22,6 +22,7 @@ module.exports = function(app) {
     app.route('/lower-third/show/:location').post(controller.show_lowerThird);
     app.route('/lower-third/hide/:location').post(controller.hide_lowerThird);
 
+    app.route('/roses').get(controller.get_roses).post(controller.set_roses);
     app.route('/roses/total');
     app.route('/roses/lanc');
     app.route('/roses/york');

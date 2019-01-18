@@ -616,36 +616,99 @@ app.controller('boxingCGController', ['$scope', 'socket',
     }
 ]);
 
-app.controller('rosesCGController', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("score", function (msg) {
-            $scope.roses = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Roses') {
-                    item.live = $scope.roses.showScore
+/**
+ * Roses/ overall score.
+ */
+app.controller('rosesCGController', ['$scope', 'socket', '$http', 
+    function($scope, socket, $http) {
+        $scope.roses = {}
+
+        /**
+         * Send changes to API.
+         */
+        $scope.$watch('roses', function() {
+            if($scope.roses) {
+                $http.post('http://127.0.0.1:3000/roses', $scope.roses);
+            }
+        })
+
+        /**
+         * Gets the Roses score.
+         */
+        function getRoses() {
+            // If we're using the roses live scores.
+            if (!$scope.roses.manualScore) {
+                // Set HTTP headers.
+                var config = {
+                    headers:  {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    }
+                }
+                
+                // Get score.
+                $http.get('https://roseslive.co.uk/score.json', config)
+                .success(function(data) {
+                    // Check roses live is being sensible.
+                    if(isNaN(data.york) || isNaN(data.lancs)){
+                        console.log("Roses live is giving us nonsense");
+                        return;
+                    };
+                    
+                    // Set scores.
+                    $scope.roses.yorkScore = data.york;
+                    $scope.roses.lancScore = data.lancs;
+
+                    // Work out each team's progress towards a win.
+                    calculateProgress();
+
+                    // Send scores to API.
+                    $http.post('http://127.0.0.1:3000/roses', $scope.roses);
+                })
+            } else {
+                // Work out progress based on manual scores.
+                calculateProgress();
+
+                // Send scores to API.
+                $http.post('http://127.0.0.1:3000/roses', $scope.roses).then(function (response) {
+                    getRosesData();
+                });
+            }
+        }
+
+        /**
+         * Works out each team's progress towards a win.
+         */
+        function calculateProgress() {
+            if($scope.roses.totalPoints){
+                $scope.roses.pointsToWin = (($scope.roses.totalPoints / 2 ) + 0.5)
+            } else {
+                $scope.roses.pointsToWin = 177.5;
+            }
+
+            // Work out progress and format values.
+			$scope.roses.yorkProgress = (($scope.roses.yorkScore / $scope.roses.pointsToWin)*100).toFixed(2);
+			$scope.roses.lancProgress = (($scope.roses.lancScore / $scope.roses.pointsToWin)*100).toFixed(2);
+            $scope.roses.pointsToWin = $scope.roses.pointsToWin.toFixed(1);
+        }
+
+        /**
+         * Gets scores/ graphics settings from API.
+         */
+        function getRosesData() {
+            $http.get('http://127.0.0.1:3000/roses')
+            .then(function(response) {
+                if (response.status == 200 && response.data) {
+                    $scope.roses = response.data;
                 }
             })
-        });
-
-        socket.on('lancScore', function(msg){
-          $scope.rosesLancScore = msg
-        });
-
-        socket.on('yorkScore', function(msg){
-          $scope.rosesYorkScore = msg
-        });
-
-        $scope.$watch('roses', function() {
-            if ($scope.roses) {
-                socket.emit("score", $scope.roses);
-            } else {
-                getScoreData();
-            }
-        }, true);
-
-        function getScoreData() {
-            socket.emit("score:get");
         }
+        
+        // Get roses from API.
+        getRosesData();
+
+        // Get scores once every timeout period.
+        setInterval(getRoses, data_timeout)
     }
 ]);
 

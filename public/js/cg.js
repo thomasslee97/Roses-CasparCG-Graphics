@@ -86,67 +86,27 @@ app.controller('bugCtrl', ['$scope', '$timeout', '$http',
     }
 ]);
 
-app.controller('scoringCtrl', ['$scope', '$interval', '$http', 'socket',
-    function($scope, $interval, $http, socket){
-        $scope.tickInterval = 5000;
-        $scope.yorkScore = "";
-        $scope.lancScore = "";
+/**
+ * Roses score.
+ */
+app.controller('scoringCtrl', ['$scope', '$http', 'socket',
+    function($scope, $http, socket){
+        $scope.roses = {}
 
-        var fetchScore = function () {
-          var config = {headers:  {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            }
-          };
-
-          $http.get('https://roseslive.co.uk/score.json', config)
-            .success(function(data) {
-              if(isNaN(data.york) || isNaN(data.lancs)){
-                console.log("Roses live is giving us nonsense");
-                return;
-              };
-              if(!$scope.manualScore){
-                $scope.yorkScore = data.york;
-                $scope.lancScore = data.lancs;
-              };
-                socket.emit('lancScore', data.lancs);
-                socket.emit('yorkScore', data.york);
-            }
-          );
-        };
-
-        socket.on("score", function (state) {
-            $scope.showScore = state.showScore;
-            $scope.manualScore = state.manualScore;
-            $scope.showProgress = state.showProgress;
-            if(state.manualScore){
-              $scope.yorkScore = state.yorkScore;
-              $scope.lancScore = state.lancScore;
-            };
-			if(state.totalPoints){
-                $scope.pointsToWin = ((state.totalPoints / 2 ) + 0.5)
-            } else {
-                $scope.pointsToWin = 177.5;
-            }
-			$scope.yorkProgress = (($scope.yorkScore / $scope.pointsToWin)*100).toFixed(2);
-			$scope.lancProgress = (($scope.lancScore / $scope.pointsToWin)*100).toFixed(2);
-            $scope.pointsToWin = $scope.pointsToWin.toFixed(1);
-        });
-
-        $scope.$watch('score', function() {
-            if (!$scope.score) {
-                getScoreData();
-            }
-        }, true);
-
-        function getScoreData() {
-            socket.emit("score:get");
+        /**
+         * Gets the score from API.
+         */
+        function getRoses() {
+            $http.get('http://127.0.0.1:3000/roses')
+            .then(function(response) {
+                if (response.status == 200 && response.data) {
+                    $scope.roses = response.data;
+                }
+            })
         }
 
-        //Intial fetch
-        fetchScore();
-        // Start the timer
-        $interval(fetchScore, $scope.tickInterval);
+        // Get Roses data once every timeout period.
+        setInterval(getRoses, data_timeout);
     }
 ]);
 

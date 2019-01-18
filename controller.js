@@ -21,9 +21,6 @@ var state = {
         showGeneral: false,
         showClock: false
     },
-    score: {
-        totalPoints: 354
-    },
     grid: {
         headingcolor:"#BC204B",
         leftcolor: "#1f1a34", 
@@ -33,6 +30,17 @@ var state = {
         position: null,
         split: null, // halves, sporttimes, onebar
         show: false
+    },
+    roses: {
+        manualScore: false,
+        yorkScore: 0,
+        lancScore: 0,
+        yorkProgress: 0,
+        lancProgress: 0,
+        pointsToWin: 0,
+        showScore: false,
+        showProgress: false,
+        totalPoints: 354
     },
     lowerThirds: {
         left: {
@@ -268,7 +276,23 @@ exports.set_grid = function(req, res) {
 
     state.grid.show = req.body.show;
 
-    res.status(200).send("Updated")
+    res.status(200).send("Updated");
+}
+
+/**
+ * Gets the state of the Roses scores.
+ */
+exports.get_roses = function(req, res) {
+    res.json(state.roses);
+}
+
+/**
+ * Sets the state of the Roses scores.
+ */
+exports.set_roses = function(req, res) {
+    state.roses = req.body;
+
+    res.status(200).send("Updated");
 }
 
 /**
