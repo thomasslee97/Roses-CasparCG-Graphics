@@ -1,0 +1,95 @@
+<div class="ui form segment">
+  <h2>Riddle Me This</h2>
+
+  <div class="ui divider"></div>
+
+  <div class="inline field">
+    <div class="ui icon white button" ng-click="showScores()">
+        Show Scores
+    </div>
+    <div class="ui icon white button" ng-click="hideScores()">
+        Hide Scores
+    </div>
+    <div class="ui icon red button" ng-click="nextRound()">
+        Next Round
+    </div>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui grid">
+    <div class="twelve wide column">
+      <h2 class="ui header">{{gameshow.greenTeam.name}} (Green)</h2>
+    </div>
+  </div>
+
+  <div class="inline field">
+    <div class="ui icon">
+      <h2>Score: {{gameshow.greenTeam.score}}</h2>
+    </div>
+    <div class="ui icon green button" ng-click="upScore('greenTeam')">
+        +
+    </div>
+    <div class="ui icon red button" ng-click="downScore('greenTeam')">
+        -
+    </div>
+  </div>
+
+  <div class="inline field">
+    <br />
+  </div>
+
+  <div class="inline field">
+      <div class="ui icon green button" ng-click="showScore('greenTeam')">
+          Show Score
+      </div>
+      <div class="ui icon green button" ng-click="hideScore('greenTeam')">
+          Hide Score
+      </div>
+      <div class="ui icon green button" ng-click="showName('greenTeam')">
+          Show Name
+      </div>
+      <div class="ui icon green button" ng-click="hideName('greenTeam')">
+          Hide Name
+      </div>
+  </div>
+
+  <div class="ui divider"></div>
+
+  <div class="ui grid">
+    <div class="twelve wide column">
+      <h2 class="ui header">{{gameshow.blueTeam.name}} (Blue)</h2>
+    </div>
+  </div>
+
+  <div class="inline field">
+    <div class="ui icon">
+      <h2>Score: {{gameshow.blueTeam.score}}</h2>
+    </div>
+    <div class="ui icon green button" ng-click="upScore('blueTeam')">
+        +
+    </div>
+    <div class="ui icon red button" ng-click="downScore('blueTeam')">
+        -
+    </div>
+  </div>
+
+  <div class="inline field">
+    <br />
+  </div>
+
+  <div class="inline field">
+      <div class="ui icon blue button" ng-click="showScore('blueTeam')">
+          Show Score
+      </div>
+      <div class="ui icon blue button" ng-click="hideScore('blueTeam')">
+          Hide Score
+      </div>
+      <div class="ui icon blue button" ng-click="showName('blueTeam')">
+          Show Name
+      </div>
+      <div class="ui icon blue button" ng-click="hideName('blueTeam')">
+          Hide Name
+      </div>
+  </div>
+</div>

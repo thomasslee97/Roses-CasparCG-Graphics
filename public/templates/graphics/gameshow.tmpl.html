@@ -1,0 +1,17 @@
+<div ng-controller="gameshowCtrl">
+    <div class="gameshowTeam bottom fullwidth scale-fade greenTeam" ng-show="gameshow.greenTeam.showName">
+        <h1>{{gameshow.greenTeam.name}}</h1>
+    </div>
+
+    <div class="gameshowTeam bottom fullwidth scale-fade blueTeam" ng-show="gameshow.blueTeam.showName">
+        <h1>{{gameshow.blueTeam.name}}</h1>
+    </div>
+
+    <div class="gameshowScore bottom right slide-right greenTeam" ng-show="gameshow.greenTeam.showScore || gameshow.showScores">
+        <h1>{{gameshow.greenTeam.score}}</h1>
+    </div>
+
+    <div class="gameshowScore bottom left slide-left blueTeam" ng-show="gameshow.blueTeam.showScore || gameshow.showScores">
+        <h1>{{gameshow.blueTeam.score}}</h1>
+    </div>
+</div>

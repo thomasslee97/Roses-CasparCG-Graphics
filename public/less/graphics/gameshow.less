@@ -1,0 +1,50 @@
+@import (once) "../current-theme.less";
+
+/**************************************************/
+/*              [Game Show]                       */
+/**************************************************/
+
+.gameshowScore {
+    min-width: 15%;
+    background-clip: padding-box;
+}
+
+.gameshowScore h1 {
+    color: @brand-text-colour-h1;
+    font-size: 100px;
+    line-height: 150px;
+    font-weight: 600;
+    padding: 5px 8px;
+    text-align: center;
+}
+
+.gameshowScore h1:empty {
+    display: none;
+}
+
+.gameshowTeam {
+    min-width: 15%;
+    background-clip: padding-box;
+}
+
+.gameshowTeam h1 {
+    color: @brand-text-colour-h1;
+    font-size: 100px;
+    line-height: 150px;
+    font-weight: 600;
+    padding: 5px 8px;
+    text-align: center;
+}
+
+.gameshowTeam.bottom.fullwidth {
+    position: absolute;
+    left: 50px;
+}
+
+.greenTeam {
+    background-color: @team-2-colour;
+}
+
+.blueTeam {
+    background-color: @team-1-colour;
+}
