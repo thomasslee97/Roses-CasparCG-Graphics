@@ -347,3 +347,49 @@ exports.get_sport = function(req, res) {
             break;
     }
 }
+
+/**
+ * Dispatches to set the state for a particular sport.
+ */
+exports.set_sport = function (req, res) {
+    var sport = req.params.sport.toUpperCase();
+    switch (sport) {
+        case "BOXING":
+            res.json(state.boxing)
+            break;
+        case "FOOTBALL":
+            res.json(state.football)
+            break;
+        case "RUGBY":
+            res.json(state.rugby)
+            break;
+        case "DARTS":
+            res.json(state.darts)
+            break;
+        case "SWIMMING":
+            res.json(state.swimming)
+            break;
+        case "BASKETBALL":
+            res.json(state.basketball)
+            break;
+        case "ARCHERY":
+            state.archery = req.body;
+            res.status(200).send("Updated");
+            break;
+        case "BADMINTON":
+            res.json(state.badminton)
+            break;
+        case "TENNIS":
+            res.json(state.tennis)
+            break;
+        case "NETBALL":
+            res.json(state.netball)
+            break;
+        case "WATERPOLO":
+            res.json(state.waterpolo)
+            break;
+        default:
+            res.status(404).send('Not found');
+            break;
+    }
+}

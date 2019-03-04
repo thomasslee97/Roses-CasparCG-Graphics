@@ -27,7 +27,7 @@ module.exports = function(app) {
     app.route('/roses/lanc');
     app.route('/roses/york');
 ;
-    app.route('/sport/:sport').get(controller.get_sport);
+    app.route('/sport/:sport').get(controller.get_sport).post(controller.set_sport);
     /**
      * boxing
      * football
