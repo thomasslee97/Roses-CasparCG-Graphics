@@ -229,129 +229,129 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
 ]);
 
 app.controller('archeryCGController', ['$scope', '$http',
-  function($scope, $http) {
+    function($scope, $http) {
 
-    // Lock changes to the scope.
-    $scope.lock = false;
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-    /**
-     * Updates the API when $scope.archery changes.
-     */
-    $scope.$watch('archery', function() {
-        // If archery exists and changes are allowed.
-        if ($scope.archery && !$scope.lock) {
-            // Lock changed.
-            $scope.lock = true;
+        /**
+         * Updates the API when $scope.archery changes.
+         */
+        $scope.$watch('archery', function() {
+            // If archery exists and changes are allowed.
+            if ($scope.archery && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
 
-            // Send changes and unlock changes.
-            $http.post('http://127.0.0.1:3000/sport/archery', $scope.archery).then($scope.lock = false);
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/archery', $scope.archery).then($scope.lock = false);
 
-            // Request changes from API to confirm changes.
-            getArcheryData();
-        } else {
-            // Get data from API.
-            getArcheryData();
-        }
-    }, true);
-
-    /**
-     * Gets data from API for $scope.archery.
-     */
-    function getArcheryData() {
-        // Only get data if changes are not locked.
-        if (!$scope.lock){
-            $http.get('http://127.0.0.1:3000/sport/archery')
-            .then(function(response){
-                // Check that request was successful and we didn't recieve an empty body.
-                if (response.status == 200 && response.data) {
-                    // Check that changes are still not locked, and that the data returned is new.
-                    if (!$scope.lock && $scope.archery != response.data) {
-                        $scope.archery = response.data;
-
-                        archeryUpdated();
-                    }
-                }
-            });
-        }
-    }
-
-    /**
-     * Should be called whenever $scope.bug is modified by the controller.
-     */
-    function archeryUpdated() {
-        // Find the item in the menu.
-        $scope.menu.forEach(item => {
-            if (item.name === 'Archery') {
-                item.live = $scope.archery.show
+                // Request changes from API to confirm changes.
+                getArcheryData();
+            } else {
+                // Get data from API.
+                getArcheryData();
             }
-        })
+        }, true);
+
+        /**
+         * Gets data from API for $scope.archery.
+         */
+        function getArcheryData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/sport/archery')
+                .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
+                    if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
+                        if (!$scope.lock && $scope.archery != response.data) {
+                            $scope.archery = response.data;
+
+                            archeryUpdated();
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Should be called whenever $scope.archery is modified by the controller.
+         */
+        function archeryUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Archery') {
+                    item.live = $scope.archery.show
+                }
+            })
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getArcheryData, data_timeout);
+
+
+
+        $scope.archeryReset1 = function() {
+            $scope.archery.score1 = 0;
+        };
+
+        $scope.archeryHit1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
+        if($scope.archery.shots1.length < 6) {
+            $scope.archery.shots1 += "H";
+            var tmp = Number($scope.archery.score1) || 0;
+            var newScore = (tmp + 1);
+            $scope.archery.score1 = newScore;
+        }
+        }
+
+        $scope.archeryHit2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
+        if($scope.archery.shots2.length < 6) {
+            $scope.archery.shots2 += "H";
+            var tmp = Number($scope.archery.score2) || 0;
+            var newScore = (tmp + 1);
+            $scope.archery.score2 = newScore;
+        }
+        }
+
+        $scope.archeryMiss1 = function(){
+        if(!$scope.archery.shots1) {
+            $scope.archery.shots1 = "";
+        }
+        if($scope.archery.shots1.length < 6) {
+            $scope.archery.shots1 += "M";
+        }
+        }
+
+        $scope.archeryMiss2 = function(){
+        if(!$scope.archery.shots2) {
+            $scope.archery.shots2 = "";
+        }
+        if($scope.archery.shots2.length < 6) {
+            $scope.archery.shots2 += "M";
+        }
+        }
+
+        $scope.archeryReset2 = function() {
+            $scope.archery.score2 = 0;
+            $scope.archery.shots1 = [];
+            $scope.archery.shots2 = [];
+        };
+
+        $scope.archeryHitsReset1 = function() {
+            $scope.archery.shots1 = "";
+        };
+
+        $scope.archeryHitsReset2 = function() {
+            $scope.archery.shots2 = "";
+        };
     }
-
-    // Update data after every data timeout period.
-    setInterval(getArcheryData, data_timeout);
-
-
-
-      $scope.archeryReset1 = function() {
-          $scope.archery.score1 = 0;
-      };
-
-      $scope.archeryHit1 = function(){
-        if(!$scope.archery.shots1) {
-            $scope.archery.shots1 = "";
-        }
-        if($scope.archery.shots1.length < 6) {
-          $scope.archery.shots1 += "H";
-          var tmp = Number($scope.archery.score1) || 0;
-          var newScore = (tmp + 1);
-          $scope.archery.score1 = newScore;
-        }
-      }
-
-      $scope.archeryHit2 = function(){
-        if(!$scope.archery.shots2) {
-            $scope.archery.shots2 = "";
-        }
-        if($scope.archery.shots2.length < 6) {
-          $scope.archery.shots2 += "H";
-          var tmp = Number($scope.archery.score2) || 0;
-          var newScore = (tmp + 1);
-          $scope.archery.score2 = newScore;
-        }
-      }
-
-      $scope.archeryMiss1 = function(){
-        if(!$scope.archery.shots1) {
-            $scope.archery.shots1 = "";
-        }
-        if($scope.archery.shots1.length < 6) {
-          $scope.archery.shots1 += "M";
-        }
-      }
-
-      $scope.archeryMiss2 = function(){
-        if(!$scope.archery.shots2) {
-            $scope.archery.shots2 = "";
-        }
-        if($scope.archery.shots2.length < 6) {
-          $scope.archery.shots2 += "M";
-        }
-      }
-
-      $scope.archeryReset2 = function() {
-          $scope.archery.score2 = 0;
-          $scope.archery.shots1 = [];
-          $scope.archery.shots2 = [];
-      };
-
-      $scope.archeryHitsReset1 = function() {
-          $scope.archery.shots1 = "";
-      };
-
-      $scope.archeryHitsReset2 = function() {
-          $scope.archery.shots2 = "";
-      };
-  }
 ]);
 
 /**
