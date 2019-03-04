@@ -16,11 +16,18 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('archeryCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("archery", function (msg) {
-            $scope.archery = msg;
-        });
+app.controller('archeryCtrl', ['$scope', 'socket', '$http',
+    function ($scope, socket, $http) {
+        function getArchery() {
+            $http.get('http://127.0.0.1:3000/sport/archery')
+            .then(function(response){
+                if (response.status == 200 && response.data) {
+                    $scope.archery = response.data;
+                }
+            })
+        }
+
+        setInterval(getArchery, data_timeout);
     }
 ]);
 
@@ -51,10 +58,10 @@ app.controller('boxingCtrl', ['$scope', 'socket',
 /**
  * Bug controller.
  */
-app.controller('bugCtrl', ['$scope', '$timeout', '$http', 
+app.controller('bugCtrl', ['$scope', '$timeout', '$http',
     function($scope, $timeout, $http){
         $scope.tickInterval = 1000; //ms
-        
+
         /**
          * Gets the state of the bug from the API.
          */
@@ -69,7 +76,7 @@ app.controller('bugCtrl', ['$scope', '$timeout', '$http',
                 }
             })
         };
-        
+
         /**
          * Updates the clock.
          */
@@ -179,7 +186,7 @@ app.controller('dartsCtrl', ['$scope', 'socket',
 /**
  * Grid
  */
-app.controller('gridCtrl', ['$scope', 'socket', '$http', 
+app.controller('gridCtrl', ['$scope', 'socket', '$http',
     function($scope, socket, $http){
         $scope.grid = {}
 
@@ -207,14 +214,14 @@ app.controller('gridCtrl', ['$scope', 'socket', '$http',
                         $scope.grid.position = response.data.position;
                         $scope.grid.split = response.data.split;
                         $scope.grid.show = response.data.show;
-                        
+
                         // If the rows have not changed, no changes are needed.
                         if (!rowsEquivalent(response.data.rows)) {
                             // If the grid is currently shown, we need to hide it to update it.
                             if ($scope.grid.show === true) {
                                 $scope.grid.show = false;
                                 $scope.grid.rows = [];
-                                
+
                                 // Wait until the grid is hidden. ng-repeat causes issues if we update while the grid is shown.
                                 setTimeout(function() {
                                     $scope.grid.rows = response.data.rows;
@@ -240,7 +247,7 @@ app.controller('gridCtrl', ['$scope', 'socket', '$http',
 
         /**
          * Returns true if the rows are equivalent to the currently displayed rows.
-         * @param {} rows 
+         * @param {} rows
          */
         function rowsEquivalent(rows) {
             if (!$scope.grid.rows) {

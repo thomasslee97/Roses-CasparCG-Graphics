@@ -23,7 +23,7 @@ var state = {
     },
     grid: {
         headingcolor:"#BC204B",
-        leftcolor: "#1f1a34", 
+        leftcolor: "#1f1a34",
         rightcolor:"#1f1a34",
         header: "",
         rows: [], // { left: "", right: "" }
@@ -114,7 +114,13 @@ var state = {
         prevOrderLength: 0
     },
     archery: {
-
+        team1: homeTeamName,
+        team2: awayTeamName,
+        score1: 0,
+        score2: 0,
+        shots1: "",
+        shots2: "",
+        show: false,
     },
     tennis: {
         options: {
@@ -198,6 +204,7 @@ exports.get_bug = function(req, res) {
  */
 exports.set_bug = function(req, res) {
     state.bug = req.body;
+    print
 
     res.status(200).send("Updated");
 }

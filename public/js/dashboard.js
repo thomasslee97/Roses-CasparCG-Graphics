@@ -228,29 +228,69 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
     }
 ]);
 
-app.controller('archeryCGController', ['$scope', 'socket',
-  function($scope, socket) {
-      socket.on("archery", function (msg) {
-          $scope.archery = msg;
-          $scope.menu.forEach(item => {
-              if (item.name === 'Archery') {
-                  item.live = $scope.archery.show
-              }
-          })
-      });
+app.controller('archeryCGController', ['$scope', '$http',
+  function($scope, $http) {
 
-      $scope.$watch('archery', function() {
-          if ($scope.archery) {
-              socket.emit("archery", $scope.archery);
-          } else {
-              getArcheryData();
-          }
-      }, true);
+    // Lock changes to the scope.
+    $scope.lock = false;
+
+    /**
+     * Updates the API when $scope.archery changes.
+     */
+    $scope.$watch('archery', function() {
+        // If archery exists and changes are allowed.
+        if ($scope.archery && !$scope.lock) {
+            // Lock changed.
+            $scope.lock = true;
+
+            // Send changes and unlock changes.
+            $http.post('http://127.0.0.1:3000/sport/archery', $scope.archery).then($scope.lock = false);
+
+            // Request changes from API to confirm changes.
+            getArcheryData();
+        } else {
+            // Get data from API.
+            getArcheryData();
+        }
+    }, true);
+
+    /**
+     * Gets data from API for $scope.archery.
+     */
+    function getArcheryData() {
+        // Only get data if changes are not locked.
+        if (!$scope.lock){
+            $http.get('http://127.0.0.1:3000/sport/archery')
+            .then(function(response){
+                // Check that request was successful and we didn't recieve an empty body.
+                if (response.status == 200 && response.data) {
+                    // Check that changes are still not locked, and that the data returned is new.
+                    if (!$scope.lock && $scope.archery != response.data) {
+                        $scope.archery = response.data;
+
+                        archeryUpdated();
+                    }
+                }
+            });
+        }
+    }
+
+    /**
+     * Should be called whenever $scope.bug is modified by the controller.
+     */
+    function archeryUpdated() {
+        // Find the item in the menu.
+        $scope.menu.forEach(item => {
+            if (item.name === 'Archery') {
+                item.live = $scope.archery.show
+            }
+        })
+    }
+
+    // Update data after every data timeout period.
+    setInterval(getArcheryData, data_timeout);
 
 
-      function getArcheryData() {
-          socket.emit("archery:get");
-      }
 
       $scope.archeryReset1 = function() {
           $scope.archery.score1 = 0;
@@ -265,7 +305,6 @@ app.controller('archeryCGController', ['$scope', 'socket',
           var tmp = Number($scope.archery.score1) || 0;
           var newScore = (tmp + 1);
           $scope.archery.score1 = newScore;
-          debugger
         }
       }
 
@@ -318,7 +357,7 @@ app.controller('archeryCGController', ['$scope', 'socket',
 /**
  * General/ Bug.
  */
-app.controller('generalCGController', ['$scope', '$http', 
+app.controller('generalCGController', ['$scope', '$http',
     function($scope, $http){
 
         // Lock changes to the scope.
@@ -332,7 +371,7 @@ app.controller('generalCGController', ['$scope', '$http',
             if ($scope.bug && !$scope.lock) {
                 // Lock changed.
                 $scope.lock = true;
-                
+
                 // Send changes and unlock changes.
                 $http.post('http://127.0.0.1:3000/bug', $scope.bug).then($scope.lock = false);
 
@@ -357,7 +396,7 @@ app.controller('generalCGController', ['$scope', '$http',
                         // Check that changes are still not locked, and that the data returned is new.
                         if (!$scope.lock && $scope.bug != response.data) {
                             $scope.bug = response.data;
-                            
+
                             bugUpdated();
                         }
                     }
@@ -373,8 +412,8 @@ app.controller('generalCGController', ['$scope', '$http',
             $scope.menu.forEach(item => {
                 if (item.name === 'General') {
                     // Set item live status according to current settings.
-                    if ($scope.bug.showLogo === true || 
-                        ($scope.bug.showGeneral === true && ($scope.bug.showLocation === true || $scope.bug.showClock === true || $scope.bug.showLive === true))) 
+                    if ($scope.bug.showLogo === true ||
+                        ($scope.bug.showGeneral === true && ($scope.bug.showLocation === true || $scope.bug.showClock === true || $scope.bug.showLive === true)))
                     {
                         item.live = true
                     } else {
@@ -383,7 +422,7 @@ app.controller('generalCGController', ['$scope', '$http',
                 }
             })
         }
-        
+
         // Update data after every data timeout period.
         setInterval(getBugData, data_timeout);
     }
@@ -395,7 +434,7 @@ app.controller('generalCGController', ['$scope', '$http',
 app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$http',
     function($scope, localStorageService, $http){
         $scope.queuedThirds = [];
-        
+
         // Load lower thirds from local storage.
         var stored = localStorageService.get('lower_thirds');
 
@@ -415,14 +454,14 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$ht
                 $scope.lowerThird = {};
             }
         };
-        
+
         /**
          * Removes a lower third from the queue.
          */
         $scope.remove = function(index){
             $scope.queuedThirds.splice(index, 1);
         };
-        
+
         /**
          * Edits a lower third.
          */
@@ -544,7 +583,7 @@ app.controller('gridCGController', ['$scope', 'localStorageService', 'socket', '
          */
         $scope.hide = function() {
             $scope.grid.show = false;
-            
+
             $http.post('http://127.0.0.1:3000/grid', $scope.grid);
         };
 
@@ -631,7 +670,7 @@ app.controller('boxingCGController', ['$scope', 'socket',
 /**
  * Roses/ overall score.
  */
-app.controller('rosesCGController', ['$scope', 'socket', '$http', 
+app.controller('rosesCGController', ['$scope', 'socket', '$http',
     function($scope, socket, $http) {
         $scope.roses = {}
 
@@ -657,7 +696,7 @@ app.controller('rosesCGController', ['$scope', 'socket', '$http',
                         'Content-Type': 'application/json',
                     }
                 }
-                
+
                 // Get score.
                 $http.get('https://roseslive.co.uk/score.json', config)
                 .success(function(data) {
@@ -666,7 +705,7 @@ app.controller('rosesCGController', ['$scope', 'socket', '$http',
                         console.log("Roses live is giving us nonsense");
                         return;
                     };
-                    
+
                     // Set scores.
                     $scope.roses.yorkScore = data.york;
                     $scope.roses.lancScore = data.lancs;
@@ -715,7 +754,7 @@ app.controller('rosesCGController', ['$scope', 'socket', '$http',
                 }
             })
         }
-        
+
         // Get roses from API.
         getRosesData();
 
@@ -1016,7 +1055,7 @@ app.controller('swimmingCGController', ['$scope', 'socket',
 
         $scope.$watch('swimming', function() {
             if ($scope.swimming) {
-                if($scope.swimming.prevOrderLength < $scope.swimming.order.length){                    
+                if($scope.swimming.prevOrderLength < $scope.swimming.order.length){
                     for (var i = $scope.swimming.prevOrderLength; i < Math.min($scope.swimming.order.length, 8); i++){
                         $scope.swimming.laneOrder[i] = {
                             lane: $scope.swimming.lanes[$scope.swimming.order[i] - 1],
