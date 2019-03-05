@@ -1167,10 +1167,10 @@ app.controller('badmintonCGController', ['$scope', '$http',
         $scope.lock = false;
 
         /**
-         * Updates the API when $scope.bug changes.
+         * Updates the API when $scope.badminton changes.
          */
         $scope.$watch('badminton', function() {
-            // If the bug exists and changes are allowed.
+            // If badminton exists and changes are allowed.
             if ($scope.badminton && !$scope.lock) {
                 // Lock changed.
                 $scope.lock = true;
