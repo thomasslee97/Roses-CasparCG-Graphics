@@ -1160,44 +1160,77 @@ app.controller('basketballCGController', ['$scope', 'localStorageService', 'sock
     }
 ]);
 
-app.controller('badmintonCGController', ['$scope', 'socket',
-    function($scope, socket) {
-        socket.on("badminton", function (msg) {
-            $scope.badminton = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Badminton') {
-                    item.live = $scope.badminton.show
-                }
-            })
-        });
+app.controller('badmintonCGController', ['$scope', '$http',
+    function($scope, $http) {
 
-        $scope.resetGame1 = function() {
-          $scope.badminton.game1 = 0;
-        };
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-        $scope.resetGame2 = function() {
-          $scope.badminton.game2 = 0;
-        };
-
-        $scope.resetPoint1 = function() {
-          $scope.badminton.point1 = 0;
-        };
-
-        $scope.resetPoint2 = function() {
-          $scope.badminton.point2 = 0;
-        };
-
+        /**
+         * Updates the API when $scope.bug changes.
+         */
         $scope.$watch('badminton', function() {
-            if ($scope.badminton) {
-                socket.emit("badminton", $scope.badminton);
-            } else {
-                getBadmintonData();
+            // If the bug exists and changes are allowed.
+            if ($scope.badminton && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/badminton', $scope.badminton).then($scope.lock = false);
             }
         }, true);
 
+        /**
+         * Gets data from API for $scope.badminton.
+         */
         function getBadmintonData() {
-            socket.emit("badminton:get");
+            // Only get data if changes are not locked.
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/sport/badminton')
+                .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
+                    if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
+                        if (!$scope.lock && $scope.badminton != response.data) {
+                            $scope.badminton = response.data;
+                            badmintonUpdated();
+                        }
+                    }
+                });
+            }
         }
+
+        /**
+         * Should be called whenever $scope.badminton is modified by the controller.
+         */
+        function badmintonUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Badminton') {
+                    // Set item live status according to current settings.
+                    item.live = $scope.badminton.show
+                }
+            })
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getBadmintonData, data_timeout);
+
+        $scope.resetGame1 = function() {
+            $scope.badminton.game1 = 0;
+        };
+
+        $scope.resetGame2 = function() {
+            $scope.badminton.game2 = 0;
+        };
+
+        $scope.resetPoint1 = function() {
+            $scope.badminton.point1 = 0;
+        };
+
+        $scope.resetPoint2 = function() {
+            $scope.badminton.point2 = 0;
+        };
     }
 ]);
 

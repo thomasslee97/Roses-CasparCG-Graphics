@@ -383,7 +383,8 @@ exports.set_sport = function (req, res) {
             res.status(200).send("Updated");
             break;
         case "BADMINTON":
-            res.json(state.badminton)
+            state.badminton = req.body;
+            res.status(200).send("Updated");
             break;
         case "TENNIS":
             res.json(state.tennis)

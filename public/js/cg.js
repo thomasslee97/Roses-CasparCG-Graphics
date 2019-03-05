@@ -329,21 +329,18 @@ app.controller('basketballCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('badmintonCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("badminton", function (msg) {
-            $scope.badminton = msg;
-        });
-
-        $scope.$watch('badminton', function() {
-            if (!$scope.badminton) {
-                getBadmintonData();
-            }
-        }, true);
-
-        function getBadmintonData() {
-            socket.emit("badminton:get");
+app.controller('badmintonCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        function getBadminton() {
+            $http.get('http://127.0.0.1:3000/sport/badminton')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.badminton = response.data;
+                    }
+                })
         }
+
+        setInterval(getBadminton, data_timeout);
     }
 ]);
 
