@@ -1,5 +1,5 @@
 var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
-var data_timeout = 100;
+var data_timeout = 1000;
 
 app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
     function($scope, socket, $http){
@@ -120,27 +120,19 @@ app.controller('scoringCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('footballCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('footballCtrl', ['$scope', '$http',
+    function($scope, $http){
 
-        socket.on("football", function (msg) {
-            $scope.football = msg;
-        });
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('football', function() {
-            if (!$scope.football) {
-                getFootballData();
-            }
-        }, true);
-
-        function getFootballData() {
-            socket.emit("football:get");
-            socket.emit("clock:get");
+        function getFootball() {
+            $http.get('http://127.0.0.1:3000/sport/football')
+            .then(function(response){
+                if (response.status == 200 && response.data) {
+                    $scope.football = response.data;
+                }
+            })
         }
+
+        setInterval(getFootball, data_timeout);
     }
 ]);
 
@@ -538,13 +530,10 @@ app.controller('clockCtrl', ['$scope', '$http',
                 this.time += this.decisecond;
             }
 
-            var formattedTime = this.formatTime(this.time);
-
             if (this.time <= 0) {
                 this.stop();
             }
-            $scope.stopwatch.time = formattedTime;
-            $scope.$digest()
+            this.updateScope();
         };
 
 
@@ -579,7 +568,7 @@ app.controller('clockCtrl', ['$scope', '$http',
             this.time = (this.hour * parseInt(match[1])||0) + (this.minute * parseInt(match[2])||0) + (this.second * parseInt(match[3])||0) + (this.decisecond * parseInt(match[4])||0);
             if (!this.isTicking) {
                 // Only correct for drift against the master clock if we've stopped.
-                $scope.stopwatch.time = this.formatTime(this.time);
+                this.updateScope()
             }
         }
 
@@ -624,6 +613,19 @@ app.controller('clockCtrl', ['$scope', '$http',
 
         Stopwatch.prototype.getTime = function () {
             return this.formatTime(this.time);
+        };
+
+        Stopwatch.prototype.updateScope = function () {
+            time = this.getTime()
+            $scope.stopwatch.time = time
+            $scope.stopwatch.short = time.slice(0, time.indexOf("."));
+            $scope.stopwatch.secs = this.time;
+            $scope.$digest()
+        };
+
+        Stopwatch.prototype.getMins = function () {
+            time = this.getTime()
+            return time.slice(0, time.indexOf(":"));
         };
 
         Stopwatch.prototype.getDirection = function () {

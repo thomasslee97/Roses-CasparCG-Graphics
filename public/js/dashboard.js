@@ -787,8 +787,68 @@ app.controller('rosesCGController', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('footballCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
+app.controller('footballCGController', ['$scope', 'localStorageService', '$http', 'socket',
+    function($scope, localStorageService, $http, socket){
+
+        // Lock changes to the scope.
+        $scope.lock = false;
+
+        // Get the default values from server on load.
+        getFootballData();
+
+        /**
+         * Updates the API when $scope.football changes.
+         */
+        $scope.$watch('football', function() {
+            // If scope exists and changes are allowed.
+            if ($scope.football && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/football', $scope.football).then($scope.lock = false);
+            }
+        }, true);
+
+        /**
+         * Gets data from API for $scope.football
+         */
+        function getFootballData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/football')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            if (!$scope.lock && $scope.football != response.data) {
+                                $scope.football = response.data;
+                                footballUpdated();
+                            }
+                        }
+                    });
+            }
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getFootballData, data_timeout);
+
+        /**
+         * Should be called whenever $scope.boxing is modified by the controller.
+         */
+        function footballUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Football') {
+                    if ($scope.football.show === true || $scope.football.showpre === true || $scope.football.showpost === true ) {
+                        item.live = true
+                    } else {
+                        item.live = false
+                    }
+                }
+            })
+        }
+
         var storedHome = localStorageService.get('home_football');
         var storedAway = localStorageService.get('away_football');
 
@@ -803,30 +863,6 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
         } else {
             $scope.awayPlayers = storedAway;
         }
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
 
         $scope.addHomePlayer = function() {
             $scope.homePlayers.push($scope.home);
@@ -847,36 +883,11 @@ app.controller('footballCGController', ['$scope', 'localStorageService', 'socket
             }
         };
 
-        socket.on("football", function (msg) {
-            $scope.football = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Football') {
-                    if ($scope.football.show === true || $scope.football.showpre === true || $scope.football.showpost === true ) {
-                        item.live = true
-                    } else {
-                        item.live = false
-                    }
-                }
-            })
-        });
-
-        $scope.$watch('football', function() {
-            if ($scope.football) {
-                socket.emit("football", $scope.football);
-            } else {
-                getFootballData();
-            }
-        }, true);
-
         $scope.$on("$destroy", function() {
             localStorageService.set('away_football', $scope.awayPlayers);
             localStorageService.set('home_football', $scope.homePlayers);
         });
 
-        function getFootballData() {
-            socket.emit("football:get");
-            socket.emit("clock:get");
-        }
     }
 ]);
 
