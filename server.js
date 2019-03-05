@@ -7,8 +7,7 @@ var express 	= require('express'),
 	rename 		= require('gulp-rename'),
 	runSequence = require('run-sequence'),
 	watch		= require('gulp-watch'),
-	bodyParser 	= require('body-parser'),
-	Stopwatch 	= require('./models/stopwatch');
+	bodyParser 	= require('body-parser');
 
 gulp.task('less', function(){
 	return gulp.src('./public/less/theme.less')
@@ -32,7 +31,7 @@ gulp.task('fileinclude', function() {
 		}))
 		.pipe(rename('index.html'))
 		.pipe(gulp.dest('./public'));
-	
+
 });
 
 gulp.task('default', function(){
@@ -45,13 +44,6 @@ var app = express();
 
 var server = http.createServer(app);
 var io = require('socket.io').listen(server);
-
-//Clock Functions
-var stopwatch = new Stopwatch();
-
-stopwatch.on('tick:stopwatch', function(time) {
-	io.sockets.emit("clock:tick", time);
-});
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())

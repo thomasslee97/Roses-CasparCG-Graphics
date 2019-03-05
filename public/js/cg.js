@@ -16,8 +16,8 @@ app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('archeryCtrl', ['$scope', 'socket', '$http',
-    function ($scope, socket, $http) {
+app.controller('archeryCtrl', ['$scope', '$http',
+    function ($scope, $http) {
         function getArchery() {
             $http.get('http://127.0.0.1:3000/sport/archery')
             .then(function(response){
@@ -31,27 +31,30 @@ app.controller('archeryCtrl', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('boxingCtrl', ['$scope', 'socket',
-    function($scope, socket){
 
-        socket.on("boxing", function (msg) {
-            $scope.boxing = msg;
-        });
+/**
+ * Bug controller.
+ */
+app.controller('boxingCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('boxing', function() {
-            if (!$scope.boxing) {
-                getBoxingData();
-            }
-        }, true);
-
+        /**
+         * Gets the state of boxing from the API.
+         */
         function getBoxingData() {
-            socket.emit("boxing:get");
-            socket.emit("clock:get");
-        }
+            $http.get("http://127.0.0.1:3000/sport/boxing")
+                .then(function (response) {
+                    if (response.status == 200) {
+                        // Only update if the new data is different.
+                        if ($scope.boxing != response.data) {
+                            $scope.boxing = response.data
+                        }
+                    }
+                })
+        };
+
+        // Get bug data once every timeout period.
+        setInterval(getBoxingData, data_timeout);
     }
 ]);
 
@@ -96,8 +99,8 @@ app.controller('bugCtrl', ['$scope', '$timeout', '$http',
 /**
  * Roses score.
  */
-app.controller('scoringCtrl', ['$scope', '$http', 'socket',
-    function($scope, $http, socket){
+app.controller('scoringCtrl', ['$scope', '$http',
+    function($scope, $http){
         $scope.roses = {}
 
         /**
@@ -457,6 +460,178 @@ app.controller('volleyballCtrl', ['$scope', 'socket',
         function getVolleyballData() {
             socket.emit("volleyball:get");
             socket.emit("clock:get");
+        }
+    }
+]);
+
+
+/* Very WIP, please refactor this! */
+app.controller('clockCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        $scope.stopwatch = []
+
+        function getStopwatch() {
+            $http.get('http://127.0.0.1:3000/stopwatch')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.stopwatchState = response.data;
+                        updateState();
+                    }
+                })
+        }
+
+        setInterval(getStopwatch, 1000);
+
+        var stopwatch = Stopwatch();
+
+        function updateState() {
+            switch ($scope.stopwatchState.direction) {
+                case "up":
+                    stopwatch.countUp();
+                    break;
+                case "down":
+                    stopwatch.countDown();
+                    break;
+            }
+            if ($scope.stopwatchState.isRunning) {
+                stopwatch.start()
+            } else {
+                stopwatch.stop()
+            }
+            stopwatch.setValue($scope.stopwatchState.time)
+        }
+
+        function formatTime(time) {
+            var remainder = time,
+                numHours,
+                numMinutes,
+                numSeconds,
+                numDeciseconds,
+                output = "";
+
+            //numHours = String(parseInt(remainder / this.hour, 10));
+            //remainder -= this.hour * numHours;
+
+            numMinutes = String(parseInt(remainder / this.minute, 10));
+            remainder -= this.minute * numMinutes;
+
+            numSeconds = String(parseInt(remainder / this.second, 10));
+            remainder -= this.second * numSeconds;
+
+            numDeciseconds = String(parseInt(remainder / this.decisecond, 10));
+
+            output = [numMinutes, numSeconds].map(function (str) {
+                if (str.length === 1) {
+                    str = "0" + str;
+                }
+                return str;
+            }).join(":");
+            output = [output, numDeciseconds].join(".");
+
+            return output;
+        };
+
+        function onTick() {
+            if (this.setCountMode === "down") {
+                this.time = this.time - this.decisecond;
+            } else {
+                this.time += this.decisecond;
+            }
+
+            var formattedTime = this.formatTime(this.time);
+
+            if (this.time <= 0) {
+                this.stop();
+            }
+            $scope.stopwatch.time = formattedTime;
+            $scope.$digest()
+        };
+
+
+        function Stopwatch() {
+            if(false === (this instanceof Stopwatch)) {
+                return new Stopwatch();
+            }
+
+            this.hour = 3600000;
+            this.minute = 60000;
+            this.second = 1000;
+            this.decisecond = 100;
+            this.time = 0;
+            this.interval = undefined;
+            this.setCountMode = "up";
+            this.isTicking = false;
+            this.formatTime = formatTime.bind(this)
+            this.onTick = onTick.bind(this)
+
+        };
+
+
+
+        Stopwatch.prototype.setValue = function(val) {
+            var pattern = /^(?:(?:(?:(\d+):)?(\d+):)?(\d+)(?:\.(\d))?)$/;
+            var match = pattern.exec(val);
+            if (!match) {
+                // ignore invalid value
+                return;
+            }
+
+            this.time = (this.hour * parseInt(match[1])||0) + (this.minute * parseInt(match[2])||0) + (this.second * parseInt(match[3])||0) + (this.decisecond * parseInt(match[4])||0);
+            if (!this.isTicking) {
+                // Only correct for drift against the master clock if we've stopped.
+                $scope.stopwatch.time = this.formatTime(this.time);
+            }
+        }
+
+        Stopwatch.prototype.start = function() {
+            if (this.interval) {
+                return;
+            }
+
+            // note the use of _.bindAll in the constructor
+            // with bindAll we can pass one of our methods to
+            // setInterval and have it called with the proper 'this' value
+            this.interval = setInterval(this.onTick, this.decisecond);
+
+            this.isTicking = true;
+        };
+
+        Stopwatch.prototype.stop = function() {
+            if (this.interval) {
+                clearInterval(this.interval);
+                this.interval = undefined;
+            }
+            this.isTicking = false;
+        };
+
+        Stopwatch.prototype.pause = function() {
+            console.log('Pause Stopwatch!');
+            if (this.interval) {
+                this.stop();
+            } else {
+                this.start();
+            }
+        };
+
+        Stopwatch.prototype.countUp = function() {
+            this.setCountMode = "up";
+        }
+
+        Stopwatch.prototype.countDown = function() {
+            this.setCountMode = "down";
+        }
+
+
+        Stopwatch.prototype.getTime = function () {
+            return this.formatTime(this.time);
+        };
+
+        Stopwatch.prototype.getDirection = function () {
+            return this.setCountMode;
+        };
+
+        Stopwatch.prototype.isRunning = function () {
+            return this.isTicking;
         }
     }
 ]);

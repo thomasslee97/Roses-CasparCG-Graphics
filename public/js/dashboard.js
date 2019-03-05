@@ -149,6 +149,41 @@ app.controller('AppCtrl', ['$scope', '$location', 'socket', '$http',
                 }
             });
         }
+
+        // Clock functions
+        function getClockTime(){
+            if ($scope.clock == undefined) {
+                $scope.clock = []
+            }
+            $http.get('http://127.0.0.1:3000/stopwatch/time')
+            .then(function(response){
+                if (response.status == 200) {
+                    $scope.clock.time = response.data
+                }
+            });
+        }
+
+        setInterval(getClockTime, data_timeout);
+
+        $scope.setClock = function(val) {
+            $http.post('http://127.0.0.1:3000/stopwatch/set/', JSON.stringify({time: val}));
+        };
+
+        $scope.upClock = function() {
+            $http.post('http://127.0.0.1:3000/stopwatch/count/up');
+        };
+
+        $scope.downClock = function() {
+            $http.post('http://127.0.0.1:3000/stopwatch/count/down');
+        };
+
+        $scope.pauseClock = function() {
+            $http.post('http://127.0.0.1:3000/stopwatch/pause');
+        };
+
+        $scope.resetClock = function() {
+            $http.post('http://127.0.0.1:3000/stopwatch/reset');
+        };
     }
 ]);
 
@@ -597,61 +632,62 @@ app.controller('gridCGController', ['$scope', 'localStorageService', 'socket', '
         }
 }]);
 
-app.controller('boxingCGController', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
+app.controller('boxingCGController', ['$scope', '$http',
+    function ($scope, $http) {
 
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
+        /**
+         * Updates the API when $scope.boxing changes.
+         */
+        $scope.$watch('boxing', function () {
+            // If boxing exists and changes are allowed.
+            if ($scope.boxing && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
 
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
-
-        $scope.updateScore = function() {
-            console.log("Score");
-        };
-
-        $scope.roundChanged = function() {
-            console.log("Round");
-        };
-
-        socket.on("boxing", function (msg) {
-            $scope.boxing = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Boxing') {
-                    item.live = $scope.boxing.showScore
-                }
-            })
-        });
-
-        $scope.$watch('boxing', function() {
-            if ($scope.boxing) {
-                socket.emit("boxing", $scope.boxing);
-            } else {
-                getBoxingData();
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/boxing', $scope.boxing).then($scope.lock = false);
             }
         }, true);
 
+        /**
+         * Gets data from API for $scope.boxing
+         */
         function getBoxingData() {
-            socket.emit("boxing:get");
-            socket.emit("clock:get");
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/boxing')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            if (!$scope.lock && $scope.boxing != response.data) {
+                                $scope.boxing = response.data;
+                                boxingUpdated();
+                            }
+                        }
+                    });
+            }
         }
+
+        /**
+         * Should be called whenever $scope.boxing is modified by the controller.
+         */
+        function boxingUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Boxing') {
+                    // Set item live status according to current settings.
+                    item.live = $scope.boxing.showScore
+                }
+            })
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getBoxingData, data_timeout);
+
     }
 ]);
 

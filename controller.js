@@ -1,3 +1,5 @@
+var Stopwatch = require('./models/stopwatch');
+
 // Team names and logos.
 const homeTeamName = "Lancaster";
 const awayTeamName = "York";
@@ -361,7 +363,8 @@ exports.set_sport = function (req, res) {
     var sport = req.params.sport.toUpperCase();
     switch (sport) {
         case "BOXING":
-            res.json(state.boxing)
+            state.boxing = req.body;
+            res.status(200).send("Updated");
             break;
         case "FOOTBALL":
             res.json(state.football)
@@ -399,4 +402,70 @@ exports.set_sport = function (req, res) {
             res.status(404).send('Not found');
             break;
     }
+}
+
+//Master Timer Functions
+var stopwatch = new Stopwatch();
+
+/**
+ * Gets the state of the master timer.
+ */
+exports.get_clock = function (req, res) {
+    var state = {
+        "isRunning": stopwatch.isRunning(),
+        "time": stopwatch.getTime(),
+        "direction": stopwatch.getDirection()
+    };
+    res.json(state);
+}
+
+/**
+* Gets the master timer time.
+*/
+exports.get_clock_time = function (req, res) {
+    res.json(stopwatch.getTime());
+}
+
+/**
+* Sets the master timer time.
+*/
+exports.set_clock_time = function (req, res) {
+    stopwatch.setValue(req.body.time);
+    res.status(200).send("Updated");
+}
+
+/**
+* Sets the master timer count direction.
+*/
+exports.set_clock_count = function (req, res) {
+    var sport = req.params.direction.toUpperCase();
+    switch (sport) {
+        case "UP":
+            stopwatch.countUp();
+            res.status(200).send("Updated");
+            break;
+        case "DOWN":
+            stopwatch.countDown();
+            res.status(200).send("Updated");
+            break;
+        default:
+            res.status(400).send('Bad Request');
+            break;
+    }
+}
+
+/**
+* Sets the master timer paused status.
+*/
+exports.set_clock_pause = function (req, res) {
+    stopwatch.pause();
+    res.status(200).send("Updated");
+}
+
+/**
+* Resets the master timer.
+*/
+exports.set_clock_reset = function (req, res) {
+    stopwatch.reset();
+    res.status(200).send("Updated");
 }
