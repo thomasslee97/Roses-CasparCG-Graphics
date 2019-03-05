@@ -245,12 +245,6 @@ app.controller('archeryCGController', ['$scope', '$http',
 
                 // Send changes and unlock changes.
                 $http.post('http://127.0.0.1:3000/sport/archery', $scope.archery).then($scope.lock = false);
-
-                // Request changes from API to confirm changes.
-                getArcheryData();
-            } else {
-                // Get data from API.
-                getArcheryData();
             }
         }, true);
 
@@ -374,12 +368,6 @@ app.controller('generalCGController', ['$scope', '$http',
 
                 // Send changes and unlock changes.
                 $http.post('http://127.0.0.1:3000/bug', $scope.bug).then($scope.lock = false);
-
-                // Request changes from API to confirm changes.
-                getBugData();
-            } else {
-                // Get data from API.
-                getBugData();
             }
         }, true);
 

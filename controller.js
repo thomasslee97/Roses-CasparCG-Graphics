@@ -204,7 +204,6 @@ exports.get_bug = function(req, res) {
  */
 exports.set_bug = function(req, res) {
     state.bug = req.body;
-    print
 
     res.status(200).send("Updated");
 }
