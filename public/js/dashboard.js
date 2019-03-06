@@ -891,90 +891,62 @@ app.controller('footballCGController', ['$scope', 'localStorageService', '$http'
     }
 ]);
 
-app.controller('rugbyCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-        var storedHome = localStorageService.get('home_rugby');
-        var storedAway = localStorageService.get('away_rugby');
+app.controller('rugbyCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
 
-        if(storedHome === null) {
-            $scope.homePlayers = [];
-        } else {
-            $scope.homePlayers = storedHome;
-        }
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-        if(storedAway === null) {
-            $scope.awayPlayers = [];
-        } else {
-            $scope.awayPlayers = storedAway;
-        }
+        // Get the default values from server on load.
+        getRugbyData();
 
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
-
-        $scope.addHomePlayer = function() {
-            $scope.homePlayers.push($scope.home);
-            $scope.home = {};
-        };
-
-        $scope.addAwayPlayer = function() {
-            $scope.awayPlayers.push($scope.away);
-            $scope.away = {};
-        };
-
-        $scope.delete = function(team, index) {
-            if(team === 'away') {
-                $scope.awayPlayers.splice(index, 1);
-            } else if (team === 'home') {
-                $scope.homePlayers.splice(index, 1);
-            }
-        };
-
-        socket.on("rugby", function (msg) {
-            $scope.rugby = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'rugby') {
-                    item.live = $scope.rugby.show
-                }
-            })
-        });
-
+        /**
+         * Updates the API when $scope.rugby changes.
+         */
         $scope.$watch('rugby', function() {
-            if ($scope.rugby) {
-                socket.emit("rugby", $scope.rugby);
-            } else {
-                getRugbyData();
+            // If scope exists and changes are allowed.
+            if ($scope.rugby && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/rugby', $scope.rugby).then($scope.lock = false);
             }
         }, true);
 
-        $scope.$on("$destroy", function() {
-            localStorageService.set('away_rugby', $scope.awayPlayers);
-            localStorageService.set('home_rugby', $scope.homePlayers);
-        });
-
+        /**
+         * Gets data from API for $scope.rugby
+         */
         function getRugbyData() {
-            socket.emit("rugby:get");
-            socket.emit("clock:get");
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/rugby')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            if (!$scope.lock && $scope.rugby != response.data) {
+                                $scope.rugby = response.data;
+                                rugbyUpdated();
+                            }
+                        }
+                    });
+            }
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getRugbyData, data_timeout);
+
+        /**
+         * Should be called whenever $scope.rugby is modified by the controller.
+         */
+        function rugbyUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Rugby') {
+                    item.live = $scope.rugby.show
+                }
+            })
         }
     }
 ]);

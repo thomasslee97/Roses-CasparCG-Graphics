@@ -136,27 +136,19 @@ app.controller('footballCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('rugbyCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('rugbyCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        socket.on("rugby", function (msg) {
-            $scope.rugby = msg;
-        });
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('rugby', function() {
-            if (!$scope.rugby) {
-                getRugbyData();
-            }
-        }, true);
-
-        function getRugbyData() {
-            socket.emit("rugby:get");
-            socket.emit("clock:get");
+        function getRugby() {
+            $http.get('http://127.0.0.1:3000/sport/rugby')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.rugby = response.data;
+                    }
+                })
         }
+
+        setInterval(getRugby, data_timeout);
     }
 ]);
 
@@ -620,7 +612,12 @@ app.controller('clockCtrl', ['$scope', '$http',
             $scope.stopwatch.time = time
             $scope.stopwatch.short = time.slice(0, time.indexOf("."));
             $scope.stopwatch.secs = this.time;
-            $scope.$digest()
+            try {
+                $scope.$digest()
+            } catch {
+                //ignore
+            }
+
         };
 
         Stopwatch.prototype.getMins = function () {
