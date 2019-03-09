@@ -18,7 +18,7 @@
   	<div class="ui grid center aligned">
 
         <div class="three wide column center aligned">
-          <h2 class="ui header">{{clock}}</h2>
+          <h2 class="ui header">{{clock.time}}</h2>
         </div>
 
         <div class="five wide column">
@@ -35,10 +35,13 @@
         </div>
 
         <div class="four wide column">
-          <input type="text" placeholder="Distance/Event" ng-model="swimming.distance">
+          <input type="text" placeholder="Distance/Event" ng-model="swimming.distanceTemp">
         </div>
-        
-        <div class="three wide column">
+
+        <div class="two wide column">
+            <div class="ui button" ng-click="submitDistance()">Submit</div>
+        </div>
+        <div class="two wide column">
             <div class="ui button" ng-click="resetLanes()" >Reset Lanes</div>
         </div>
 
@@ -54,7 +57,7 @@
             <div class="ui button" ng-click="resetOrder()" >Clear</div>
         </div>
     </div>
-    
+
     <div class="ui grid center aligned">
         <div class="wide column">
             Before a race starts, press clear, then enable splits with the toggle above.<br>At each split, type numbers 1-8 in the order of the swimmers. [Enter] also clears the splits.<br>The start list turns into a results page when an order is typed.

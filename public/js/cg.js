@@ -263,32 +263,19 @@ app.controller('gridCtrl', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('swimmingCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("swimming", function (msg) {
-            $scope.swimming = msg;
-        });
+app.controller('swimmingCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        $scope.clockMin = "0";
-        $scope.clockSec = "00";
-        $scope.clockDec = "0";
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clockMin = msg.slice(0,msg.indexOf(":")).replace(/^0/, '');
-            $scope.clockSec = msg.slice(msg.indexOf(":")+1,msg.indexOf("."));
-            $scope.clockDec = msg.slice(msg.indexOf(".")+1);
-        });
-
-        $scope.$watch('swimming', function() {
-            if (!$scope.swimming) {
-                getSwimmingData();
-            }
-        }, true);
-
-        function getSwimmingData() {
-            socket.emit("swimming:get");
-            socket.emit("clock:get");
+        function getSwimming() {
+            $http.get('http://127.0.0.1:3000/sport/swimming')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.swimming = response.data;
+                    }
+                })
         }
+
+        setInterval(getSwimming, data_timeout);
     }
 ]);
 
@@ -611,7 +598,8 @@ app.controller('clockCtrl', ['$scope', '$http',
             time = this.getTime()
             $scope.stopwatch.time = time
             $scope.stopwatch.short = time.slice(0, time.indexOf("."));
-            $scope.stopwatch.secs = this.time;
+            $scope.stopwatch.totalsecs = this.time;
+            $scope.stopwatch.deci = time.split('.')[1];
             try {
                 $scope.$digest()
             } catch {

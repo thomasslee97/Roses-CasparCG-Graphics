@@ -1,6 +1,7 @@
 module.exports = function(app) {
     var controller = require('./controller');
 
+    app.route('/stopwatch/stop').post(controller.set_clock_stop);
     app.route('/stopwatch/pause').post(controller.set_clock_pause);
     app.route('/stopwatch/reset').post(controller.set_clock_reset);
     app.route('/stopwatch/count/:direction').post(controller.set_clock_count);

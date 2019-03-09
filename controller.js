@@ -113,7 +113,12 @@ var state = {
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
         laneOrder: [],
-        prevOrderLength: 0
+        prevOrderLength: 0,
+        showclock: false,
+        showsplits: false,
+        showlist: false,
+        distance: "",
+        showdistance: true
     },
     archery: {
         team1: homeTeamName,
@@ -378,7 +383,8 @@ exports.set_sport = function (req, res) {
             res.json(state.darts)
             break;
         case "SWIMMING":
-            res.json(state.swimming)
+            state.swimming = req.body;
+            res.status(200).send("Updated");
             break;
         case "BASKETBALL":
             res.json(state.basketball)
@@ -461,6 +467,14 @@ exports.set_clock_count = function (req, res) {
 */
 exports.set_clock_pause = function (req, res) {
     stopwatch.pause();
+    res.status(200).send("Updated");
+}
+
+/**
+* Stops the master timer.
+*/
+exports.set_clock_stop = function (req, res) {
+    stopwatch.stop();
     res.status(200).send("Updated");
 }
 

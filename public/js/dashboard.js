@@ -181,6 +181,10 @@ app.controller('AppCtrl', ['$scope', '$location', 'socket', '$http',
             $http.post('http://127.0.0.1:3000/stopwatch/pause');
         };
 
+        $scope.stopClock = function() {
+            $http.post('http://127.0.0.1:3000/stopwatch/stop');
+        };
+
         $scope.resetClock = function() {
             $http.post('http://127.0.0.1:3000/stopwatch/reset');
         };
@@ -1014,33 +1018,16 @@ app.controller('dartsCGController', ['$scope', 'socket',
     }
 ]);
 
-app.controller('swimmingCGController', ['$scope', 'socket',
-    function($scope, socket) {
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.replace(/^0/, '');
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
+app.controller('swimmingCGController', ['$scope', '$http',
+    function($scope, $http) {
 
         $scope.resetLanes = function() {
+            $scope.swimming.showclock = false;
+            $scope.swimming.showlist = false;
+            setTimeout($scope.emptyLanes, data_timeout + 500);
+        }
+
+        $scope.emptyLanes = function() {
             for (var i = 0; i < 8; i++){
                 $scope.swimming.lanes[i] = {
                     id: i,
@@ -1048,6 +1035,7 @@ app.controller('swimmingCGController', ['$scope', 'socket',
                     team: ""
                 };
             }
+            $scope.resetOrder();
         };
 
         $scope.resetOrder = function() {
@@ -1056,17 +1044,34 @@ app.controller('swimmingCGController', ['$scope', 'socket',
             $scope.swimming.prevOrderLength = 0;
         };
 
-        socket.on("swimming", function (msg) {
-            $scope.swimming = msg;
-        });
+        $scope.submitDistance = function() {
+            $scope.swimming.showdistance = false;
+            console.log("running")
+            setTimeout($scope.showNewDistance, data_timeout + 500);
+        }
 
+        $scope.showNewDistance = function() {
+            console.log("also running")
+            $scope.swimming.distance = $scope.swimming.distanceTemp;
+            $scope.swimming.showdistance = true;
+        }
+
+        // Lock changes to the scope.
+        $scope.lock = false;
+
+        // Get the default values from server on load.
+        getSwimmingData();
+
+        /**
+         * Updates the API when $scope.swimming changes.
+         */
         $scope.$watch('swimming', function() {
             if ($scope.swimming) {
                 if($scope.swimming.prevOrderLength < $scope.swimming.order.length){
                     for (var i = $scope.swimming.prevOrderLength; i < Math.min($scope.swimming.order.length, 8); i++){
                         $scope.swimming.laneOrder[i] = {
                             lane: $scope.swimming.lanes[$scope.swimming.order[i] - 1],
-                            time: $scope.clock
+                            time: $scope.clock.time
                         };
                     }
 
@@ -1076,17 +1081,72 @@ app.controller('swimmingCGController', ['$scope', 'socket',
                 if($scope.swimming.order.length > 0){
 
                 }
+            }
+            // If scope exists and changes are allowed.
+            if ($scope.swimming && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
 
-                socket.emit("swimming", $scope.swimming);
-            } else {
-                getSwimmingData();
+                // If we are displaying the starting/results list, we don't want a clock and splits
+                // they'll just overlap each other.
+                if ($scope.swimming.showlist === true) {
+                    $scope.swimming.showsplits = false;
+                    $scope.swimming.showclock = false;
+                    $scope.resetClock();
+                    $scope.stopClock();
+                }
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/swimming', $scope.swimming).then($scope.lock = false);
             }
         }, true);
 
+        /**
+         * Gets data from API for $scope.swimming
+         */
         function getSwimmingData() {
-            socket.emit("swimming:get");
-            socket.emit("clock:get");
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/swimming')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            // Angular adds $$hashkey for repeated html elements (like the swim lanes here)
+                            // This causes the hashes to be different on every update. toJSON removes these for actual comparison.
+                            if (!$scope.lock && angular.toJson($scope.swimming) != angular.toJson(response.data)) {
+                                $scope.swimming = response.data;
+                            }
+                            swimmingUpdated();
+                        }
+                    });
+            }
         }
+
+        // Update data after every data timeout period.
+        setInterval(getSwimmingData, data_timeout);
+
+        /**
+         * Should be called whenever $scope.swimming is modified by the controller.
+         */
+        function swimmingUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Swimming') {
+                    if (
+                        $scope.swimming.showclock === true
+                        || $scope.swimming.showlist === true
+                        || $scope.swimming.showsplits === true
+                    ) {
+                        item.live = true
+                    } else {
+                        item.live = false
+                    }
+                }
+            })
+        }
+
+
     }
 ]);
 
