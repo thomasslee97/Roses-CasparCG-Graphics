@@ -277,27 +277,19 @@ app.controller('swimmingCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('basketballCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('basketballCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        socket.on("basketball", function (msg) {
-            $scope.basketball = msg;
-        });
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('basketball', function() {
-            if (!$scope.basketball) {
-                getBasketballData();
-            }
-        }, true);
-
-        function getBasketballData() {
-            socket.emit("basketball:get");
-            socket.emit("clock:get");
+        function getBasketball() {
+            $http.get('http://127.0.0.1:3000/sport/basketball')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.basketball = response.data;
+                    }
+                })
         }
+
+        setInterval(getBasketball, data_timeout);
     }
 ]);
 

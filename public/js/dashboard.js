@@ -1195,92 +1195,63 @@ app.controller('swimmingCGController', ['$scope', '$http',
     }
 ]);
 
-app.controller('basketballCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
-        var storedHome = localStorageService.get('home_basketball');
-        var storedAway = localStorageService.get('away_basketball');
+app.controller('basketballCGController', ['$scope', '$http',
+    function($scope, $http){
 
-        if(storedHome === null) {
-            $scope.homePlayers = [];
-        } else {
-            $scope.homePlayers = storedHome;
-        }
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-        if(storedAway === null) {
-            $scope.awayPlayers = [];
-        } else {
-            $scope.awayPlayers = storedAway;
-        }
+        getBasketballData();
 
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
-
-        $scope.addHomePlayer = function() {
-            $scope.homePlayers.push($scope.home);
-            $scope.home = {};
-        };
-
-        $scope.addAwayPlayer = function() {
-            $scope.awayPlayers.push($scope.away);
-            $scope.away = {};
-        };
-
-        $scope.delete = function(team, index) {
-            console.log('delete');
-            if(team === 'away') {
-                $scope.awayPlayers.splice(index, 1);
-            } else if (team === 'home') {
-                $scope.homePlayers.splice(index, 1);
-            }
-        };
-
-        socket.on("basketball", function (msg) {
-            $scope.basketball = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'basketball') {
-                    item.live = $scope.basketball.show
-                }
-            })
-        });
-
+        /**
+         * Updates the API when $scope.basketball changes.
+         */
         $scope.$watch('basketball', function() {
-            if ($scope.basketball) {
-                socket.emit("basketball", $scope.basketball);
-            } else {
-                getBasketballData();
+            // If basketball exists and changes are allowed.
+            if ($scope.basketball && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/basketball', $scope.basketball).then($scope.lock = false);
             }
         }, true);
 
-        $scope.$on("$destroy", function() {
-            localStorageService.set('away_basketball', $scope.awayPlayers);
-            localStorageService.set('home_basketball', $scope.homePlayers);
-        });
-
+        /**
+         * Gets data from API for $scope.basketball.
+         */
         function getBasketballData() {
-            socket.emit("basketball:get");
-            socket.emit("clock:get");
+            // Only get data if changes are not locked.
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/sport/basketball')
+                .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
+                    if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
+                        if (!$scope.lock && $scope.basketball != response.data) {
+                            $scope.basketball = response.data;
+
+                            basketballUpdated();
+                        }
+                    }
+                });
+            }
         }
+
+        /**
+         * Should be called whenever $scope.basketball is modified by the controller.
+         */
+        function basketballUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Basketball') {
+                    item.live = $scope.basketball.show
+                }
+            })
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getBasketballData, data_timeout);
     }
 ]);
 

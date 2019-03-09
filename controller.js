@@ -92,7 +92,8 @@ var state = {
         homeTeamShort: homeTeamShortName,
         awayTeamShort: awayTeamShortName,
         homeScore: 0,
-        awayScore: 0
+        awayScore: 0,
+        show: false
     },
     darts: {
         match: "Darts",
@@ -388,7 +389,8 @@ exports.set_sport = function (req, res) {
             res.status(200).send("Updated");
             break;
         case "BASKETBALL":
-            res.json(state.basketball)
+            state.basketball = req.body;
+            res.status(200).send("Updated");
             break;
         case "ARCHERY":
             state.archery = req.body;
