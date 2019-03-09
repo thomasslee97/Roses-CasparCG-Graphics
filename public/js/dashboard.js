@@ -955,28 +955,63 @@ app.controller('rugbyCGController', ['$scope', 'localStorageService', '$http',
     }
 ]);
 
-app.controller('dartsCGController', ['$scope', 'socket',
-    function($scope, socket) {
-        socket.on("darts", function (msg) {
-            $scope.darts = msg;
+app.controller('dartsCGController', ['$scope', '$http',
+    function($scope, $http) {
+
+        // Lock changes to the scope.
+        $scope.lock = false;
+
+        // Get the default values from server on load.
+        getDartsData();
+
+        /**
+         * Updates the API when $scope.darts changes.
+         */
+        $scope.$watch('darts', function() {
+            // If scope exists and changes are allowed.
+            if ($scope.darts && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/darts', $scope.darts).then($scope.lock = false);
+            }
+        }, true);
+
+        /**
+         * Gets data from API for $scope.darts
+         */
+        function getDartsData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/darts')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            if (!$scope.lock && $scope.darts != response.data) {
+                                $scope.darts = response.data;
+                                dartsUpdated();
+                            }
+                        }
+                    });
+            }
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getDartsData, data_timeout);
+
+        /**
+         * Should be called whenever $scope.darts is modified by the controller.
+         */
+        function dartsUpdated() {
+            // Find the item in the menu.
             $scope.menu.forEach(item => {
                 if (item.name === 'Darts') {
                     item.live = $scope.darts.show
                 }
             })
-        });
-
-        $scope.$watch('darts', function() {
-            if ($scope.darts) {
-                socket.emit("darts", $scope.darts);
-            } else {
-                getDartData();
-            }
-        }, true);
-
-        function getDartData() {
-            socket.emit("darts:get");
-        }
+        };
 
         $scope.reset1 = function() {
             $scope.darts.score1 = 501;
@@ -984,6 +1019,16 @@ app.controller('dartsCGController', ['$scope', 'socket',
 
         $scope.reset2 = function() {
             $scope.darts.score2 = 501;
+        };
+
+        $scope.set1 = function(val) {
+            $scope.darts.score1 = val;
+            $scope.last1 = "";
+        };
+
+        $scope.set2 = function(val) {
+            $scope.darts.score2 = val;
+            $scope.last2 = "";
         };
 
         $scope.take1 = function(val) {

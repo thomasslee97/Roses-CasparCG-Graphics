@@ -152,21 +152,19 @@ app.controller('rugbyCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('dartsCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("darts", function (msg) {
-            $scope.darts = msg;
-        });
+app.controller('dartsCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        $scope.$watch('darts', function() {
-            if (!$scope.darts) {
-                getDartData();
-            }
-        }, true);
-
-        function getDartData() {
-            socket.emit("darts:get");
+        function getDarts() {
+            $http.get('http://127.0.0.1:3000/sport/darts')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.darts = response.data;
+                    }
+                })
         }
+
+        setInterval(getDarts, data_timeout);
     }
 ]);
 

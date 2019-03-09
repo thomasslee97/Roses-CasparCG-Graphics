@@ -380,7 +380,8 @@ exports.set_sport = function (req, res) {
             res.status(200).send("Updated");
             break;
         case "DARTS":
-            res.json(state.darts)
+            state.darts = req.body;
+            res.status(200).send("Updated");
             break;
         case "SWIMMING":
             state.swimming = req.body;
