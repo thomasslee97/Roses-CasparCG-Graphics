@@ -1692,7 +1692,7 @@ app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
         }
 
         /**
-         * Should be called whenever $scope.archery is modified by the controller.
+         * Should be called whenever $scope.netball is modified by the controller.
          */
         function netballUpdated() {
             // Find the item in the menu.
@@ -1853,60 +1853,61 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', '$http
     }
 ]);
 
-app.controller('volleyballCGController', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
+app.controller('volleyballCGController', ['$scope', '$http',
+    function ($scope, $http) {
 
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
+        getVolleyballData();
+        /**
+         * Updates the API when $scope.volleyball changes.
+         */
+        $scope.$watch('volleyball', function () {
+            // If volleyball exists and changes are allowed.
+            if ($scope.volleyball && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
 
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/volleyball', $scope.volleyball).then($scope.lock = false);
+            }
+        }, true);
 
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
+        /**
+         * Gets data from API for $scope.volleyball.
+         */
+        function getVolleyballData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock) {
+                $http.get('http://127.0.0.1:3000/sport/volleyball')
+                    .then(function (response) {
+                        // Check that request was successful and we didn't recieve an empty body.
+                        if (response.status == 200 && response.data) {
+                            // Check that changes are still not locked, and that the data returned is new.
+                            if (!$scope.lock && $scope.volleyball != response.data) {
+                                $scope.volleyball = response.data;
 
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
+                                volleyballUpdated();
+                            }
+                        }
+                    });
+            }
+        }
 
-        $scope.updateScore = function() {
-            console.log("Score");
-        };
-
-        $scope.roundChanged = function() {
-            console.log("Round");
-        };
-
-        socket.on("volleyball", function (msg) {
-            $scope.volleyball = msg;
+        /**
+         * Should be called whenever $scope.volleyball is modified by the controller.
+         */
+        function volleyballUpdated() {
+            // Find the item in the menu.
             $scope.menu.forEach(item => {
                 if (item.name === 'Volleyball') {
                     item.live = $scope.volleyball.showScore
                 }
             })
-        });
-
-        $scope.$watch('volleyball', function() {
-            if ($scope.volleyball) {
-                socket.emit("volleyball", $scope.volleyball);
-            } else {
-                getVolleyballData();
-            }
-        }, true);
-
-        function getVolleyballData() {
-            socket.emit("volleyball:get");
-            socket.emit("clock:get");
         }
+
+        // Update data after every data timeout period.
+        setInterval(getVolleyballData, data_timeout);
     }
 ]);

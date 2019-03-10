@@ -385,30 +385,21 @@ app.controller('waterpoloCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('volleyballCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('volleyballCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        socket.on("volleyball", function (msg) {
-            $scope.volleyball = msg;
-        });
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('volleyball', function() {
-            if (!$scope.volleyball) {
-                getVolleyballData();
-            }
-        }, true);
-
-        function getVolleyballData() {
-            socket.emit("volleyball:get");
-            socket.emit("clock:get");
+        function getVolleyball() {
+            $http.get('http://127.0.0.1:3000/sport/volleyball')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.volleyball = response.data;
+                    }
+                });
         }
+
+        setInterval(getVolleyball, data_timeout);
     }
 ]);
-
 
 /* Very WIP, please refactor this! */
 app.controller('clockCtrl', ['$scope', '$http',

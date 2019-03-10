@@ -182,6 +182,12 @@ var state = {
         awayTeam: awayTeamName,
         homeScore: 0,
         awayScore: 0
+    },
+    volleyball: {
+        homeTeam: homeTeamName,
+        awayTeam: awayTeamName,
+        homeScore: 0,
+        awayScore: 0
     }
 }
 
@@ -356,6 +362,9 @@ exports.get_sport = function(req, res) {
         case "WATERPOLO":
             res.json(state.waterpolo)
             break;
+        case "VOLLEYBALL":
+            res.json(state.volleyball)
+            break;
         default:
             res.status(404).send('Not found');
             break;
@@ -409,6 +418,10 @@ exports.set_sport = function (req, res) {
             break;
         case "WATERPOLO":
             state.waterpolo = req.body;
+            res.status(200).send("Updated");
+            break;
+        case "VOLLEYBALL":
+            state.volleyball = req.body;
             res.status(200).send("Updated");
             break;
         default:
