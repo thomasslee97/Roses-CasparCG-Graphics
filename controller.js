@@ -404,7 +404,8 @@ exports.set_sport = function (req, res) {
             res.json(state.tennis)
             break;
         case "NETBALL":
-            res.json(state.netball)
+            state.netball = req.body;
+            res.status(200).send("Updated");
             break;
         case "WATERPOLO":
             res.json(state.waterpolo)

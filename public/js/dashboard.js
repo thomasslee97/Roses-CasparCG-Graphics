@@ -273,6 +273,7 @@ app.controller('archeryCGController', ['$scope', '$http',
         // Lock changes to the scope.
         $scope.lock = false;
 
+        getArcheryData();
         /**
          * Updates the API when $scope.archery changes.
          */
@@ -1648,8 +1649,63 @@ app.controller('tennisCGController', ['$scope', 'socket',
     }
 ]);
 
-app.controller('netballCGController', ['$scope', 'localStorageService', 'socket',
-    function($scope, localStorageService, socket){
+app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
+
+        // Lock changes to the scope.
+        $scope.lock = false;
+
+        getNetballData();
+        /**
+         * Updates the API when $scope.netball changes.
+         */
+        $scope.$watch('netball', function() {
+            // If scope exists and changes are allowed.
+            if ($scope.netball && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
+
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/netball', $scope.netball).then($scope.lock = false);
+            }
+        }, true);
+
+        /**
+         * Gets data from API for $scope.netball.
+         */
+        function getNetballData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/sport/netball')
+                .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
+                    if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
+                        if (!$scope.lock && $scope.netball != response.data) {
+                            $scope.netball = response.data;
+
+                            netballUpdated();
+                        }
+                    }
+                });
+            }
+        }
+
+        /**
+         * Should be called whenever $scope.archery is modified by the controller.
+         */
+        function netballUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Netball') {
+                    item.live = $scope.netball.show
+                }
+            })
+        }
+
+        // Update data after every data timeout period.
+        setInterval(getNetballData, data_timeout);
+
         var storedHome = localStorageService.get('home_netball');
         var storedAway = localStorageService.get('aways_netball');
 
@@ -1664,30 +1720,6 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
         } else {
             $scope.awayPlayers = storedAway;
         }
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.pauseClock = function() {
-            socket.emit("clock:pause");
-        };
-
-        $scope.resetClock = function() {
-            socket.emit("clock:reset");
-        };
-
-        $scope.setClock = function(val) {
-            socket.emit("clock:set", val);
-        };
-
-        $scope.downClock = function() {
-            socket.emit("clock:down");
-        };
-
-        $scope.upClock = function() {
-            socket.emit("clock:up");
-        };
 
         $scope.addHomePlayer = function() {
             $scope.homePlayers.push($scope.home);
@@ -1708,36 +1740,17 @@ app.controller('netballCGController', ['$scope', 'localStorageService', 'socket'
             }
         };
 
-        socket.on("netball", function (msg) {
-            $scope.netball = msg;
-            $scope.menu.forEach(item => {
-                if (item.name === 'Netball') {
-                    item.live = $scope.netball.show
-                }
-            })
-        });
 
         $scope.quarterChanged = function() {
             console.log("Quarter");
         };
 
-        $scope.$watch('netball', function() {
-            if ($scope.netball) {
-                socket.emit("netball", $scope.netball);
-            } else {
-                getNetballData();
-            }
-        }, true);
 
         $scope.$on("$destroy", function() {
             localStorageService.set('away_netball', $scope.awayPlayers);
             localStorageService.set('home_netball', $scope.homePlayers);
         });
 
-        function getNetballData() {
-            socket.emit("netball:get");
-            socket.emit("clock:get");
-        }
     }
 ]);
 

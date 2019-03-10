@@ -336,44 +336,36 @@ app.controller('tennisCtrl', ['$scope', 'socket',
     }
 ]);
 
-app.controller('netballCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('netballCtrl', ['$scope', '$http',
+    function($scope, $http) {
 
-        socket.on("netball", function (msg) {
-            $scope.netball = msg;
+        function getNetball() {
+            $http.get('http://127.0.0.1:3000/sport/netball')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.netball = response.data;
+                    }
+                });
 
             if ($scope.netball.firstpasshome == true) {
-            	$scope.netball.homeoffset = 1;
+                $scope.netball.homeoffset = 1;
             }
 
             if ($scope.netball.firstpasshome == true & $scope.netball.firstpassaway == true) {
-            	$scope.netball.homeoffset = 0;
+                $scope.netball.homeoffset = 0;
             }
 
             $scope.TotalScore = $scope.netball.awayScore + $scope.netball.homeScore + $scope.netball.homeoffset;
-			if (($scope.TotalScore % 2) == 1) {
-						$scope.showcurrenthome = true;
-						$scope.showcurrentaway = false;
-				} else {
-						$scope.showcurrenthome = false;
-						$scope.showcurrentaway = true;
-					}
-			});
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('netball', function() {
-            if (!$scope.netball) {
-                getNetballData();
+            if (($scope.TotalScore % 2) == 1) {
+                $scope.showcurrenthome = true;
+                $scope.showcurrentaway = false;
+            } else {
+                $scope.showcurrenthome = false;
+                $scope.showcurrentaway = true;
             }
-        }, true);
-
-        function getNetballData() {
-            socket.emit("netball:get");
-            socket.emit("clock:get");
         }
+
+        setInterval(getNetball, data_timeout);
     }
 ]);
 
