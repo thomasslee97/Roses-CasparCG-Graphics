@@ -1754,94 +1754,103 @@ app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
     }
 ]);
 
-app.controller('waterpoloCGController', ['$scope', 'localStorageService', 'socket',
-  function($scope, localStorageService, socket){
-    var storedHome = localStorageService.get('home_waterpolo');
-    var storedAway = localStorageService.get('away_waterpolo');
-    var clockIcon = 'pause icon'
+app.controller('waterpoloCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
 
-    if(storedHome === null) {
-        $scope.homePlayers = [];
-    } else {
-        $scope.homePlayers = storedHome;
-    }
+        // Lock changes to the scope.
+        $scope.lock = false;
 
-    if(storedAway === null) {
-        $scope.awayPlayers = [];
-    } else {
-        $scope.awayPlayers = storedAway;
-    }
+        getWaterpoloData();
+        /**
+         * Updates the API when $scope.waterpolo changes.
+         */
+        $scope.$watch('waterpolo', function() {
+            // If waterpolo exists and changes are allowed.
+            if ($scope.waterpolo && !$scope.lock) {
+                // Lock changed.
+                $scope.lock = true;
 
-    socket.on("clock:tick", function (msg) {
-        $scope.clock = msg.slice(0, msg.indexOf("."));
-    });
-
-    $scope.pauseClock = function() {
-        socket.emit("clock:pause");
-    };
-
-    $scope.resetClock = function() {
-        socket.emit("clock:reset");
-    };
-
-    $scope.setClock = function(val) {
-        socket.emit("clock:set", val);
-    };
-
-    $scope.downClock = function() {
-        socket.emit("clock:down");
-    };
-
-    $scope.upClock = function() {
-        socket.emit("clock:up");
-    };
-
-    $scope.addHomePlayer = function() {
-        $scope.homePlayers.push($scope.home);
-        $scope.home = {};
-    };
-
-    $scope.addAwayPlayer = function() {
-        $scope.awayPlayers.push($scope.away);
-        $scope.away = {};
-    };
-
-    $scope.delete = function(team, index) {
-        console.log('delete');
-        if(team === 'away') {
-            $scope.awayPlayers.splice(index, 1);
-        } else if (team === 'home') {
-            $scope.homePlayers.splice(index, 1);
-        }
-    };
-
-    socket.on("waterpolo", function (msg) {
-        $scope.waterpolo = msg;
-        $scope.menu.forEach(item => {
-            if (item.name === 'Waterpolo') {
-                item.live = $scope.waterpolo.show
+                // Send changes and unlock changes.
+                $http.post('http://127.0.0.1:3000/sport/waterpolo', $scope.waterpolo).then($scope.lock = false);
             }
-        })
-    });
+        }, true);
 
-    $scope.$watch('waterpolo', function() {
-        if ($scope.waterpolo) {
-            socket.emit("waterpolo", $scope.waterpolo);
-        } else {
-            getWaterpoloData();
+        /**
+         * Gets data from API for $scope.waterpolo.
+         */
+        function getWaterpoloData() {
+            // Only get data if changes are not locked.
+            if (!$scope.lock){
+                $http.get('http://127.0.0.1:3000/sport/waterpolo')
+                .then(function(response){
+                    // Check that request was successful and we didn't recieve an empty body.
+                    if (response.status == 200 && response.data) {
+                        // Check that changes are still not locked, and that the data returned is new.
+                        if (!$scope.lock && $scope.waterpolo != response.data) {
+                            $scope.waterpolo = response.data;
+
+                            waterpoloUpdated();
+                        }
+                    }
+                });
+            }
         }
-    }, true);
 
-    $scope.$on("$destroy", function() {
-        localStorageService.set('away_waterpolo', $scope.awayPlayers);
-        localStorageService.set('home_waterpolo', $scope.homePlayers);
-    });
+        /**
+         * Should be called whenever $scope.waterpolo is modified by the controller.
+         */
+        function waterpoloUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Waterpolo') {
+                    item.live = $scope.waterpolo.show
+                }
+            })
+        }
 
-    function getWaterpoloData() {
-        socket.emit("waterpolo:get");
-        socket.emit("clock:get");
+        // Update data after every data timeout period.
+        setInterval(getWaterpoloData, data_timeout);
+
+
+        var storedHome = localStorageService.get('home_waterpolo');
+        var storedAway = localStorageService.get('away_waterpolo');
+
+        if(storedHome === null) {
+            $scope.homePlayers = [];
+        } else {
+            $scope.homePlayers = storedHome;
+        }
+
+        if(storedAway === null) {
+            $scope.awayPlayers = [];
+        } else {
+            $scope.awayPlayers = storedAway;
+        }
+
+        $scope.addHomePlayer = function() {
+            $scope.homePlayers.push($scope.home);
+            $scope.home = {};
+        };
+
+        $scope.addAwayPlayer = function() {
+            $scope.awayPlayers.push($scope.away);
+            $scope.away = {};
+        };
+
+        $scope.delete = function(team, index) {
+            console.log('delete');
+            if(team === 'away') {
+                $scope.awayPlayers.splice(index, 1);
+            } else if (team === 'home') {
+                $scope.homePlayers.splice(index, 1);
+            }
+        };
+
+        $scope.$on("$destroy", function() {
+            localStorageService.set('away_waterpolo', $scope.awayPlayers);
+            localStorageService.set('home_waterpolo', $scope.homePlayers);
+        });
     }
-  }
 ]);
 
 app.controller('volleyballCGController', ['$scope', 'socket',

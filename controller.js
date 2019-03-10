@@ -408,7 +408,8 @@ exports.set_sport = function (req, res) {
             res.status(200).send("Updated");
             break;
         case "WATERPOLO":
-            res.json(state.waterpolo)
+            state.waterpolo = req.body;
+            res.status(200).send("Updated");
             break;
         default:
             res.status(404).send('Not found');

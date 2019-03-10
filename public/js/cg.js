@@ -369,27 +369,19 @@ app.controller('netballCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('waterpoloCtrl', ['$scope', 'socket',
-    function($scope, socket){
+app.controller('waterpoloCtrl', ['$scope', '$http',
+    function ($scope, $http) {
 
-        socket.on("waterpolo", function (msg) {
-            $scope.waterpolo = msg;
-			});
-
-        socket.on("clock:tick", function (msg) {
-            $scope.clock = msg.slice(0, msg.indexOf("."));
-        });
-
-        $scope.$watch('waterpolo', function() {
-            if (!$scope.waterpolo) {
-                getWaterpoloData();
-            }
-        }, true);
-
-        function getWaterpoloData() {
-            socket.emit("waterpolo:get");
-            socket.emit("clock:get");
+        function getWaterpolo() {
+            $http.get('http://127.0.0.1:3000/sport/waterpolo')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.waterpolo = response.data;
+                    }
+                });
         }
+
+        setInterval(getWaterpolo, data_timeout);
     }
 ]);
 

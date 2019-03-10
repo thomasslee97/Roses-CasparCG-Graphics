@@ -14,7 +14,7 @@
 
     <div class="ui grid">
         <div class="five wide column center aligned">
-          <h2 class="ui header">{{clock}}</h2>
+          <h2 class="ui header">{{clock.time}}</h2>
           <dropdown title="Current Quarter" ng-model="waterpolo.currentQuarter" on-change="quarterChanged()">
             <dropdown-group>1st</dropdown-group>
             <dropdown-group>2nd</dropdown-group>
@@ -43,7 +43,7 @@
             <div class="ui icon green button" ng-click="downClock()">
                 <i class="down arrow icon"></i>
             </div>
-            
+
             <div class="ui button" ng-click="resetClock()">Reset</div>
           </div>
         </div>
