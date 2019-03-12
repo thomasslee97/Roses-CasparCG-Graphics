@@ -27,7 +27,9 @@ module.exports = function(app) {
     app.route('/roses/total');
     app.route('/roses/lanc');
     app.route('/roses/york');
-;
+
+    app.route('/sport/tennis/undo').post(controller.undo_tennis);
+    app.route('/sport/tennis/reset').post(controller.reset_tennis);
     app.route('/sport/:sport').get(controller.get_sport).post(controller.set_sport);
     /**
      * boxing

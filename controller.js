@@ -11,8 +11,9 @@ const awayTeamImage = "images/YorkSport250.png";
 // The logo for the event.
 const eventLogo = "/images/roses2018logo.png";
 
-// The current state.
-var state = {
+// The default server state.
+// Holds the initial settings for resetting the server state without restarting server.
+var state_default = {
     bug: {
         livetext: "Live",
         locationtext: "",
@@ -141,12 +142,15 @@ var state = {
             showSets: false,
             showStats: false
         },
+        //Score is an array because it contains the history of the match
+        //this allows you to undo by doing score.pop()
         score: [{
             sets1: [0], sets2: [0],
             set1: 0, set2: 0,
             game1: 0, game2: 0,
             point1: 0, point2: 0,
             pointName1: 0, pointName2: 0,
+            pointsPlayed: 0,
             pointsServed1: 0, pointsServed2: 0,
             pointsWon1: 0, pointsWon2:0,
             firstServeWon1: 0, firstServeWon2: 0,
@@ -190,6 +194,11 @@ var state = {
         awayScore: 0
     }
 }
+// Make a copy for the operating current state.
+// We have to JSON parse this because otherwise it's a referenced copy
+// Hence the default array would be updated also.
+var state = JSON.parse(JSON.stringify(state_default));
+
 
 for (var i = 0; i < 8; i++){
 	state.swimming.lanes[i] = {
@@ -354,7 +363,11 @@ exports.get_sport = function(req, res) {
             res.json(state.badminton)
             break;
         case "TENNIS":
-            res.json(state.tennis)
+            var tennisState = {};
+            tennisState.options = state.tennis.options;
+            // Always send the latest score history (current score)
+            tennisState.score = state.tennis.score[state.tennis.score.length -1];
+            res.json(tennisState)
             break;
         case "NETBALL":
             res.json(state.netball)
@@ -410,7 +423,13 @@ exports.set_sport = function (req, res) {
             res.status(200).send("Updated");
             break;
         case "TENNIS":
-            res.json(state.tennis)
+            state.tennis.options = req.body.options;
+            // Add the score to the history array
+            // Prevents double submission of score history.
+            if (!_.isEqual(req.body.score, state.tennis.score.slice(-1)[0])) {
+                state.tennis.score.push(req.body.score);
+            }
+            res.status(200).send("Updated");
             break;
         case "NETBALL":
             state.netball = req.body;
@@ -428,6 +447,23 @@ exports.set_sport = function (req, res) {
             res.status(404).send('Not found');
             break;
     }
+}
+
+// Remove the last score update from tennis history array.
+exports.undo_tennis = function (req, res) {
+    if (state.tennis.score.length != 1) {
+        state.tennis.score.splice(-1,1);
+    }
+    res.status(200).send("Updated");
+}
+
+// Reset tennis game history back to factory.
+exports.reset_tennis = function(req, res) {
+    // Make a copy for the operating current state.
+    // We have to JSON parse this because otherwise it's a referenced copy
+    // Hence the default array would be updated also.
+    state.tennis = JSON.parse(JSON.stringify(state_default.tennis));
+    res.status(200).send("Updated");
 }
 
 //Master Timer Functions

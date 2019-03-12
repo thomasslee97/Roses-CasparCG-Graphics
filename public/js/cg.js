@@ -308,31 +308,18 @@ app.controller('badmintonCtrl', ['$scope', '$http',
     }
 ]);
 
-app.controller('tennisCtrl', ['$scope', 'socket',
-    function($scope, socket){
-        socket.on("tennisOptions", function (msg) {
-            $scope.tennisOptions = msg;
-        });
-
-        socket.on("tennisScore", function (msg) {
-            $scope.tennisScore = msg;
-        });
-
-        $scope.$watch('tennisOptions', function() {
-            if (!$scope.tennisScore) {
-                getTennisData();
-            }
-        }, true);
-
-        $scope.$watch('tennisScore', function() {
-            if (!$scope.tennisScore) {
-                getTennisData();
-            }
-        }, true);
-
-        function getTennisData() {
-            socket.emit("tennis:get");
+app.controller('tennisCtrl', ['$scope', '$http',
+    function ($scope, $http) {
+        function getTennis() {
+            $http.get('http://127.0.0.1:3000/sport/tennis')
+                .then(function (response) {
+                    if (response.status == 200 && response.data) {
+                        $scope.tennis = response.data;
+                    }
+                })
         }
+
+        setInterval(getTennis, data_timeout);
     }
 ]);
 
