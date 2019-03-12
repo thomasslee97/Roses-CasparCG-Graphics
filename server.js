@@ -42,9 +42,6 @@ gulp.start('default');
 
 var app = express();
 
-var server = http.createServer(app);
-var io = require('socket.io').listen(server);
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 

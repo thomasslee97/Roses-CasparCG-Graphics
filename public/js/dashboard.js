@@ -1,9 +1,9 @@
-var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic', 'socket-io']);
+var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic']);
 
 var data_timeout = 1000;
 
-app.controller('AppCtrl', ['$scope', '$location', 'socket', '$http',
-    function($scope, $location, socket, $http){
+app.controller('AppCtrl', ['$scope', '$location', '$http',
+    function($scope, $location, $http){
 
         $scope.menu = [];
 
@@ -571,8 +571,8 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$ht
 /**
  * Grid.
  */
-app.controller('gridCGController', ['$scope', 'localStorageService', 'socket', '$http',
-    function($scope, localStorageService, socket, $http){
+app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
         // Initialise grid.
         $scope.grid = {};
         $scope.grid.rows = [];
@@ -699,8 +699,8 @@ app.controller('boxingCGController', ['$scope', '$http',
 /**
  * Roses/ overall score.
  */
-app.controller('rosesCGController', ['$scope', 'socket', '$http',
-    function($scope, socket, $http) {
+app.controller('rosesCGController', ['$scope', '$http',
+    function($scope, $http) {
         $scope.roses = {}
 
         /**
@@ -792,8 +792,8 @@ app.controller('rosesCGController', ['$scope', 'socket', '$http',
     }
 ]);
 
-app.controller('footballCGController', ['$scope', 'localStorageService', '$http', 'socket',
-    function($scope, localStorageService, $http, socket){
+app.controller('footballCGController', ['$scope', 'localStorageService', '$http',
+    function($scope, localStorageService, $http){
 
         // Lock changes to the scope.
         $scope.lock = false;

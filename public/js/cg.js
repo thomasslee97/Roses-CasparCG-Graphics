@@ -1,8 +1,8 @@
-var app = angular.module('cgApp', ['ngAnimate', 'socket-io']);
+var app = angular.module('cgApp', ['ngAnimate']);
 var data_timeout = 1000;
 
-app.controller('lowerThirdsCtrl', ['$scope', 'socket', '$http',
-    function($scope, socket, $http){
+app.controller('lowerThirdsCtrl', ['$scope', '$http',
+    function($scope, $http){
         function getLowerThirds() {
             $http.get('http://127.0.0.1:3000/lower-third')
             .then(function(response){
@@ -171,8 +171,8 @@ app.controller('dartsCtrl', ['$scope', '$http',
 /**
  * Grid
  */
-app.controller('gridCtrl', ['$scope', 'socket', '$http',
-    function($scope, socket, $http){
+app.controller('gridCtrl', ['$scope', '$http',
+    function($scope, $http){
         $scope.grid = {}
 
         // Lock changes to the scope so that the grid is not update multiple times, causing ng-repeat issues.
