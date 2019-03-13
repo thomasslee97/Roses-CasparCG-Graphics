@@ -2,6 +2,8 @@ var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angula
 
 var data_timeout = 1000;
 
+var api_root = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
+
 app.controller('AppCtrl', ['$scope', '$location', '$http',
     function($scope, $location, $http){
 
@@ -142,7 +144,7 @@ app.controller('AppCtrl', ['$scope', '$location', '$http',
         getBrandingData();
 
         function getBrandingData() {
-            $http.get('http://127.0.0.1:3000/images/logo')
+            $http.get(api_root + '/images/logo')
             .then(function(response){
                 if (response.status == 200) {
                     $scope.logoUrl = response.data
@@ -155,7 +157,7 @@ app.controller('AppCtrl', ['$scope', '$location', '$http',
             if ($scope.clock == undefined) {
                 $scope.clock = []
             }
-            $http.get('http://127.0.0.1:3000/stopwatch/time')
+            $http.get(api_root + '/stopwatch/time')
             .then(function(response){
                 if (response.status == 200) {
                     $scope.clock.time = response.data
@@ -166,27 +168,27 @@ app.controller('AppCtrl', ['$scope', '$location', '$http',
         setInterval(getClockTime, data_timeout);
 
         $scope.setClock = function(val) {
-            $http.post('http://127.0.0.1:3000/stopwatch/set/', JSON.stringify({time: val}));
+            $http.post(api_root + '/stopwatch/set/', JSON.stringify({time: val}));
         };
 
         $scope.upClock = function() {
-            $http.post('http://127.0.0.1:3000/stopwatch/count/up');
+            $http.post(api_root + '/stopwatch/count/up');
         };
 
         $scope.downClock = function() {
-            $http.post('http://127.0.0.1:3000/stopwatch/count/down');
+            $http.post(api_root + '/stopwatch/count/down');
         };
 
         $scope.pauseClock = function() {
-            $http.post('http://127.0.0.1:3000/stopwatch/pause');
+            $http.post(api_root + '/stopwatch/pause');
         };
 
         $scope.stopClock = function() {
-            $http.post('http://127.0.0.1:3000/stopwatch/stop');
+            $http.post(api_root + '/stopwatch/stop');
         };
 
         $scope.resetClock = function() {
-            $http.post('http://127.0.0.1:3000/stopwatch/reset');
+            $http.post(api_root + '/stopwatch/reset');
         };
     }
 ]);
@@ -284,7 +286,7 @@ app.controller('archeryCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/archery', $scope.archery).then($scope.lock = false);
+                $http.post(api_root + '/sport/archery', $scope.archery).then($scope.lock = false);
             }
         }, true);
 
@@ -294,7 +296,7 @@ app.controller('archeryCGController', ['$scope', '$http',
         function getArcheryData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/archery')
+                $http.get(api_root + '/sport/archery')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -407,7 +409,7 @@ app.controller('generalCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/bug', $scope.bug).then($scope.lock = false);
+                $http.post(api_root + '/bug', $scope.bug).then($scope.lock = false);
             }
         }, true);
 
@@ -417,7 +419,7 @@ app.controller('generalCGController', ['$scope', '$http',
         function getBugData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/bug')
+                $http.get(api_root + '/bug')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -505,42 +507,42 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$ht
          * Shows a lower third.
          */
         $scope.show = function(side, item) {
-            $http.post('http://127.0.0.1:3000/lower-third/show/' + side, item);
+            $http.post(api_root + '/lower-third/show/' + side, item);
         };
 
         /**
          * Hides all lower thirds.
          */
         $scope.hideall = function() {
-            $http.post('http://127.0.0.1:3000/lower-third/hide/all')
+            $http.post(api_root + '/lower-third/hide/all')
         };
 
         /**
          * Hides the full lower third.
          */
         $scope.hidefull = function() {
-            $http.post('http://127.0.0.1:3000/lower-third/hide/full')
+            $http.post(api_root + '/lower-third/hide/full')
         };
 
         /**
          * Hides the left lower third.
          */
 		$scope.hideleft = function() {
-            $http.post('http://127.0.0.1:3000/lower-third/hide/left')
+            $http.post(api_root + '/lower-third/hide/left')
         };
 
         /**
          * Hide the right lower third.
          */
 		$scope.hideright = function() {
-            $http.post('http://127.0.0.1:3000/lower-third/hide/right')
+            $http.post(api_root + '/lower-third/hide/right')
         };
 
         /**
          * Gets all lower thirds from the API.
          */
         function getLowerThirds() {
-            $http.get('http://127.0.0.1:3000/lower-third')
+            $http.get(api_root + '/lower-third')
             .then(function(response) {
                 if (response.status == 200 && response.data) {
                     $scope.lowerThirds = response.data;
@@ -607,7 +609,7 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
         $scope.show = function() {
             $scope.grid.show = true;
 
-            $http.post('http://127.0.0.1:3000/grid', $scope.grid);
+            $http.post(api_root + '/grid', $scope.grid);
         };
 
         /**
@@ -616,7 +618,7 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
         $scope.hide = function() {
             $scope.grid.show = false;
 
-            $http.post('http://127.0.0.1:3000/grid', $scope.grid);
+            $http.post(api_root + '/grid', $scope.grid);
         };
 
         /**
@@ -644,7 +646,7 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
          * Gets grid data from API.
          */
         function getGrid() {
-            $http.get('http://127.0.0.1:3000/grid')
+            $http.get(api_root + '/grid')
             .then(function(response) {
                 if (response.status == 200 && response.data) {
                     $scope.grid = response.data;
@@ -653,7 +655,7 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
         }
 
         function getGridLive() {
-            $http.get('http://127.0.0.1:3000/grid')
+            $http.get(api_root + '/grid')
             .then(function(response) {
                 if (response.status == 200 && response.data) {
                     $scope.grid.show = response.data.show;
@@ -694,7 +696,7 @@ app.controller('boxingCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/boxing', $scope.boxing).then($scope.lock = false);
+                $http.post(api_root + '/sport/boxing', $scope.boxing).then($scope.lock = false);
             }
         }, true);
 
@@ -704,7 +706,7 @@ app.controller('boxingCGController', ['$scope', '$http',
         function getBoxingData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/boxing')
+                $http.get(api_root + '/sport/boxing')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {
@@ -749,7 +751,7 @@ app.controller('rosesCGController', ['$scope', '$http',
          */
         $scope.$watch('roses', function() {
             if($scope.roses) {
-                $http.post('http://127.0.0.1:3000/roses', $scope.roses);
+                $http.post(api_root + '/roses', $scope.roses);
             }
         })
 
@@ -784,14 +786,14 @@ app.controller('rosesCGController', ['$scope', '$http',
                     calculateProgress();
 
                     // Send scores to API.
-                    $http.post('http://127.0.0.1:3000/roses', $scope.roses);
+                    $http.post(api_root + '/roses', $scope.roses);
                 })
             } else {
                 // Work out progress based on manual scores.
                 calculateProgress();
 
                 // Send scores to API.
-                $http.post('http://127.0.0.1:3000/roses', $scope.roses).then(function (response) {
+                $http.post(api_root + '/roses', $scope.roses).then(function (response) {
                     getRosesData();
                 });
             }
@@ -817,7 +819,7 @@ app.controller('rosesCGController', ['$scope', '$http',
          * Gets scores/ graphics settings from API.
          */
         function getRosesData() {
-            $http.get('http://127.0.0.1:3000/roses')
+            $http.get(api_root + '/roses')
             .then(function(response) {
                 if (response.status == 200 && response.data) {
                     $scope.roses = response.data;
@@ -852,7 +854,7 @@ app.controller('footballCGController', ['$scope', 'localStorageService', '$http'
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/football', $scope.football).then($scope.lock = false);
+                $http.post(api_root + '/sport/football', $scope.football).then($scope.lock = false);
             }
         }, true);
 
@@ -862,7 +864,7 @@ app.controller('footballCGController', ['$scope', 'localStorageService', '$http'
         function getFootballData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/football')
+                $http.get(api_root + '/sport/football')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {
@@ -956,7 +958,7 @@ app.controller('rugbyCGController', ['$scope', 'localStorageService', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/rugby', $scope.rugby).then($scope.lock = false);
+                $http.post(api_root + '/sport/rugby', $scope.rugby).then($scope.lock = false);
             }
         }, true);
 
@@ -966,7 +968,7 @@ app.controller('rugbyCGController', ['$scope', 'localStorageService', '$http',
         function getRugbyData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/rugby')
+                $http.get(api_root + '/sport/rugby')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {
@@ -1016,7 +1018,7 @@ app.controller('dartsCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/darts', $scope.darts).then($scope.lock = false);
+                $http.post(api_root + '/sport/darts', $scope.darts).then($scope.lock = false);
             }
         }, true);
 
@@ -1026,7 +1028,7 @@ app.controller('dartsCGController', ['$scope', '$http',
         function getDartsData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/darts')
+                $http.get(api_root + '/sport/darts')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {
@@ -1184,7 +1186,7 @@ app.controller('swimmingCGController', ['$scope', '$http',
                 }
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/swimming', $scope.swimming).then($scope.lock = false);
+                $http.post(api_root + '/sport/swimming', $scope.swimming).then($scope.lock = false);
             }
         }, true);
 
@@ -1194,7 +1196,7 @@ app.controller('swimmingCGController', ['$scope', '$http',
         function getSwimmingData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/swimming')
+                $http.get(api_root + '/sport/swimming')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {
@@ -1255,7 +1257,7 @@ app.controller('basketballCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/basketball', $scope.basketball).then($scope.lock = false);
+                $http.post(api_root + '/sport/basketball', $scope.basketball).then($scope.lock = false);
             }
         }, true);
 
@@ -1265,7 +1267,7 @@ app.controller('basketballCGController', ['$scope', '$http',
         function getBasketballData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/basketball')
+                $http.get(api_root + '/sport/basketball')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -1313,7 +1315,7 @@ app.controller('badmintonCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/badminton', $scope.badminton).then($scope.lock = false);
+                $http.post(api_root + '/sport/badminton', $scope.badminton).then($scope.lock = false);
             }
         }, true);
 
@@ -1323,7 +1325,7 @@ app.controller('badmintonCGController', ['$scope', '$http',
         function getBadmintonData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/badminton')
+                $http.get(api_root + '/sport/badminton')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -1391,7 +1393,7 @@ app.controller('tennisCGController', ['$scope', '$http',
         function getTennisData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/tennis')
+                $http.get(api_root + '/sport/tennis')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -1441,7 +1443,7 @@ app.controller('tennisCGController', ['$scope', '$http',
                 }
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/tennis', $scope.tennis).then($scope.lock = false);
+                $http.post(api_root + '/sport/tennis', $scope.tennis).then($scope.lock = false);
 
             }
         }, true);
@@ -1698,7 +1700,7 @@ app.controller('tennisCGController', ['$scope', '$http',
         $scope.undoPoint = function() {
             if (!$scope.lock) {
                 $scope.lock = true;
-                $http.post('http://127.0.0.1:3000/sport/tennis/undo').then($scope.lock = false);
+                $http.post(api_root + '/sport/tennis/undo').then($scope.lock = false);
             }
             $scope.tennis.options.disableInput = false;
         }
@@ -1707,7 +1709,7 @@ app.controller('tennisCGController', ['$scope', '$http',
         $scope.resetAll = function() {
             if (!$scope.lock) {
                 $scope.lock = true;
-                $http.post('http://127.0.0.1:3000/sport/tennis/reset').then($scope.lock = false);
+                $http.post(api_root + '/sport/tennis/reset').then($scope.lock = false);
                 getTennisData();
             }
 
@@ -1733,7 +1735,7 @@ app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/netball', $scope.netball).then($scope.lock = false);
+                $http.post(api_root + '/sport/netball', $scope.netball).then($scope.lock = false);
             }
         }, true);
 
@@ -1743,7 +1745,7 @@ app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
         function getNetballData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/netball')
+                $http.get(api_root + '/sport/netball')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -1838,7 +1840,7 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', '$http
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/waterpolo', $scope.waterpolo).then($scope.lock = false);
+                $http.post(api_root + '/sport/waterpolo', $scope.waterpolo).then($scope.lock = false);
             }
         }, true);
 
@@ -1848,7 +1850,7 @@ app.controller('waterpoloCGController', ['$scope', 'localStorageService', '$http
         function getWaterpoloData() {
             // Only get data if changes are not locked.
             if (!$scope.lock){
-                $http.get('http://127.0.0.1:3000/sport/waterpolo')
+                $http.get(api_root + '/sport/waterpolo')
                 .then(function(response){
                     // Check that request was successful and we didn't recieve an empty body.
                     if (response.status == 200 && response.data) {
@@ -1937,7 +1939,7 @@ app.controller('volleyballCGController', ['$scope', '$http',
                 $scope.lock = true;
 
                 // Send changes and unlock changes.
-                $http.post('http://127.0.0.1:3000/sport/volleyball', $scope.volleyball).then($scope.lock = false);
+                $http.post(api_root + '/sport/volleyball', $scope.volleyball).then($scope.lock = false);
             }
         }, true);
 
@@ -1947,7 +1949,7 @@ app.controller('volleyballCGController', ['$scope', '$http',
         function getVolleyballData() {
             // Only get data if changes are not locked.
             if (!$scope.lock) {
-                $http.get('http://127.0.0.1:3000/sport/volleyball')
+                $http.get(api_root + '/sport/volleyball')
                     .then(function (response) {
                         // Check that request was successful and we didn't recieve an empty body.
                         if (response.status == 200 && response.data) {

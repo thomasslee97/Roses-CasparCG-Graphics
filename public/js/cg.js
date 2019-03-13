@@ -1,10 +1,11 @@
 var app = angular.module('cgApp', ['ngAnimate']);
 var data_timeout = 1000;
+var api_root = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
 
 app.controller('lowerThirdsCtrl', ['$scope', '$http',
     function($scope, $http){
         function getLowerThirds() {
-            $http.get('http://127.0.0.1:3000/lower-third')
+            $http.get(api_root + '/lower-third')
             .then(function(response){
                 if (response.status == 200 && response.data) {
                     $scope.lowerThirds = response.data;
@@ -19,7 +20,7 @@ app.controller('lowerThirdsCtrl', ['$scope', '$http',
 app.controller('archeryCtrl', ['$scope', '$http',
     function ($scope, $http) {
         function getArchery() {
-            $http.get('http://127.0.0.1:3000/sport/archery')
+            $http.get(api_root + '/sport/archery')
             .then(function(response){
                 if (response.status == 200 && response.data) {
                     $scope.archery = response.data;
@@ -42,7 +43,7 @@ app.controller('boxingCtrl', ['$scope', '$http',
          * Gets the state of boxing from the API.
          */
         function getBoxingData() {
-            $http.get("http://127.0.0.1:3000/sport/boxing")
+            $http.get(api_root + '/sport/boxing')
                 .then(function (response) {
                     if (response.status == 200) {
                         // Only update if the new data is different.
@@ -69,7 +70,7 @@ app.controller('bugCtrl', ['$scope', '$timeout', '$http',
          * Gets the state of the bug from the API.
          */
         function getBugData() {
-            $http.get("http://127.0.0.1:3000/bug")
+            $http.get(api_root + '/bug')
             .then(function(response){
                 if (response.status == 200) {
                     // Only update if the new data is different.
@@ -107,7 +108,7 @@ app.controller('scoringCtrl', ['$scope', '$http',
          * Gets the score from API.
          */
         function getRoses() {
-            $http.get('http://127.0.0.1:3000/roses')
+            $http.get(api_root + '/roses')
             .then(function(response) {
                 if (response.status == 200 && response.data) {
                     $scope.roses = response.data;
@@ -124,7 +125,7 @@ app.controller('footballCtrl', ['$scope', '$http',
     function($scope, $http){
 
         function getFootball() {
-            $http.get('http://127.0.0.1:3000/sport/football')
+            $http.get(api_root + '/sport/football')
             .then(function(response){
                 if (response.status == 200 && response.data) {
                     $scope.football = response.data;
@@ -140,7 +141,7 @@ app.controller('rugbyCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getRugby() {
-            $http.get('http://127.0.0.1:3000/sport/rugby')
+            $http.get(api_root + '/sport/rugby')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.rugby = response.data;
@@ -156,7 +157,7 @@ app.controller('dartsCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getDarts() {
-            $http.get('http://127.0.0.1:3000/sport/darts')
+            $http.get(api_root + '/sport/darts')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.darts = response.data;
@@ -186,7 +187,7 @@ app.controller('gridCtrl', ['$scope', '$http',
                 // Lock changes.
                 $scope.lock = true;
 
-                $http.get('http://127.0.0.1:3000/grid')
+                $http.get(api_root + '/grid')
                 .then(function(response) {
                     // Check for a valid response.
                     if (response.status == 200 && response.data) {
@@ -265,7 +266,7 @@ app.controller('swimmingCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getSwimming() {
-            $http.get('http://127.0.0.1:3000/sport/swimming')
+            $http.get(api_root + '/sport/swimming')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.swimming = response.data;
@@ -281,7 +282,7 @@ app.controller('basketballCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getBasketball() {
-            $http.get('http://127.0.0.1:3000/sport/basketball')
+            $http.get(api_root + '/sport/basketball')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.basketball = response.data;
@@ -296,7 +297,7 @@ app.controller('basketballCtrl', ['$scope', '$http',
 app.controller('badmintonCtrl', ['$scope', '$http',
     function ($scope, $http) {
         function getBadminton() {
-            $http.get('http://127.0.0.1:3000/sport/badminton')
+            $http.get(api_root + '/sport/badminton')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.badminton = response.data;
@@ -311,7 +312,7 @@ app.controller('badmintonCtrl', ['$scope', '$http',
 app.controller('tennisCtrl', ['$scope', '$http',
     function ($scope, $http) {
         function getTennis() {
-            $http.get('http://127.0.0.1:3000/sport/tennis')
+            $http.get(api_root + '/sport/tennis')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.tennis = response.data;
@@ -327,7 +328,7 @@ app.controller('netballCtrl', ['$scope', '$http',
     function($scope, $http) {
 
         function getNetball() {
-            $http.get('http://127.0.0.1:3000/sport/netball')
+            $http.get(api_root + '/sport/netball')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.netball = response.data;
@@ -360,7 +361,7 @@ app.controller('waterpoloCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getWaterpolo() {
-            $http.get('http://127.0.0.1:3000/sport/waterpolo')
+            $http.get(api_root + '/sport/waterpolo')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.waterpolo = response.data;
@@ -376,7 +377,7 @@ app.controller('volleyballCtrl', ['$scope', '$http',
     function ($scope, $http) {
 
         function getVolleyball() {
-            $http.get('http://127.0.0.1:3000/sport/volleyball')
+            $http.get(api_root + '/sport/volleyball')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.volleyball = response.data;
@@ -394,7 +395,7 @@ app.controller('clockCtrl', ['$scope', '$http',
         $scope.stopwatch = []
 
         function getStopwatch() {
-            $http.get('http://127.0.0.1:3000/stopwatch')
+            $http.get(api_root + '/stopwatch')
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.stopwatchState = response.data;
