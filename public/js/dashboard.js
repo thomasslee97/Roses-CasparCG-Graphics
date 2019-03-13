@@ -787,6 +787,7 @@ app.controller('rosesCGController', ['$scope', '$http',
 
                     // Send scores to API.
                     $http.post(api_root + '/roses', $scope.roses);
+                    rosesUpdated();
                 })
             } else {
                 // Work out progress based on manual scores.
@@ -795,6 +796,7 @@ app.controller('rosesCGController', ['$scope', '$http',
                 // Send scores to API.
                 $http.post(api_root + '/roses', $scope.roses).then(function (response) {
                     getRosesData();
+                    rosesUpdated();
                 });
             }
         }
@@ -832,6 +834,19 @@ app.controller('rosesCGController', ['$scope', '$http',
 
         // Get scores once every timeout period.
         setInterval(getRoses, data_timeout)
+
+        function rosesUpdated() {
+            // Find the item in the menu.
+            $scope.menu.forEach(item => {
+                if (item.name === 'Roses') {
+                    if ($scope.roses.showScore === true || $scope.roses.showProgress === true) {
+                        item.live = true
+                    } else {
+                        item.live = false
+                    }
+                }
+            })
+        }
     }
 ]);
 
