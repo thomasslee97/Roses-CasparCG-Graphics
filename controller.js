@@ -25,6 +25,7 @@ var state_default = {
         showClock: false
     },
     grid: {
+        colorShow: false,
         headingcolor:"#BC204B",
         leftcolor: "#1f1a34",
         rightcolor:"#1f1a34",

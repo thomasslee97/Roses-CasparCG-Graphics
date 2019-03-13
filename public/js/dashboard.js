@@ -577,10 +577,14 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
         $scope.grid = {};
         $scope.grid.rows = [];
 
+
         // Get stored grid.
         var stored = localStorageService.get('grid');
         if(stored !== null) {
             $scope.grid = stored;
+        } else {
+            // If we don't have a local copy, grab from the server.
+            getGrid();
         }
 
         /**
@@ -635,6 +639,43 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
         $scope.hideColorOptions = function() {
           $scope.grid.colorShow = false
         }
+
+        /**
+         * Gets grid data from API.
+         */
+        function getGrid() {
+            $http.get('http://127.0.0.1:3000/grid')
+            .then(function(response) {
+                if (response.status == 200 && response.data) {
+                    $scope.grid = response.data;
+                }
+            })
+        }
+
+        function getGridLive() {
+            $http.get('http://127.0.0.1:3000/grid')
+            .then(function(response) {
+                if (response.status == 200 && response.data) {
+                    $scope.grid.show = response.data.show;
+
+                    gridLiveUpdated();
+                }
+            })
+        }
+        /**
+         * Called after the grid data has been updated by getGrid.
+         */
+        function gridLiveUpdated() {
+
+            $scope.menu.forEach(item => {
+                if (item.name === 'Grid') {
+                    item.live = $scope.grid.show;
+                }
+            })
+        }
+
+        // Calls getGrid once every data_timeout.
+        setInterval(getGridLive, data_timeout)
 }]);
 
 app.controller('boxingCGController', ['$scope', '$http',
