@@ -812,8 +812,8 @@ app.controller('rosesCGController', ['$scope', '$http',
             }
 
             // Work out progress and format values.
-			$scope.roses.yorkProgress = (($scope.roses.yorkScore / $scope.roses.pointsToWin)*100).toFixed(2);
-			$scope.roses.lancProgress = (($scope.roses.lancScore / $scope.roses.pointsToWin)*100).toFixed(2);
+            $scope.roses.yorkProgress = (($scope.roses.yorkScore / $scope.roses.pointsToWin)*100).toFixed(2);
+            $scope.roses.lancProgress = (($scope.roses.lancScore / $scope.roses.pointsToWin)*100).toFixed(2);
             $scope.roses.pointsToWin = $scope.roses.pointsToWin.toFixed(1);
         }
 

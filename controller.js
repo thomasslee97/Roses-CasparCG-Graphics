@@ -10,6 +10,7 @@ const awayTeamImage = "images/YorkSport250.png";
 
 // The logo for the event.
 const eventLogo = "/images/roses2018logo.png";
+const eventName = "Roses 2019";
 
 // The default server state.
 // Holds the initial settings for resetting the server state without restarting server.
@@ -44,7 +45,8 @@ var state_default = {
         pointsToWin: 0,
         showScore: false,
         showProgress: false,
-        totalPoints: 354
+        totalPoints: 354,
+        eventName: eventName,
     },
     lowerThirds: {
         left: {
