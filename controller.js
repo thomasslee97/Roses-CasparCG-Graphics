@@ -70,7 +70,8 @@ var state_default = {
         awayTeam: awayTeamShortName,
         homeScore: 0,
         awayScore: 0,
-        currRound: ""
+        currRound: "",
+        showScore: false
     },
     football: {
         homeTeam: homeTeamName,
@@ -80,7 +81,10 @@ var state_default = {
         homeScore: 0,
         awayScore: 0,
         homeTeamImage: homeTeamImage,
-        awayTeamImage, awayTeamImage
+        awayTeamImage, awayTeamImage,
+        show: false,
+        showpre: false,
+        showpost: false
     },
     rugby: {
         homeTeam: homeTeamName,
@@ -88,7 +92,8 @@ var state_default = {
         homeTeamShort: homeTeamShortName,
         awayTeamShort: awayTeamShortName,
         homeScore: 0,
-        awayScore: 0
+        awayScore: 0,
+        show: false,
     },
     basketball: {
         homeTeam: homeTeamName,
@@ -110,7 +115,8 @@ var state_default = {
         leg1: 0,
         leg2: 0,
         score1:501,
-        score2:501
+        score2:501,
+        show: false
     },
     swimming: {
         order: '',
@@ -176,25 +182,29 @@ var state_default = {
         game1: 0,
         game2:0,
         point1: 0,
-        point2: 0
+        point2: 0,
+        show: false,
     },
     netball: {
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
         homeScore: 0,
-        awayScore: 0
+        awayScore: 0,
+        show: false,
     },
     waterpolo: {
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
         homeScore: 0,
-        awayScore: 0
+        awayScore: 0,
+        show: false,
     },
     volleyball: {
         homeTeam: homeTeamName,
         awayTeam: awayTeamName,
         homeScore: 0,
-        awayScore: 0
+        awayScore: 0,
+        showScore: false,
     }
 }
 // Make a copy for the operating current state.
