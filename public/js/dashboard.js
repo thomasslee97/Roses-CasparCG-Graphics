@@ -1,4 +1,4 @@
-var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'angularify.semantic']);
+var app = angular.module('StarterApp', ['ngRoute', 'LocalStorageModule', 'semantic-ui']);
 
 var data_timeout = 1000;
 
@@ -198,7 +198,7 @@ app.controller('AppCtrl', ['$scope', '$location', '$http',
  */
 app.config(['$routeProvider', 'localStorageServiceProvider',
     function($routeProvider, localStorageServiceProvider) {
-        localStorageServiceProvider.setPrefix('la1tv');
+        localStorageServiceProvider.setPrefix('rosesCG');
 
         $routeProvider
             .when("/general", {
@@ -246,20 +246,20 @@ app.config(['$routeProvider', 'localStorageServiceProvider',
                 controller: 'archeryCGController'
             })
             .when("/badminton", {
-              templateUrl: '/admin/templates/badminton.tmpl.html',
-              controller: 'badmintonCGController'
+                templateUrl: '/admin/templates/badminton.tmpl.html',
+                controller: 'badmintonCGController'
             })
             .when("/tennis", {
-              templateUrl: '/admin/templates/tennis.tmpl.html',
-              controller: 'tennisCGController'
+                templateUrl: '/admin/templates/tennis.tmpl.html',
+                controller: 'tennisCGController'
             })
             .when("/netball", {
-              templateUrl: '/admin/templates/netball.tmpl.html',
-              controller: 'netballCGController'
+                templateUrl: '/admin/templates/netball.tmpl.html',
+                controller: 'netballCGController'
             })
             .when("/waterpolo", {
-              templateUrl: '/admin/templates/waterpolo.tmpl.html',
-              controller: 'waterpoloCGController'
+                templateUrl: '/admin/templates/waterpolo.tmpl.html',
+                controller: 'waterpoloCGController'
             })
             .when("/volleyball", {
                 templateUrl: '/admin/templates/volleyball.tmpl.html',
@@ -567,6 +567,10 @@ app.controller('lowerThirdsCGController', ['$scope', 'localStorageService', '$ht
 
         // Calls getLowerThirds once every data_timeout.
         setInterval(getLowerThirds, data_timeout)
+
+        $scope.$on("$destroy", function() {
+            localStorageService.set('lower_thirds', $scope.queuedThirds);
+        });
     }
 ]);
 
@@ -632,14 +636,14 @@ app.controller('gridCGController', ['$scope', 'localStorageService', '$http',
          * Shows the color options.
          */
         $scope.showColorOptions = function() {
-          $scope.grid.colorShow = true
+            $scope.grid.colorShow = true
         }
 
         /**
          * Hides the color options.
          */
         $scope.hideColorOptions = function() {
-          $scope.grid.colorShow = false
+            $scope.grid.colorShow = false
         }
 
         /**
@@ -771,23 +775,25 @@ app.controller('rosesCGController', ['$scope', '$http',
 
                 // Get score.
                 $http.get('https://roseslive.co.uk/score.json', config)
-                .success(function(data) {
-                    // Check roses live is being sensible.
-                    if(isNaN(data.york) || isNaN(data.lancs)){
-                        console.log("Roses live is giving us nonsense");
-                        return;
-                    };
+                .then(function(response) {
+                    if (response.status == 200 && response.data) {
+                        // Check roses live is being sensible.
+                        if(isNaN(response.data.york) || isNaN(response.data.lancs)){
+                            console.log("Roses live is giving us nonsense");
+                            return;
+                        };
 
-                    // Set scores.
-                    $scope.roses.yorkScore = data.york;
-                    $scope.roses.lancScore = data.lancs;
+                        // Set scores.
+                        $scope.roses.yorkScore = response.data.york;
+                        $scope.roses.lancScore = response.data.lancs;
 
-                    // Work out each team's progress towards a win.
-                    calculateProgress();
+                        // Work out each team's progress towards a win.
+                        calculateProgress();
 
-                    // Send scores to API.
-                    $http.post(api_root + '/roses', $scope.roses);
-                    rosesUpdated();
+                        // Send scores to API.
+                        $http.post(api_root + '/roses', $scope.roses);
+                        rosesUpdated();
+                    }
                 })
             } else {
                 // Work out progress based on manual scores.
@@ -1823,12 +1829,6 @@ app.controller('netballCGController', ['$scope', 'localStorageService', '$http',
                 $scope.homePlayers.splice(index, 1);
             }
         };
-
-
-        $scope.quarterChanged = function() {
-            console.log("Quarter");
-        };
-
 
         $scope.$on("$destroy", function() {
             localStorageService.set('away_netball', $scope.awayPlayers);

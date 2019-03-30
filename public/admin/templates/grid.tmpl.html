@@ -7,37 +7,34 @@
 
       <div class="four wide field">
         <label>Grid Position</label>
-        <dropdown title="Grid Position"  ng-model="grid.position">
-          <dropdown-group>bottom left</dropdown-group>
-          <dropdown-group>bottom right</dropdown-group>
-          <dropdown-group>bottom center</dropdown-group>
-          <dropdown-group>top center</dropdown-group>
-          <dropdown-group>top left</dropdown-group>
-          <dropdown-group>top right</dropdown-group>
-        </dropdown>
+        <select ng-model="grid.position" class="ui fluid dropdown">
+            <option value="bottom left">Bottom Left</option>
+            <option value="bottom center">Bottom Center</option>
+            <option value="bottom right">Bottom Right</option>
+            <option value="top left">Top Left</option>
+            <option value="top center">Top Center</option>
+            <option value="top right">Top Right</option>
+        </select>
       </div>
 
       <div class="four wide field">
         <label>Grid Type</label>
-        <dropdown title="Grid Sizes"  ng-model="grid.split">
-          <dropdown-group>halves</dropdown-group>
-          <dropdown-group>sporttimes</dropdown-group>
-          <dropdown-group>onebar</dropdown-group>
-        </dropdown>
+        <select ng-model="grid.split" class="ui fluid dropdown">
+          <option value="halves">Halves</option>
+          <option value="sporttimes">Sports Times</option>
+          <option value="onebar">One Bar</option>
+        </select>
       </div>
 
-      <div class="four wide field">
-        <label>Show Color Options</label>
+      <div class="eight wide field">
+        <label>Color Options</label>
         <div class="ui green button" ng-click="showColorOptions()">Show</div>
-      </div>
-      <div class="four wide field">
-        <label>Hide Color Options</label>
         <div class="ui red button" ng-click="hideColorOptions()">Hide</div>
       </div>
     </div>
   </div>
 
-  <div id="colorOptions" style="display:block;">
+  <div id="colorOptions">
     <div class="content" ng-if="grid.colorShow">
       <div class="ui divider"></div>
 

@@ -3,13 +3,28 @@
 
 	<div class="ui grid center aligned">
     	<div class="five wide column">
-    		<div class="field"><checkbox ng-model="swimming.showclock" size="large" type="toggle">Show Clock</checkbox></div>
+    		<div class="field">
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" ng-model="swimming.showclock">
+                    <label>Show Clock</label>
+                </div>
+            </div>
     	</div>
         <div class="five wide column">
-            <div class="field"><checkbox ng-model="swimming.showsplits" size="large" type="toggle">Enable Splits</checkbox></div>
+            <div class="field">
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" ng-model="swimming.showsplits">
+                    <label>Enable Splits</label>
+                </div>
+            </div>
         </div>
         <div class="five wide column">
-            <div class="field"><checkbox ng-model="swimming.showlist" size="large" type="toggle">Show Start/Results</checkbox></div>
+            <div class="field">
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" ng-model="swimming.showlist">
+                    <label>Show Start/Results</label>
+                </div>
+            </div>
         </div>
     </div>
 

@@ -38,8 +38,6 @@ gulp.task('default', function(){
 	runSequence(['less', 'fileinclude'], 'watchFiles');
 });
 
-gulp.start('default');
-
 var app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }))

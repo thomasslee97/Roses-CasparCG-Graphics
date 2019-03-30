@@ -1,13 +1,18 @@
 <div class="ui form segment">
   <h2>Volleyball</h2>
 
-  <div class="ui grid">
-      <div class="six wide column">
-        <div class="field"><checkbox ng-model="volleyball.showScore" size="large" type="toggle">Show Score</checkbox></div>
-      </div>
-
-      <div class="six wide column">
-        <div class="field"><checkbox ng-model="volleyball.showClock" size="large" type="toggle">Show Clock</checkbox></div>
+  <div class="ui grid centered">
+      <div class="ten wide column">
+        <div class="inline field">
+          <div class="ui toggle checkbox">
+            <input type="checkbox" ng-model="volleyball.showScore">
+            <label>Show Score Bar</label>
+          </div>
+          <div class="ui toggle checkbox">
+            <input type="checkbox" ng-model="volleyball.showClock">
+            <label>Show Clock</label>
+          </div>
+        </div>
       </div>
   </div>
 
@@ -19,8 +24,8 @@
       </div>
 
       <div class="five wide column">
-          <div class="ui action input">
-              <input type="text" placeholder="mm:ss" ng-model="time" size="10">
+          <div class="ui action input fluid">
+              <input type="text" placeholder="mm:ss" ng-model="time">
               <div class="ui button" ng-click="setClock(time)">Set</div>
           </div>
       </div>
@@ -49,7 +54,6 @@
   <div class="ui grid center aligned">
     <div class="eight wide column">
       <h3>{{volleyball.homeTeam}}</h3>
-      <input type="text" ng-model="volleyball.name1" >
       <h1>{{volleyball.homeScore}}</h1>
       <div class="ui icon buttons">
         <button class="ui green button" ng-click="volleyball.homeScore = volleyball.homeScore + 1; updateScore();">
@@ -70,7 +74,6 @@
 
     <div class="eight wide column">
       <h3>{{volleyball.awayTeam}}</h3>
-      <input type="text" ng-model="volleyball.name2" >
       <h1>{{volleyball.awayScore}}</h1>
       <div class="ui icon buttons">
         <button class="ui green button" ng-click="volleyball.awayScore = volleyball.awayScore + 1; updateScore();">

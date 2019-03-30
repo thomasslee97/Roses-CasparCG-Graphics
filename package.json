@@ -9,12 +9,12 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-file-include": "^2.0.1",
     "gulp-less": "^4.0.1",
     "gulp-rename": "^1.4.0",
-    "less": "^3.8.1",
-    "nodemon": "^1.18.9",
+    "less": "^3.9.0",
+    "nodemon": "^1.18.10",
     "path": "^0.12.7",
     "run-sequence": "^2.2.1",
     "underscore": "^1.9.1"
