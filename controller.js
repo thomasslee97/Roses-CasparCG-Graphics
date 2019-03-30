@@ -191,6 +191,8 @@ var state_default = {
         homeScore: 0,
         awayScore: 0,
         show: false,
+        firstpasshome: false,
+        firstpassaway: false
     },
     waterpolo: {
         homeTeam: homeTeamName,

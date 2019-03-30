@@ -332,25 +332,25 @@ app.controller('netballCtrl', ['$scope', '$http',
                 .then(function (response) {
                     if (response.status == 200 && response.data) {
                         $scope.netball = response.data;
+
+                        if ($scope.netball.firstpasshome == true) {
+                            $scope.netball.homeoffset = 1;
+                        }
+
+                        if ($scope.netball.firstpasshome == true & $scope.netball.firstpassaway == true) {
+                            $scope.netball.homeoffset = 0;
+                        }
+
+                        $scope.TotalScore = $scope.netball.awayScore + $scope.netball.homeScore + $scope.netball.homeoffset;
+                        if (($scope.TotalScore % 2) == 1) {
+                            $scope.showcurrenthome = true;
+                            $scope.showcurrentaway = false;
+                        } else {
+                            $scope.showcurrenthome = false;
+                            $scope.showcurrentaway = true;
+                        }
                     }
                 });
-
-            if ($scope.netball.firstpasshome == true) {
-                $scope.netball.homeoffset = 1;
-            }
-
-            if ($scope.netball.firstpasshome == true & $scope.netball.firstpassaway == true) {
-                $scope.netball.homeoffset = 0;
-            }
-
-            $scope.TotalScore = $scope.netball.awayScore + $scope.netball.homeScore + $scope.netball.homeoffset;
-            if (($scope.TotalScore % 2) == 1) {
-                $scope.showcurrenthome = true;
-                $scope.showcurrentaway = false;
-            } else {
-                $scope.showcurrenthome = false;
-                $scope.showcurrentaway = true;
-            }
         }
 
         setInterval(getNetball, data_timeout);
