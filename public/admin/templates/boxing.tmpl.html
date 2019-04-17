@@ -6,25 +6,36 @@
   <div class="four wide column">
     <div class="inline field">
       <label>Round</label>
-      <dropdown title="Current Round" ng-model="boxing.currRound" on-change="roundChanged()">
-        <dropdown-group>1st</dropdown-group>
-        <dropdown-group>2nd</dropdown-group>
-        <dropdown-group>3rd</dropdown-group>
-        <dropdown-group>4th</dropdown-group>
-        <dropdown-group>5th</dropdown-group>
-        <dropdown-group>6th</dropdown-group>
-        <dropdown-group>7th</dropdown-group>
-        <dropdown-group>8th</dropdown-group>
-      </dropdown>
+      <select title="Current Round" ng-model="boxing.currRound" class="ui fluid dropdown">
+        <option value="1st">1st</option>
+        <option value="2nd">2nd</option>
+        <option value="3rd">3rd</option>
+        <option value="4th">4th</option>
+        <option value="5th">5th</option>
+        <option value="6th">6th</option>
+        <option value="7th">7th</option>
+        <option value="8th">8th</option>
+      </select>
       </div>
     </div>
 
     <div class="six wide column">
-      <div class="field"><checkbox ng-model="boxing.showScore" size="large" type="toggle">Show Score</checkbox></div>
+
+      <div class="field">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" ng-model="boxing.showScore">
+            <label>Show Score</label>
+        </div>
+      </div>
     </div>
 
     <div class="six wide column">
-      <div class="field"><checkbox ng-model="boxing.showTime" size="large" type="toggle">Show Clock</checkbox></div>
+      <div class="field">
+        <div class="ui toggle checkbox">
+            <input type="checkbox" ng-model="boxing.showTime">
+            <label>Show Clock</label>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -32,12 +43,12 @@
 
   <div class="ui grid">
       <div class="three wide column center aligned">
-          <h2 class="ui header">{{clock}}</h2>
+          <h2 class="ui header">{{clock.time}}</h2>
       </div>
 
       <div class="five wide column">
-          <div class="ui action input">
-              <input type="text" placeholder="mm:ss" ng-model="time" size="10">
+          <div class="ui action input fluid">
+              <input type="text" placeholder="mm:ss" ng-model="time">
               <div class="ui button" ng-click="setClock(time)">Set</div>
           </div>
       </div>
@@ -65,42 +76,42 @@
 
   <div class="ui grid center aligned">
     <div class="eight wide column">
-      <h3>Lancaster</h3>
+      <h3>{{boxing.homeTeam}}</h3>
       <input type="text" ng-model="boxing.name1" >
-      <h1>{{boxing.lancScore}}</h1>
+      <h1>{{boxing.homeScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="boxing.lancScore = boxing.lancScore + 1; updateScore();">
+        <button class="ui green button" ng-click="boxing.homeScore = boxing.homeScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="boxing.lancScore = boxing.lancScore - 1; updateScore();" ng-disabled="boxing.lancScore == 0">
+        <button class="ui red button" ng-click="boxing.homeScore = boxing.homeScore - 1; updateScore();" ng-disabled="boxing.homeScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="boxing.lancScore = 0">
+	 	<button class="ui red button" ng-click="boxing.homeScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
-	 </div>   
+	 </div>
     </div>
 
     <div class="eight wide column">
-      <h3>York</h3>
+      <h3>{{boxing.awayTeam}}</h3>
       <input type="text" ng-model="boxing.name2" >
-      <h1>{{boxing.yorkScore}}</h1>
+      <h1>{{boxing.awayScore}}</h1>
       <div class="ui icon buttons">
-        <button class="ui green button" ng-click="boxing.yorkScore = boxing.yorkScore + 1; updateScore();">
+        <button class="ui green button" ng-click="boxing.awayScore = boxing.awayScore + 1; updateScore();">
           <i class="plus icon"></i>
         </button>
-        <button class="ui red button" ng-click="boxing.yorkScore = boxing.yorkScore - 1; updateScore();" ng-disabled="boxing.yorkScore == 0">
+        <button class="ui red button" ng-click="boxing.awayScore = boxing.awayScore - 1; updateScore();" ng-disabled="boxing.awayScore == 0">
           <i class="minus icon"></i>
         </button>
       </div>
       <br>
 	  <br>
 	  <div class="ui icon buttons">
-	 	<button class="ui red button" ng-click="boxing.yorkScore = 0">
+	 	<button class="ui red button" ng-click="boxing.awayScore = 0">
 			<i class="ban icon"></i>Reset
 		</button>
 	 </div>
